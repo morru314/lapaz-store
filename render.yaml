@@ -3,7 +3,7 @@ services:
     name: la-paz-store
     env: python
     buildCommand: ""
-    startCommand: "python app.py"
+    startCommand: "gunicorn app:create_app"
     envVars:
       - key: FLASK_ENV
         value: production
