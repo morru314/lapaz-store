@@ -39,8 +39,14 @@ def registrar_venta():
     # Detalles
     for item in data["items"]:
         producto = Producto.query.get(item["producto_id"])
-        if not producto or producto.stock < item["cantidad"]:
-            return jsonify({"error": f"Stock insuficiente para {producto.nombre}"}), 400
+        if not producto:
+            return jsonify({
+                "error": f"Producto con ID {item['producto_id']} no encontrado"
+            }), 404
+        if producto.stock < item["cantidad"]:
+            return jsonify({
+                "error": f"Stock insuficiente para {producto.nombre}"
+            }), 400
 
         producto.stock -= item["cantidad"]
 
