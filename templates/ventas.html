@@ -1,0 +1,311 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="w-full sm:max-w-4xl mx-auto mt-6 px-0 sm:px-6 lg:px-8">
+  <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white mb-6 sm:mb-8">Registrar Venta</h1>
+
+  <form id="venta-form" class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-xl space-y-8" onsubmit="registrarVenta(event)">
+
+    <!-- Paso 1: Cliente -->
+    <section class="space-y-4">
+      <h2 class="text-lg sm:text-xl font-semibold text-gray-700 dark:text-white">1. Cliente</h2>
+      <input type="text" id="buscar_cliente" placeholder="Buscar cliente por nombre o teléfono…"
+             class="w-full p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white"
+             oninput="buscarCliente()" />
+      <div id="sugerencias_cliente" class="bg-white dark:bg-gray-700 rounded shadow p-2 hidden"></div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <input type="text" id="cliente_nombre" class="w-full p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white" placeholder="Nombre" required>
+        <input type="text" id="cliente_apellido" class="w-full p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white" placeholder="Apellido" required>
+        <input type="text" id="cliente_telefono" class="w-full p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white" placeholder="Teléfono">
+      </div>
+    </section>
+
+    <!-- Paso 2: Productos -->
+    <section class="space-y-4">
+      <h2 class="text-lg sm:text-xl font-semibold text-gray-700 dark:text-white">2. Productos</h2>
+      <div class="flex flex-col sm:flex-row gap-2">
+        <input type="text" id="buscar_producto" placeholder="Buscar producto…"
+               class="flex-grow p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white"
+               oninput="buscarProducto()">
+      </div>
+      <div id="sugerencias_producto" class="bg-white dark:bg-gray-700 rounded shadow p-2 hidden"></div>
+
+      <div class="mt-2 space-y-2" id="lista-items"></div>
+    </section>
+
+    <!-- Paso 3: Pago -->
+    <section class="space-y-4">
+      <h2 class="text-lg sm:text-xl font-semibold text-gray-700 dark:text-white">3. Pago</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <input type="number" id="total_original" placeholder="Total original"
+               class="w-full p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white" readonly>
+        <input type="number" id="descuento_total" placeholder="Descuento total" value="0"
+               class="w-full p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white" oninput="recalcular()">
+        <input type="number" id="total_cobrado" placeholder="Monto cobrado"
+               class="w-full p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white" required>
+      </div>
+       <div class="col-span-1">
+    <select id="metodo_pago" class="w-full p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white">
+      <option value="Transferencia">Transferencia</option>
+      <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+      <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+      <option value="Efectivo">Efectivo</option>
+    </select>
+  </div>
+</div>
+    </section>
+
+    <!-- Botón Final -->
+    <div class="text-right">
+      <button type="submit"
+              class="w-full sm:w-auto px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-lg transition">
+        📂 Registrar Venta
+      </button>
+    </div>
+
+  </form>
+</div>
+
+<script>
+let cliente_id = null;
+let items = [];
+
+function buscarCliente() {
+  const q = document.getElementById('buscar_cliente').value.trim();
+  const cont = document.getElementById('sugerencias_cliente');
+
+  if (q.length < 2) {
+    cont.classList.add('hidden');
+    cont.innerHTML = '';
+    return;
+  }
+
+  fetch(`/ventas/buscar_cliente?q=${encodeURIComponent(q)}`)
+    .then(res => res.json().then(data => ({ ok: res.ok, data })))
+    .then(({ ok, data }) => {
+      cont.innerHTML = '';
+
+      if (!ok) {
+        Swal.fire({
+          title: 'Error',
+          text: data.error || 'Ocurrió un problema al buscar el cliente.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          background: '#1f2937',
+          color: '#fff',
+          confirmButtonColor: '#ef4444'
+        });
+        cont.classList.add('hidden');
+        return;
+      }
+
+      if (!Array.isArray(data) || data.length === 0) {
+        cont.classList.add('hidden');
+        return;
+      }
+
+      data.forEach(cli => {
+        const div = document.createElement('div');
+        div.innerText = `${cli.nombre} ${cli.apellido} (${cli.telefono})`;
+        div.className = 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 p-1 rounded text-sm text-gray-800 dark:text-white';
+        div.onclick = () => {
+          cliente_id = cli.id;
+          document.getElementById('cliente_nombre').value = cli.nombre;
+          document.getElementById('cliente_apellido').value = cli.apellido;
+          document.getElementById('cliente_telefono').value = cli.telefono;
+          cont.classList.add('hidden');
+        };
+        cont.appendChild(div);
+      });
+
+      cont.classList.remove('hidden');
+    })
+    .catch(err => {
+      console.error("Error en la búsqueda de cliente:", err);
+      Swal.fire({
+        title: 'Error de red',
+        text: 'No se pudo comunicar con el servidor.',
+        icon: 'error',
+        confirmButtonText: 'Cerrar',
+        background: '#1f2937',
+        color: '#fff',
+        confirmButtonColor: '#ef4444'
+      });
+    });
+}
+
+function buscarProducto() {
+  const q = document.getElementById('buscar_producto').value.trim();
+  const cont = document.getElementById('sugerencias_producto');
+  if (q.length < 2) {
+    cont.classList.add('hidden');
+    cont.innerHTML = '';
+    return;
+  }
+  fetch(`/ventas/buscar_producto?q=${q}`)
+    .then(res => res.json())
+    .then(data => {
+      cont.innerHTML = '';
+      cont.classList.remove('hidden');
+      data.forEach(p => {
+        const div = document.createElement('div');
+        const stockColor = p.stock === 0 ? 'text-red-500' : p.stock < 3 ? 'text-yellow-500' : 'text-green-600 dark:text-green-400';
+        div.innerHTML = `
+          <span class='font-semibold'>${p.codigo}</span> - ${p.nombre} - 
+          <span class='italic'>${p.talle}</span> - ${p.color} - 
+          <span class='text-green-600 dark:text-green-400'>$${p.precio_venta}</span> - 
+          <span class='text-xs ${stockColor}'>Stock: ${p.stock}</span>
+        `;
+        div.className = 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 p-1 rounded text-sm text-gray-800 dark:text-white';
+        div.onclick = () => {
+          agregarProducto(p);
+          cont.classList.add('hidden');
+          document.getElementById('buscar_producto').value = '';
+        };
+        cont.appendChild(div);
+      });
+    });
+}
+
+function agregarProducto(p) {
+  const yaEsta = items.find(i => i.id === p.id);
+  if (yaEsta) return;
+  items.push({
+    id: p.id,
+    nombre: p.nombre,
+    talle: p.talle,
+    color: p.color,
+    cantidad: 1,
+    precio_unitario: p.precio_venta,
+    precio_cobrado: p.precio_venta
+  });
+  document.getElementById('buscar_producto').value = '';
+  document.getElementById('sugerencias_producto').classList.add('hidden');
+  renderItems();
+  recalcular();
+}
+
+function renderItems() {
+  const cont = document.getElementById('lista-items');
+  cont.innerHTML = '';
+  items.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.className = 'border rounded-2xl shadow-md bg-gradient-to-br from-gray-100 via-gray-50 to-white dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 text-base sm:text-sm transition-all duration-300';
+    div.innerHTML = `
+      <div class="flex items-center justify-between p-4">
+        <button type="button" onclick="toggleDetalle(${index})" id="toggle-btn-${index}" class="text-lg font-bold text-blue-600 dark:text-blue-400 hover:scale-110 transition-transform">+</button>
+        <span class="font-semibold flex-grow ml-4 text-gray-800 dark:text-white">${item.nombre}</span>
+        <div class="flex items-center gap-2">
+          <button type="button" class="px-2 py-1 bg-gray-200 dark:bg-gray-600 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500" onclick="items[${index}].cantidad--; if(items[${index}].cantidad < 1) items[${index}].cantidad = 1; renderItems(); recalcular();">-</button>
+          <input type="number" min="1" class="w-14 text-center p-1 rounded-md bg-white dark:bg-gray-700 text-black dark:text-white border dark:border-gray-600" value="${item.cantidad}" onchange="items[${index}].cantidad=this.valueAsNumber; recalcular();">
+          <button type="button" class="px-2 py-1 bg-gray-200 dark:bg-gray-600 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500" onclick="items[${index}].cantidad++; renderItems(); recalcular();">+</button>
+          <button type="button" class="text-red-500 text-lg ml-2 hover:scale-110 transition-transform" onclick="eliminarItem(${index})">🗑️</button>
+        </div>
+      </div>
+      <div id="detalle-${index}" class="px-4 pb-4 hidden text-sm text-gray-700 dark:text-gray-300">
+        <div class="grid grid-cols-3 gap-4 rounded-lg bg-white/60 dark:bg-gray-800/60 p-3">
+          <div class="text-center"><span class="block text-xs text-gray-500 dark:text-gray-400">Color</span><span class="font-medium">${item.color}</span></div>
+          <div class="text-center"><span class="block text-xs text-gray-500 dark:text-gray-400">Talle</span><span class="font-medium">${item.talle}</span></div>
+          <div class="text-center"><span class="block text-xs text-gray-500 dark:text-gray-400">Precio</span><span class="font-medium">$${item.precio_unitario.toFixed(2)}</span></div>
+        </div>
+      </div>
+    `;
+    cont.appendChild(div);
+  });
+}
+
+function toggleDetalle(index) {
+  const detalle = document.getElementById(`detalle-${index}`);
+  const boton = document.getElementById(`toggle-btn-${index}`);
+  if (detalle && boton) {
+    const isHidden = detalle.classList.contains('hidden');
+    detalle.classList.toggle('hidden');
+    boton.innerText = isHidden ? '-' : '+';
+  }
+}
+
+function eliminarItem(i) {
+  items.splice(i, 1);
+  renderItems();
+  recalcular();
+}
+
+function recalcular() {
+  let total = 0;
+  items.forEach(i => total += i.cantidad * i.precio_cobrado);
+  document.getElementById('total_original').value = total.toFixed(2);
+
+  const descuento = parseFloat(document.getElementById('descuento_total').value || 0);
+  const montoFinal = total * (1 - descuento / 100);
+  document.getElementById('total_cobrado').value = montoFinal.toFixed(2);
+}
+
+function registrarVenta(e) {
+  e.preventDefault();
+  
+  const payload = {
+    cliente_id: cliente_id,
+    cliente_nombre: document.getElementById('cliente_nombre').value,
+    cliente_apellido: document.getElementById('cliente_apellido').value,
+    cliente_telefono: document.getElementById('cliente_telefono').value,
+    total_original: parseFloat(document.getElementById('total_original').value),
+    descuento_total: parseFloat(document.getElementById('descuento_total').value || 0),
+    total_cobrado: parseFloat(document.getElementById('total_cobrado').value),
+    metodo_pago: document.getElementById('metodo_pago').value,  
+    items: items.map(i => ({
+      producto_id: i.id,
+      cantidad: i.cantidad,
+      precio_unitario: i.precio_unitario,
+      precio_cobrado: i.precio_cobrado,
+      descuento_aplicado: i.precio_unitario - i.precio_cobrado
+    
+    }))
+  };
+
+  fetch('/ventas/registrar', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json().then(data => ({ ok: res.ok, data })))
+  .then(({ ok, data }) => {
+    if (!ok) {
+      Swal.fire({
+        title: 'Error',
+        text: data.error || 'Ocurrió un problema al registrar la venta.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        background: '#1f2937',
+        color: '#fff',
+        confirmButtonColor: '#ef4444'
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: 'Venta registrada',
+      text: 'La venta se guardó exitosamente.',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      background: '#1f2937',
+      color: '#fff',
+      confirmButtonColor: '#3b82f6'
+    }).then(() => {
+      window.location.reload();
+    });
+  })
+  .catch(() => {
+    Swal.fire({
+      title: 'Error de red',
+      text: 'No se pudo comunicar con el servidor.',
+      icon: 'error',
+      confirmButtonText: 'Cerrar',
+      background: '#1f2937',
+      color: '#fff',
+      confirmButtonColor: '#ef4444'
+    });
+  });
+}
+</script>
+{% endblock %}

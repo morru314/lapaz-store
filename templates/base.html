@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>La Paz Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (localStorage.getItem('modo') === 'oscuro') {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+
+  <!-- NAVIGATION -->
+  <nav class="backdrop-blur-xl bg-white/50 dark:bg-gray-800/50 shadow-md fixed w-full z-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        <a href="/" class="text-xl font-bold">La Paz Store</a>
+
+        <div class="sm:hidden">
+          <button id="menu-btn" class="text-gray-800 dark:text-gray-100 focus:outline-none transition-transform">
+            <i id="menu-icon" data-lucide="menu" class="w-6 h-6 transition-transform duration-300"></i>
+          </button>
+        </div>
+
+        <div id="menu" class="hidden sm:flex space-x-4 items-center text-sm sm:text-base">
+          <a href="/dashboard" class="flex items-center gap-1 hover:underline">
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
+          </a>
+          <a href="/stock" class="flex items-center gap-1 hover:underline">
+            <i data-lucide="boxes" class="w-4 h-4"></i> Stock
+          </a>
+          <a href="/clientes" class="flex items-center gap-1 hover:underline">
+            <i data-lucide="users" class="w-4 h-4"></i> Clientes
+          </a>
+          <a href="/ventas" class="flex items-center gap-1 hover:underline">
+            <i data-lucide="shopping-cart" class="w-4 h-4"></i> Ventas
+          </a>
+          <a href="/deudas" class="flex items-center gap-1 hover:underline">
+            <i data-lucide="credit-card" class="w-4 h-4"></i> Deudas
+          </a>
+          <button onclick="toggleModo()" class="hover:scale-110 transition-transform">
+            🌗
+          </button>
+        </div>
+      </div>
+
+      <!-- MOBILE MENU -->
+      <div id="mobile-menu" class="sm:hidden hidden flex-col space-y-2 pb-4 text-base">
+        <a href="/dashboard" onclick="cerrarMenu()" class="flex items-center gap-2 hover:underline">
+          <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard
+        </a>
+        <a href="/stock" onclick="cerrarMenu()" class="flex items-center gap-2 hover:underline">
+          <i data-lucide="boxes" class="w-5 h-5"></i> Stock
+        </a>
+        <a href="/clientes" onclick="cerrarMenu()" class="flex items-center gap-2 hover:underline">
+          <i data-lucide="users" class="w-5 h-5"></i> Clientes
+        </a>
+        <a href="/ventas" onclick="cerrarMenu()" class="flex items-center gap-2 hover:underline">
+          <i data-lucide="shopping-cart" class="w-5 h-5"></i> Ventas
+        </a>
+        <a href="/deudas" onclick="cerrarMenu()" class="flex items-center gap-2 hover:underline">
+          <i data-lucide="credit-card" class="w-5 h-5"></i> Deudas
+        </a>
+        <button onclick="toggleModo(); cerrarMenu();" class="hover:scale-110 transition-transform">
+          🌗
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="pt-24 px-4 max-w-6xl mx-auto">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="mb-4">
+        {% for msg in messages %}
+          <li class="text-green-600 dark:text-green-400">{{ msg }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- JS -->
+  <script>
+    lucide.createIcons();
+
+    const menuBtn = document.getElementById("menu-btn");
+    const menuIcon = document.getElementById("menu-icon");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = !mobileMenu.classList.contains("hidden");
+
+      if (isOpen) {
+        menuIcon.setAttribute("data-lucide", "menu");
+        mobileMenu.classList.add("hidden");
+      } else {
+        menuIcon.setAttribute("data-lucide", "x");
+        mobileMenu.classList.remove("hidden");
+      }
+
+      lucide.createIcons();
+    });
+
+    function cerrarMenu() {
+      mobileMenu.classList.add("hidden");
+      menuIcon.setAttribute("data-lucide", "menu");
+      lucide.createIcons();
+    }
+
+    function toggleModo() {
+      document.documentElement.classList.toggle("dark");
+      localStorage.setItem("modo", document.documentElement.classList.contains("dark") ? "oscuro" : "claro");
+    }
+  </script>
+</body>
+</html>

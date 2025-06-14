@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <!-- Sección de carga de archivo -->
+  <div class="bg-gray-800 p-6 rounded-xl shadow mb-8">
+    <h2 class="text-xl font-semibold text-white mb-4">Cargar archivo de stock (.csv o .xlsx)</h2>
+    <form action="{{ url_for('stock_routes.cargar_stock') }}" method="post" enctype="multipart/form-data" class="space-y-4">
+      <input type="file" name="archivo" accept=".csv,.xlsx" class="w-full bg-gray-700 text-white p-2 rounded-md">
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-semibold">Subir y Actualizar Stock</button>
+    </form>
+  </div>
+
+  <!-- Buscador -->
+  <div class="flex gap-3 mb-6">
+    <input type="text" id="buscar" placeholder="Buscar por cualquier campo..." class="w-full bg-gray-700 text-white p-2 rounded-md" oninput="filtrarTabla()">
+    <button onclick="document.getElementById('buscar').value=''; filtrarTabla();" class="text-white bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md">❌</button>
+  </div>
+
+  <!-- Tabla -->
+  <div class="overflow-auto bg-gray-800 rounded-xl shadow">
+    <table class="min-w-full text-sm text-white">
+      <thead class="bg-gray-700">
+        <tr>
+          <th class="p-3 text-left">Código</th>
+          <th class="p-3 text-left">Nombre</th>
+          <th class="p-3 text-left">Descripción</th>
+          <th class="p-3 text-left">Familia</th>
+          <th class="p-3 text-left">Talle</th>
+          <th class="p-3 text-left">Color</th>
+          <th class="p-3 text-left">Proveedor</th>
+          <th class="p-3 text-left">Compra</th>
+          <th class="p-3 text-left">Venta</th>
+          <th class="p-3 text-left">Stock</th>
+          <th class="p-3 text-left">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-productos" class="bg-gray-900">
+        {% for p in productos %}
+        <tr class="border-b border-gray-700 hover:bg-gray-700 transition">
+          <td class="p-3">{{ p.codigo }}</td>
+          <td class="p-3">{{ p.nombre }}</td>
+          <td class="p-3">{{ p.descripcion }}</td>
+          <td class="p-3">{{ p.familia }}</td>
+          <td class="p-3">{{ p.talle }}</td>
+          <td class="p-3">{{ p.color }}</td>
+          <td class="p-3">{{ p.proveedor }}</td>
+          <td class="p-3">${{ "%.2f"|format(p.precio_compra) }}</td>
+          <td class="p-3">${{ "%.2f"|format(p.precio_venta) }}</td>
+          <td class="p-3">{{ p.stock }}</td>
+          <td class="p-3 flex gap-3">
+            <a href="{{ url_for('stock_routes.mostrar_formulario_edicion', id=p.id) }}" title="Editar" class="text-yellow-400 hover:text-yellow-300">✏️</a>
+            <button type="button" title="Eliminar" onclick='abrirModal("{{ url_for("stock_routes.eliminar_producto", id=p.id) }}");' class="text-red-500 hover:text-red-300">❌</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Filtro -->
+<script>
+function filtrarTabla() {
+  const filtro = document.getElementById('buscar').value.toLowerCase();
+  const filas = document.querySelectorAll('#tabla-productos tr');
+  filas.forEach(fila => {
+    let textoTotal = fila.innerText.toLowerCase();
+    fila.style.display = textoTotal.includes(filtro) ? '' : 'none';
+  });
+}
+</script>
+
+<!-- Modal Eliminar -->
+<div id="modalEliminar" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-gray-800 text-white p-6 rounded-xl shadow-xl max-w-sm w-full">
+    <h2 class="text-xl font-bold text-red-400 mb-3">¿Eliminar producto?</h2>
+    <p class="mb-4">Esta acción no se puede deshacer.</p>
+    <div class="flex justify-end gap-3">
+      <button onclick="cerrarModal()" class="bg-gray-600 hover:bg-gray-500 px-4 py-2 rounded">Cancelar</button>
+      <form id="formEliminar" method="post">
+        <button type="submit" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white">Eliminar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function abrirModal(url) {
+  const modal = document.getElementById('modalEliminar');
+  modal.classList.remove('hidden');
+  document.getElementById('formEliminar').action = url;
+}
+function cerrarModal() {
+  document.getElementById('modalEliminar').classList.add('hidden');
+}
+</script>
+
+{% endblock %}

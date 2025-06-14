@@ -1,0 +1,28 @@
+{# templates/confirmar_eliminar.html #}
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mx-auto p-6 max-w-2xl">
+  <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+    <h2 class="text-xl font-bold mb-4">Confirmar Eliminación</h2>
+
+    <p class="mb-4">Estás a punto de eliminar el siguiente producto:</p>
+
+    <ul class="mb-6 space-y-2">
+      <li><strong>Código:</strong> {{ producto.codigo }}</li>
+      <li><strong>Nombre:</strong> {{ producto.nombre }}</li>
+      <li><strong>Proveedor:</strong> {{ producto.proveedor }}</li>
+      <li><strong>Precio Venta:</strong> ${{ producto.precio_venta }}</li>
+      <li><strong>Stock:</strong> {{ producto.stock }}</li>
+    </ul>
+
+    <form method="post" action="{{ url_for('stock_routes.eliminar_producto', id=producto.id) }}">
+      <div class="flex gap-4">
+        <button type="submit" class="btn-danger">Eliminar</button>
+        <a href="{{ url_for('stock_routes.stock') }}" class="btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

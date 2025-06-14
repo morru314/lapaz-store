@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-4">Clientes con Deuda</h1>
+
+  <table class="min-w-full text-sm text-left border dark:border-gray-600">
+    <thead class="bg-gray-200 dark:bg-gray-700">
+      <tr>
+        <th class="p-2">Cliente</th>
+        <th class="p-2">Teléfono</th>
+        <th class="p-2">Total Deuda</th>
+        <th class="p-2">Estado</th>
+        <th class="p-2">Ver</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white dark:bg-gray-800">
+      {% for c in clientes %}
+        {% set total = 0 %}
+        {% set estado = 'Saldada' %}
+        {% for d in c.deudas %}
+          {% set total = total + d.saldo_pendiente %}
+          {% if d.saldo_pendiente > 0 %}
+            {% set estado = 'Con Deuda' %}
+          {% endif %}
+        {% endfor %}
+        {% if total > 0 %}
+        <tr class="border-b dark:border-gray-700">
+          <td class="p-2">{{ c.nombre }} {{ c.apellido }}</td>
+          <td class="p-2">{{ c.telefono }}</td>
+          <td class="p-2 text-red-500 font-bold">${{ "%.2f"|format(total) }}</td>
+          <td class="p-2">{{ estado }}</td>
+          <td class="p-2">
+            <a href="{{ url_for('deudas_routes.deudas_por_cliente', cliente_id=c.id) }}" class="btn-secondary text-xs">Ver Detalle</a>
+          </td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
