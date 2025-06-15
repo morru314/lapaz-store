@@ -1,4 +1,3 @@
-# config.py
 import os
 import secrets
 
@@ -11,8 +10,10 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Seguridad y archivos
-    # La clave secreta se obtiene de la variable de entorno SECRET_KEY para evitar
-    # exponerla en el código fuente. Si no está definida, se genera una de
-    # forma aleatoria en ejecución.
     SECRET_KEY = os.environ.get("SECRET_KEY") or secrets.token_hex(16)
+
+    # Credenciales de administrador para autenticación básica
+    ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
+    ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin")
+
     UPLOAD_FOLDER = os.path.join(BASEDIR, 'static', 'uploads')  # esto es clave
