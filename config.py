@@ -15,4 +15,7 @@ class Config:
     # exponerla en el código fuente. Si no está definida, se genera una de
     # forma aleatoria en ejecución.
     SECRET_KEY = os.environ.get("SECRET_KEY") or secrets.token_hex(16)
+    # Credenciales de administrador para autenticación básica
+    ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
+    ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin")
     UPLOAD_FOLDER = os.path.join(BASEDIR, 'static', 'uploads')  # esto es clave

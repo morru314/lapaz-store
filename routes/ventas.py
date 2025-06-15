@@ -1,16 +1,19 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask_login import login_required
 from extensions import db
 from models.models import Cliente, Producto, Venta, DetalleVenta, Deuda, Pago
 
 ventas_routes = Blueprint('ventas_routes', __name__, template_folder='../templates')
 
 @ventas_routes.route('/ventas')
+@login_required
 def ventas():
     productos = Producto.query.all()
     clientes = Cliente.query.all()
     return render_template('ventas.html', productos=productos, clientes=clientes)
 
 @ventas_routes.route('/ventas/registrar', methods=['POST'])
+@login_required
 def registrar_venta():
     data = request.json
 
@@ -85,6 +88,7 @@ def registrar_venta():
     db.session.commit()
     return jsonify({"message": "Venta registrada correctamente."})
 @ventas_routes.route('/ventas/buscar_producto')
+@login_required
 def buscar_producto():
     q = request.args.get('q', '').strip().lower()
     palabras = q.split()
@@ -118,6 +122,7 @@ def buscar_producto():
 
 
 @ventas_routes.route('/ventas/buscar_cliente')
+@login_required
 def buscar_cliente():
     q = request.args.get('q', '').lower()
     clientes = Cliente.query.filter(

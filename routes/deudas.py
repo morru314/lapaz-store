@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import login_required
 from extensions import db
 from models.models import Deuda, Cliente, Pago
 from datetime import datetime
@@ -6,12 +7,14 @@ from datetime import datetime
 deudas_routes = Blueprint('deudas_routes', __name__, template_folder='../templates')
 
 @deudas_routes.route('/deudas')
+@login_required
 def deudas():
     clientes = Cliente.query.all()
     deudas = Deuda.query.all()
     return render_template('deudas.html', clientes=clientes, deudas=deudas)
 
 @deudas_routes.route('/deudas/cliente/<int:cliente_id>')
+@login_required
 def deudas_por_cliente(cliente_id):
     cliente = Cliente.query.get_or_404(cliente_id)
     deudas = Deuda.query.filter_by(cliente_id=cliente_id).all()
@@ -19,6 +22,7 @@ def deudas_por_cliente(cliente_id):
     return render_template('deudas_cliente.html', cliente=cliente, deudas=deudas, pagos=pagos)
 
 @deudas_routes.route('/deudas/pagar', methods=['POST'])
+@login_required
 def pagar_deuda():
     cliente_id = int(request.form['cliente_id'])
     monto_pago = float(request.form['monto'])

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from flask_login import login_required
 from models.models import Producto, Venta, Deuda, DetalleVenta
 from datetime import datetime
 from extensions import db
@@ -6,6 +7,7 @@ from extensions import db
 dashboard_routes = Blueprint('dashboard_routes', __name__, template_folder='../templates')
 
 @dashboard_routes.route('/dashboard')
+@login_required
 def dashboard():
     hoy = datetime.today()
     primer_dia_mes = datetime(hoy.year, hoy.month, 1)

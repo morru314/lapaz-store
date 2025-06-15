@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4">Iniciar sesión</h2>
+<form method="post" class="space-y-4 max-w-sm">
+  <div>
+    <label class="block">Usuario</label>
+    <input type="text" name="username" class="border px-2 py-1 w-full" required>
+  </div>
+  <div>
+    <label class="block">Contraseña</label>
+    <input type="password" name="password" class="border px-2 py-1 w-full" required>
+  </div>
+  <button type="submit" class="bg-blue-500 text-white px-4 py-2">Entrar</button>
+</form>
+{% endblock %}
