@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4">Crear usuario</h2>
+<form method="post" class="space-y-4 max-w-sm">
+  <div>
+    <label class="block">Usuario</label>
+    <input type="text" name="username" class="border px-2 py-1 w-full" required>
+  </div>
+  <div>
+    <label class="block">Nombre</label>
+    <input type="text" name="nombre" class="border px-2 py-1 w-full" required>
+  </div>
+  <div>
+    <label class="block">Email</label>
+    <input type="email" name="email" class="border px-2 py-1 w-full" required>
+  </div>
+  <div>
+    <label class="block">Perfil</label>
+    <select name="perfil" class="border px-2 py-1 w-full">
+      <option value="Vendedor">Vendedor</option>
+      <option value="Admin">Admin</option>
+    </select>
+  </div>
+  <div>
+    <label class="block">Contraseña</label>
+    <input type="password" name="password" class="border px-2 py-1 w-full" required>
+  </div>
+  <button type="submit" class="bg-blue-500 text-white px-4 py-2">Guardar</button>
+</form>
+{% endblock %}

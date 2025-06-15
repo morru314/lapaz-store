@@ -3,10 +3,43 @@ from flask_login import login_user, logout_user, login_required
 from models.models import User
 from flask_login import current_user  # ya que usás user logueado
 from werkzeug.security import generate_password_hash
+from extensions import db
 
 
 
 auth_routes = Blueprint('auth_routes', __name__, template_folder='../templates')
+
+
+@auth_routes.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        nombre = request.form['nombre']
+        email = request.form['email']
+        perfil = request.form.get('perfil', 'Vendedor')
+
+        if User.query.filter_by(username=username).first():
+            flash('El nombre de usuario ya existe.')
+            return redirect(url_for('auth_routes.register'))
+
+        if User.query.filter_by(email=email).first():
+            flash('El email ya está registrado.')
+            return redirect(url_for('auth_routes.register'))
+
+        nuevo = User(
+            username=username,
+            nombre=nombre,
+            email=email,
+            perfil=perfil,
+        )
+        nuevo.set_password(password)
+        db.session.add(nuevo)
+        db.session.commit()
+        flash('Usuario creado correctamente.')
+        return redirect(url_for('auth_routes.login'))
+
+    return render_template('register.html')
 
 @auth_routes.route('/login', methods=['GET', 'POST'])
 def login():
