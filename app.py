@@ -62,7 +62,7 @@ if __name__ == "__main__":
             print("[*] Admin not found, creating...")
             admin = User(
                 username=Config.ADMIN_USERNAME,
-                nombre="Administrador",
+                full_name="Administrador",
                 email="admin@example.com",
                 perfil="Admin",
             )
