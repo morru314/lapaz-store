@@ -12,6 +12,7 @@ import os
 app = Flask(__name__)
 app.config.from_object(Config)
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
 db.init_app(app)
 login_manager.init_app(app)
 login_manager.login_view = 'auth_routes.login'
@@ -36,8 +37,6 @@ def index():
 def format_currency(value):
     return f"{value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
-import os
-
 if __name__ == "__main__":
     with app.app_context():
         from models.models import *
@@ -56,7 +55,7 @@ if __name__ == "__main__":
         db.create_all()
         print("[*] db.create_all() executed")
 
-        # Crear usuario admin si no existe
+        # Crear usuario administrador si no existe
         admin = User.query.filter_by(username=Config.ADMIN_USERNAME).first()
         if not admin:
             print("[*] Admin not found, creating...")
@@ -71,3 +70,8 @@ if __name__ == "__main__":
             db.session.commit()
         else:
             print("[*] Admin already exists.")
+
+    # Solo ejecutar app.run() si no estamos en Render
+    if not os.environ.get("RENDER"):
+        port = int(os.environ.get("PORT", 5000))
+        app.run(host="0.0.0.0", port=port)

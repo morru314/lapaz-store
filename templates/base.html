@@ -12,6 +12,27 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+   <!-- ✅ Estilos globales para campos de formulario -->
+  <style>
+    input, textarea, select {
+      background-color: #ffffff;
+      color: #111111;
+    }
+
+    .dark input, .dark textarea, .dark select {
+      background-color: #1f2937;
+      color: #f1f5f9;
+    }
+
+    input::placeholder {
+      color: #9ca3af;
+    }
+
+    .dark input::placeholder {
+      color: #6b7280;
+    }
+  </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
 

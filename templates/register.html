@@ -4,27 +4,27 @@
 <form method="post" class="space-y-4 max-w-sm">
   <div>
     <label class="block">Usuario</label>
-    <input type="text" name="username" class="border px-2 py-1 w-full" required>
+    <input type="text" name="username" class="w-full px-3 py-2 rounded border bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600" required>
   </div>
   <div>
     <label class="block">Nombre</label>
-    <input type="text" name="nombre" class="border px-2 py-1 w-full" required>
+    <input type="text" name="nombre" class="w-full px-3 py-2 rounded border bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600" required>
   </div>
   <div>
     <label class="block">Email</label>
-    <input type="email" name="email" class="border px-2 py-1 w-full" required>
+    <input type="email" name="email" class="w-full px-3 py-2 rounded border bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600" required>
   </div>
   <div>
     <label class="block">Perfil</label>
-    <select name="perfil" class="border px-2 py-1 w-full">
+    <select name="perfil" class="w-full px-3 py-2 rounded border bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600">
       <option value="Vendedor">Vendedor</option>
       <option value="Admin">Admin</option>
     </select>
   </div>
   <div>
     <label class="block">Contraseña</label>
-    <input type="password" name="password" class="border px-2 py-1 w-full" required>
+    <input type="password" name="password" class="w-full px-3 py-2 rounded border bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600" required>
   </div>
-  <button type="submit" class="bg-blue-500 text-white px-4 py-2">Guardar</button>
+  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Guardar</button>
 </form>
 {% endblock %}

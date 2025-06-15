@@ -15,7 +15,7 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        nombre = request.form['nombre']
+        full_name = request.form['nombre']  # (el input HTML puede seguir llamándose "nombre")
         email = request.form['email']
         perfil = request.form.get('perfil', 'Vendedor')
 
@@ -29,10 +29,11 @@ def register():
 
         nuevo = User(
             username=username,
-            nombre=nombre,
+            full_name=full_name,
             email=email,
             perfil=perfil,
         )
+
         nuevo.set_password(password)
         db.session.add(nuevo)
         db.session.commit()
