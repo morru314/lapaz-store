@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask_login import login_required
 from extensions import db
 from models.models import Cliente
 
@@ -7,6 +8,7 @@ clientes_routes = Blueprint('clientes_routes', __name__, template_folder='../tem
 from models.models import Cliente, Venta, Deuda  # ya lo usás
 
 @clientes_routes.route('/clientes')
+@login_required
 def clientes():
     clientes = Cliente.query.filter_by(activo=True).all()
     clientes_data = []
@@ -21,6 +23,7 @@ def clientes():
     return render_template('clientes.html', clientes_data=clientes_data)
 
 @clientes_routes.route('/clientes/nuevo', methods=['POST'])
+@login_required
 def nuevo_cliente():
     nombre = request.form['nombre']
     apellido = request.form['apellido']
@@ -39,7 +42,7 @@ def nuevo_cliente():
     flash("Cliente agregado correctamente.")
     return redirect(url_for('clientes_routes.clientes'))
 @clientes_routes.route('/clientes/editar/<int:id>', methods=['GET', 'POST'])
-
+@login_required
 def editar_cliente(id):
     cliente = Cliente.query.get_or_404(id)
     if request.method == 'POST':
@@ -54,6 +57,7 @@ def editar_cliente(id):
     return render_template('clientes.html', cliente_editar=cliente, editar=True)
 
 @clientes_routes.route('/clientes/eliminar/<int:id>', methods=['POST'])
+@login_required
 def eliminar_cliente(id):
     cliente = Cliente.query.get_or_404(id)
 
@@ -67,6 +71,7 @@ def eliminar_cliente(id):
     return redirect(url_for('clientes_routes.clientes'))
 
 @clientes_routes.route('/clientes/buscar')
+@login_required
 def buscar_cliente():
     q = request.args.get('q', '').lower()
     resultados = Cliente.query.filter(

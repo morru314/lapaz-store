@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import login_required
 from extensions import db
 from models.models import Producto
 import pandas as pd
@@ -10,6 +11,7 @@ stock_routes = Blueprint('stock_routes', __name__, template_folder='../templates
 from models.models import DetalleVenta
 
 @stock_routes.route('/stock')
+@login_required
 def stock():
     productos = Producto.query.all()
 
@@ -32,16 +34,19 @@ def stock():
     )
 
 @stock_routes.route('/stock/editar/<int:id>', methods=['GET'])
+@login_required
 def mostrar_formulario_edicion(id):
     producto = Producto.query.get_or_404(id)
     return render_template('editar_producto.html', producto=producto)
 
 @stock_routes.route('/stock/eliminar/<int:id>', methods=['GET'])
+@login_required
 def confirmar_eliminar_producto(id):
     producto = Producto.query.get_or_404(id)
     return render_template('confirmar_eliminar.html', producto=producto)
 
 @stock_routes.route('/stock/eliminar/<int:id>', methods=['POST'])
+@login_required
 def eliminar_producto(id):
     producto = Producto.query.get_or_404(id)
     db.session.delete(producto)
@@ -50,6 +55,7 @@ def eliminar_producto(id):
     return redirect(url_for('stock_routes.stock'))
 
 @stock_routes.route('/stock/editar/<int:id>', methods=['POST'])
+@login_required
 def editar_producto(id):
     producto = Producto.query.get_or_404(id)
     producto.nombre = request.form['nombre']
@@ -66,6 +72,7 @@ def editar_producto(id):
     return redirect(url_for('stock_routes.stock'))
 
 @stock_routes.route('/stock/cargar', methods=['GET', 'POST'])
+@login_required
 def cargar_stock():
     if request.method == 'POST':
         archivo = request.files['archivo']
