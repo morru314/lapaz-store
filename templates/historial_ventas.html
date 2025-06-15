@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Ventas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-dark text-light">
+<div class="container py-4">
+    <h1 class="mb-4"><i class="bi bi-cart-check"></i> Historial de Ventas</h1>
+
+    <div class="table-responsive">
+        <table class="table table-dark table-bordered table-hover align-middle text-center">
+            <thead class="table-secondary text-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                    <th>Cobrado</th>
+                    <th>Descuento</th>
+                    <th>Deuda</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venta in ventas %}
+                <tr>
+                    <td>{{ venta.id }}</td>
+                    <td>{{ venta.cliente.nombre }} {{ venta.cliente.apellido }}</td>
+                    <td>{{ venta.total_original | format_currency }}</td>
+                    <td>{{ venta.total_cobrado | format_currency }}</td>
+                    <td>{{ venta.descuento_total | format_currency }}</td>
+                    <td>
+                        {% if deudas.get(venta.id) %}
+                            {{ deudas[venta.id].saldo_pendiente | format_currency }}
+                        {% else %}-{% endif %}
+                    </td>
+                    <td>
+                        {% if venta.anulada %}
+                            <span class="badge bg-danger">Anulada</span>
+                        {% elif venta.total_cobrado < venta.total_original %}
+                            <span class="badge bg-warning text-dark">Pendiente</span>
+                        {% else %}
+                            <span class="badge bg-success">Pagado</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not venta.anulada %}
+                            {% if deudas.get(venta.id) %}
+                            <form method="GET" action="/deudas/registrar/{{ venta.id }}" class="d-inline">
+                                <button class="btn btn-sm btn-primary">Pagar</button>
+                            </form>
+                            {% endif %}
+                            <form method="POST" action="{{ url_for('ventas_routes.anular_venta', venta_id=venta.id) }}" class="d-inline">
+                                <button class="btn btn-sm btn-outline-danger">Anular</button>
+                            </form>
+                        {% else %}-{% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="/dashboard" class="btn btn-outline-light mt-3">&larr; Volver al dashboard</a>
+</div>
+</body>
+</html>
+
+{% endblock %}

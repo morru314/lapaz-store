@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrar Pago</title>
+</head>
+<body>
+    <h1>Registrar Pago para Venta #{{ venta.id }}</h1>
+    <p><strong>Cliente:</strong> {{ venta.cliente.nombre }} {{ venta.cliente.apellido }}</p>
+    <p><strong>Deuda actual:</strong> {{ deuda.saldo_pendiente | format_currency }}</p>
+
+    <form method="POST">
+        <label>Monto a pagar:</label>
+        <input type="number" name="monto" step="0.01" required><br><br>
+
+        <label>Método de pago:</label>
+        <select name="metodo">
+            <option>Transferencia</option>
+            <option>Efectivo</option>
+            <option>Débito</option>
+            <option>Crédito</option>
+        </select><br><br>
+
+        <button type="submit">Registrar Pago</button>
+    </form>
+
+    <br>
+    <a href="{{ url_for('ventas_routes.historial_ventas') }}">Volver al historial</a>
+</body>
+</html>

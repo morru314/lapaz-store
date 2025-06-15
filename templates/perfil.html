@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div align="center">
+<h2 class="text-2xl font-bold mb-4">Mi Perfil</h2>
+
+<div class="bg-white dark:bg-gray-800 p-6 rounded shadow max-w-md space-y-6">
+  <div>
+    <p><strong>Usuario:</strong> {{ user.username }}</p>
+    <p><strong>ID de usuario:</strong> {{ user.id }}</p>
+    <p><strong>Email:</strong> (campo opcional no definido)</p>
+  </div>
+
+  <h3 class="text-xl font-semibold">Cambiar contraseña</h3>
+  <form method="post" class="space-y-4">
+    <!-- Nueva contraseña -->
+    <div>
+      <label class="block mb-1">Nueva contraseña</label>
+      <div class="relative">
+        <input type="password" name="nueva_password" id="nueva_password"
+               class="w-full border p-2 pr-10 rounded bg-gray-50 dark:bg-gray-700" required>
+        <button type="button" onclick="togglePassword('nueva_password', this)"
+                class="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                title="Mostrar/ocultar">
+          <i data-lucide="eye" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Confirmar contraseña -->
+    <div>
+      <label class="block mb-1">Confirmar contraseña</label>
+      <div class="relative">
+        <input type="password" name="confirmar_password" id="confirmar_password"
+               class="w-full border p-2 pr-10 rounded bg-gray-50 dark:bg-gray-700" required>
+        <button type="button" onclick="togglePassword('confirmar_password', this)"
+                class="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                title="Mostrar/ocultar">
+          <i data-lucide="eye" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Guardar cambios</button>
+  </form>
+</div>
+{% endblock %}
+

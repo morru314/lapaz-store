@@ -43,9 +43,15 @@
           <a href="/deudas" class="flex items-center gap-1 hover:underline">
             <i data-lucide="credit-card" class="w-4 h-4"></i> Deudas
           </a>
-          <button onclick="toggleModo()" class="hover:scale-110 transition-transform">
-            🌗
-          </button>
+          <button onclick="toggleModo()" class="hover:scale-110 transition-transform">🌗</button>
+          {% if current_user.is_authenticated %}
+          <div class="hidden sm:flex items-center gap-3">
+            <a href="{{ url_for('auth_routes.perfil') }}" class="text-sm font-semibold hover:underline">
+              👤 {{ current_user.username }}
+            </a>
+            <a href="{{ url_for('auth_routes.logout') }}" class="text-red-500 hover:underline text-sm">Salir</a>
+          </div>
+          {% endif %}
         </div>
       </div>
 
@@ -66,6 +72,14 @@
         <a href="/deudas" onclick="cerrarMenu()" class="flex items-center gap-2 hover:underline">
           <i data-lucide="credit-card" class="w-5 h-5"></i> Deudas
         </a>
+        {% if current_user.is_authenticated %}
+        <div class="pt-4 border-t border-gray-600 space-y-1">
+          <a href="{{ url_for('auth_routes.perfil') }}" onclick="cerrarMenu()" class="text-sm hover:underline flex items-center gap-1">
+            👤 {{ current_user.username }}
+          </a>
+          <a href="{{ url_for('auth_routes.logout') }}" onclick="cerrarMenu()" class="text-red-400 hover:underline text-sm">Cerrar sesión</a>
+        </div>
+        {% endif %}
         <button onclick="toggleModo(); cerrarMenu();" class="hover:scale-110 transition-transform">
           🌗
         </button>
@@ -75,13 +89,24 @@
 
   <!-- CONTENT -->
   <main class="pt-24 px-4 max-w-6xl mx-auto">
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-        <ul class="mb-4">
-        {% for msg in messages %}
-          <li class="text-green-600 dark:text-green-400">{{ msg }}</li>
-        {% endfor %}
-        </ul>
+        <script>
+          Swal.fire({
+            icon: '{{ messages[0][0] }}',
+            title: '{{ messages[0][0]|capitalize }}',
+            html: `{% for category, msg in messages %}{{ msg }}<br>{% endfor %}`,
+            confirmButtonColor: '#3B82F6', // Azul Tailwind
+            background: '#1f2937', // Fondo dark
+            color: '#f9fafb', // Texto claro
+            customClass: {
+              popup: 'text-sm max-w-md p-4 rounded-lg shadow-xl',
+              title: 'text-lg font-semibold',
+              confirmButton: 'text-sm px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700'
+            },
+            buttonsStyling: false
+          });
+        </script>
       {% endif %}
     {% endwith %}
     {% block content %}{% endblock %}
@@ -119,6 +144,22 @@
       document.documentElement.classList.toggle("dark");
       localStorage.setItem("modo", document.documentElement.classList.contains("dark") ? "oscuro" : "claro");
     }
+
+    function togglePassword(fieldId, btn) {
+      const input = document.getElementById(fieldId);
+      const icon = btn.querySelector("i");
+
+      if (input.type === "password") {
+        input.type = "text";
+        icon.setAttribute("data-lucide", "eye-off");
+      } else {
+        input.type = "password";
+        icon.setAttribute("data-lucide", "eye");
+      }
+
+      lucide.createIcons();
+    }
   </script>
+
 </body>
 </html>
