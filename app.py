@@ -36,17 +36,33 @@ def index():
 def format_currency(value):
     return f"{value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
+import os
+
 if __name__ == "__main__":
     with app.app_context():
         from models.models import *
+
+        print(f"[*] DB PATH: {Config.DB_PATH}")
+        print(f"[*] DB exists? {os.path.exists(Config.DB_PATH)}")
+
+        if os.path.exists(Config.DB_PATH):
+            print("[*] Existing tables in DB:")
+            tables = db.engine.execute("SELECT name FROM sqlite_master WHERE type='table';").fetchall()
+            for t in tables:
+                print(" -", t[0])
+        else:
+            print("[!] Database file NOT found!")
+
         db.create_all()
-        # Crear usuario administrador si no existe
+        print("[*] db.create_all() executed")
+
+        # Crear usuario admin si no existe
         admin = User.query.filter_by(username=Config.ADMIN_USERNAME).first()
         if not admin:
+            print("[*] Admin not found, creating...")
             admin = User(username=Config.ADMIN_USERNAME)
             admin.set_password(Config.ADMIN_PASSWORD)
             db.session.add(admin)
             db.session.commit()
-
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+        else:
+            print("[*] Admin already exists.")
