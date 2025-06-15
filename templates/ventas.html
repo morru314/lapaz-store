@@ -107,8 +107,18 @@ function buscarCliente() {
 
       data.forEach(cli => {
         const div = document.createElement('div');
-        div.innerText = `${cli.nombre} ${cli.apellido} (${cli.telefono})`;
-        div.className = 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 p-1 rounded text-sm text-gray-800 dark:text-white';
+        div.innerHTML = `
+         <div class="flex items-center gap-4 p-3 border rounded-xl shadow-sm bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
+          <div class="text-3xl">👤</div>
+          <div class="flex flex-col text-left">
+            <span class="font-semibold text-gray-900 dark:text-white text-base">${cli.nombre} ${cli.apellido}</span>
+            <span class="text-gray-500 dark:text-gray-300 text-sm">${cli.telefono || 'Sin teléfono'}</span>
+          </div>
+        </div>
+      `;
+      
+div.className = 'cursor-pointer mb-2';
+
         div.onclick = () => {
           cliente_id = cli.id;
           document.getElementById('cliente_nombre').value = cli.nombre;
@@ -151,12 +161,22 @@ function buscarProducto() {
       data.forEach(p => {
         const div = document.createElement('div');
         const stockColor = p.stock === 0 ? 'text-red-500' : p.stock < 3 ? 'text-yellow-500' : 'text-green-600 dark:text-green-400';
+        const icono = p.familia.toLowerCase().includes("buzo") ? "🧥" :
+              p.familia.toLowerCase().includes("pantalon") ? "👖" :
+              p.familia.toLowerCase().includes("campera") ? "🧢" :
+              p.familia.toLowerCase().includes("remera") ? "👕" : "🧾";
+
         div.innerHTML = `
-          <span class='font-semibold'>${p.codigo}</span> - ${p.nombre} - 
-          <span class='italic'>${p.talle}</span> - ${p.color} - 
-          <span class='text-green-600 dark:text-green-400'>$${p.precio_venta}</span> - 
-          <span class='text-xs ${stockColor}'>Stock: ${p.stock}</span>
+        <div class="flex items-center gap-4 p-3 border rounded-xl shadow-sm bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all cursor-pointer">
+        <div class="text-3xl">${icono}</div>
+          <div class="flex flex-col text-sm">
+          <span class="font-bold text-gray-900 dark:text-white">${p.nombre} (${p.talle})</span>
+          <span class="text-gray-600 dark:text-gray-300 text-xs">${p.color} — <span class="${stockColor}">Stock: ${p.stock}</span></span>
+          <span class="text-blue-600 dark:text-blue-400 font-semibold">$${p.precio_venta}</span>
+         </div>
+        </div>
         `;
+
         div.className = 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 p-1 rounded text-sm text-gray-800 dark:text-white';
         div.onclick = () => {
           agregarProducto(p);
