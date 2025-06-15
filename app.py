@@ -60,7 +60,12 @@ if __name__ == "__main__":
         admin = User.query.filter_by(username=Config.ADMIN_USERNAME).first()
         if not admin:
             print("[*] Admin not found, creating...")
-            admin = User(username=Config.ADMIN_USERNAME)
+            admin = User(
+                username=Config.ADMIN_USERNAME,
+                nombre="Administrador",
+                email="admin@example.com",
+                perfil="Admin",
+            )
             admin.set_password(Config.ADMIN_PASSWORD)
             db.session.add(admin)
             db.session.commit()
