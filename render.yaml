@@ -2,7 +2,9 @@ services:
   - type: web
     name: lapaz-store
     runtime: python
-    pythonVersion: 3.12.3
+    # Render supports several versions of Python. This project targets Python 3.11
+    # to avoid compatibility issues with certain dependencies.
+    pythonVersion: 3.11
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn app:app"
     envVars:
