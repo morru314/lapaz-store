@@ -1,54 +1,13 @@
-# CORE - Web y DB
+# Core dependencies
 Flask==3.1.1
 Flask-SQLAlchemy==3.1.1
 Flask-Login==0.6.3
 SQLAlchemy==2.0.41
 python-dotenv==1.1.0
 gunicorn==23.0.0
-psycopg2==2.9.9  # Para conectar con Supabase PostgreSQL
+psycopg2==2.9.9
 supabase==1.0.3
 
-# FRONTEND & FORMATO
-Jinja2==3.1.6
-Werkzeug==3.1.3
-MarkupSafe==3.0.2
-
-# EXCEL / CSV / DATA
+# Data handling
 pandas==2.2.3
 openpyxl==3.1.5
-XlsxWriter==3.2.3
-
-# UTILIDADES
-python-dateutil==2.9.0.post0
-tqdm==4.67.1
-requests==2.32.3
-urllib3==2.4.0
-python-bidi==0.6.6
-
-# GOOGLE / OPENAI / SUPABASE
-google-auth==2.40.2
-google-api-python-client==2.170.0
-openai==1.82.0
-
-# OCR y VISIÓN
-pytesseract==0.3.13
-easyocr==1.7.2
-opencv-python==4.11.0.86
-pillow==11.2.1
-
-# SCRAPING y AUTOMATION
-selenium==4.32.0
-beautifulsoup4==4.13.4
-cloudscraper==1.2.71
-webdriver-manager==4.0.2
-
-# SEGURIDAD
-itsdangerous==2.2.0
-blinker==1.9.0
-
-# OTROS (solo si los usás)
-matplotlib==3.10.3
-scipy==1.15.3
-scikit-image==0.25.2
-torch==2.7.0
-torchvision==0.22.0
