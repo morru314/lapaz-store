@@ -25,6 +25,12 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 # Inicializar SQLAlchemy
 db.init_app(app)
 
+# Crear las tablas siempre que arranca la app
+with app.app_context():
+    from models.models import *
+    db.create_all()
+    print("[*] Tablas inicializadas en Supabase Postgres")
+
 # Registrar rutas
 app.register_blueprint(stock_routes)
 app.register_blueprint(clientes_routes)
@@ -42,11 +48,6 @@ def format_currency(value):
     return f"{value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 if __name__ == "__main__":
-    with app.app_context():
-        from models.models import *
-        db.create_all()
-        print("[*] Tablas inicializadas en Supabase Postgres")
-
     if not os.environ.get("RENDER"):
         port = int(os.environ.get("PORT", 5000))
         app.run(host="0.0.0.0", port=port)
