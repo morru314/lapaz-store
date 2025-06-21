@@ -18,7 +18,7 @@ def stock():
     valor_stock_compra = sum(p["stock"] * p["precio_compra"] for p in productos)
     valor_stock_venta = sum(p["stock"] * p["precio_venta"] for p in productos)
 
-    detalles = supabase.table("detalleventa").select("*").execute().data
+    detalles = supabase.table("detalle_venta").select("*").execute().data
     facturacion = sum(d["precio_cobrado"] * d["cantidad"] for d in detalles)
 
     return render_template(
