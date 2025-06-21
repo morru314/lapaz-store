@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-from supabase import create_client
+from supabase_client import supabase
 import os
 import uuid
 from datetime import datetime

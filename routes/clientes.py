@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, session
-from app import supabase  # Cliente ya creado en app.py
+from supabase_client import supabase
 from functools import wraps
 
 clientes_routes = Blueprint('clientes_routes', __name__, template_folder='../templates')

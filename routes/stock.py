@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-from app import supabase
+from supabase_client import supabase
 import pandas as pd
 import os
 from config import Config

@@ -6,7 +6,7 @@ from routes.ventas import ventas_routes
 from routes.deudas import deudas_routes
 from routes.dashboard import dashboard_routes
 from routes.auth import auth_routes
-from supabase import create_client, Client
+from supabase_client import supabase
 import os
 
 # Crear cliente Supabase

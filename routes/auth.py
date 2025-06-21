@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session
-from supabase import create_client
+from supabase_client import supabase
 from extensions import db
 from models.models import User
 import os
