@@ -9,12 +9,6 @@ from routes.auth import auth_routes
 from supabase_client import supabase
 import os
 
-# Crear cliente Supabase
-supabase: Client = create_client(
-    os.getenv("SUPABASE_URL"),
-    os.getenv("SUPABASE_ANON_KEY")
-)
-
 # Flask app
 app = Flask(__name__)
 app.config.from_object(Config)
