@@ -5,8 +5,11 @@ Flask-Login==0.6.3
 SQLAlchemy==2.0.41
 python-dotenv==1.1.0
 gunicorn==23.0.0
-# Use the precompiled binary wheel to avoid build errors during deployment.
+
+# PostgreSQL driver (precompiled binary – ideal for Render/Supabase)
 psycopg2-binary==2.9.9
+
+# Supabase client
 supabase==1.0.3
 
 # Data handling
