@@ -8,12 +8,6 @@ from datetime import datetime
 
 deudas_routes = Blueprint('deudas_routes', __name__, template_folder='../templates')
 
-# Supabase client
-supabase = create_client(
-    os.getenv("SUPABASE_URL"),
-    os.getenv("SUPABASE_ANON_KEY")
-)
-
 # Decorador Supabase
 from functools import wraps
 

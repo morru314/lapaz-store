@@ -6,10 +6,6 @@ import os
 
 auth_routes = Blueprint('auth_routes', __name__, template_folder='../templates')
 
-supabase = create_client(
-    os.getenv("SUPABASE_URL"),
-    os.getenv("SUPABASE_ANON_KEY")
-)
 
 @auth_routes.route('/register', methods=['GET', 'POST'])
 def register():
