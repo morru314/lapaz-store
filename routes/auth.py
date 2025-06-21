@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from supabase_client import supabase
 from extensions import db
-from models.models import User
+from models import User
 import os
 
 auth_routes = Blueprint('auth_routes', __name__, template_folder='../templates')

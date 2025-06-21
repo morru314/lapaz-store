@@ -8,7 +8,7 @@ from routes.dashboard import dashboard_routes
 from routes.auth import auth_routes
 from supabase_client import supabase
 from flask_login import LoginManager, current_user
-from models.usuario import Usuario  # Asegurate de tener este modelo
+from models import User
 
 import os
 
