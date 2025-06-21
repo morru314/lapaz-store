@@ -1,15 +1,10 @@
 services:
   - type: web
-    name: la-paz-store
-    env: python
+    name: lapaz-store
+    runtime: python
+    pythonVersion: 3.12.3
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn app:app"
     envVars:
       - key: FLASK_ENV
         value: production
-      - key: UPLOAD_FOLDER
-        value: static/uploads
-      - key: POSTGRES_SUPABASE_URL
-        value: postgresql+psycopg2://postgres:WcW5zKYZ01E3fQEu@db.ykfatywikuekmhjeytwc.supabase.co:5432/postgres
-      - key: SECRET_KEY
-        generateValue: true
