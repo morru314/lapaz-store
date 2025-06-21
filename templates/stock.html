@@ -35,8 +35,8 @@
         <td>{{ p.talle }}</td>
         <td>{{ p.color }}</td>
         <td>{{ p.proveedor }}</td>
-        <td>${{ "%.2f"|format(p.precio_compra) }}</td>
-        <td>${{ "%.2f"|format(p.precio_venta) }}</td>
+        <td>{{ "$%.2f"|format(p.precio_compra) }}</td>
+        <td>{{ "$%.2f"|format(p.precio_venta) }}</td>
         <td>{{ p.stock }}</td>
         <td class="acciones">
           <a href="{{ url_for('stock_routes.mostrar_formulario_edicion', id=p.id) }}" title="Editar" class="icono-editar">✏️</a>

@@ -1,14 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-from extensions import db
-from models.models import Producto, DetalleVenta
+from app import supabase
 import pandas as pd
 import os
 from config import Config
+from functools import wraps
 
 stock_routes = Blueprint('stock_routes', __name__, template_folder='../templates')
-
-# ✅ Decorador personalizado con Supabase
-from functools import wraps
 
 def login_required_sb(f):
     @wraps(f)
@@ -22,14 +19,14 @@ def login_required_sb(f):
 @stock_routes.route('/stock')
 @login_required_sb
 def stock():
-    productos = Producto.query.all()
+    productos = supabase.table("productos").select("*").execute().data
     total_productos = len(productos)
-    total_stock = sum(p.stock for p in productos)
-    valor_stock_compra = sum(p.stock * p.precio_compra for p in productos)
-    valor_stock_venta = sum(p.stock * p.precio_venta for p in productos)
+    total_stock = sum(p["stock"] for p in productos)
+    valor_stock_compra = sum(p["stock"] * p["precio_compra"] for p in productos)
+    valor_stock_venta = sum(p["stock"] * p["precio_venta"] for p in productos)
 
-    detalles = DetalleVenta.query.all()
-    facturacion = sum(d.precio_cobrado * d.cantidad for d in detalles)
+    detalles = supabase.table("detalleventa").select("*").execute().data
+    facturacion = sum(d["precio_cobrado"] * d["cantidad"] for d in detalles)
 
     return render_template(
         'stock.html',
@@ -42,45 +39,34 @@ def stock():
     )
 
 
-@stock_routes.route('/stock/editar/<int:id>', methods=['GET'])
+@stock_routes.route('/stock/editar/<int:id>', methods=['GET', 'POST'])
 @login_required_sb
-def mostrar_formulario_edicion(id):
-    producto = Producto.query.get_or_404(id)
+def editar_producto(id):
+    if request.method == 'POST':
+        supabase.table("productos").update({
+            "nombre": request.form['nombre'],
+            "descripcion": request.form['descripcion'],
+            "familia": request.form['familia'],
+            "talle": request.form['talle'],
+            "color": request.form['color'],
+            "proveedor": request.form['proveedor'],
+            "precio_compra": float(request.form['precio_compra']),
+            "precio_venta": float(request.form['precio_venta']),
+            "stock": max(0, int(request.form['stock']))
+        }).eq("id", id).execute()
+
+        flash("Producto actualizado correctamente.")
+        return redirect(url_for('stock_routes.stock'))
+
+    producto = supabase.table("productos").select("*").eq("id", id).maybe_single().execute().data
     return render_template('editar_producto.html', producto=producto)
-
-
-@stock_routes.route('/stock/eliminar/<int:id>', methods=['GET'])
-@login_required_sb
-def confirmar_eliminar_producto(id):
-    producto = Producto.query.get_or_404(id)
-    return render_template('confirmar_eliminar.html', producto=producto)
 
 
 @stock_routes.route('/stock/eliminar/<int:id>', methods=['POST'])
 @login_required_sb
 def eliminar_producto(id):
-    producto = Producto.query.get_or_404(id)
-    db.session.delete(producto)
-    db.session.commit()
-    flash(f'Producto "{producto.nombre}" eliminado correctamente.')
-    return redirect(url_for('stock_routes.stock'))
-
-
-@stock_routes.route('/stock/editar/<int:id>', methods=['POST'])
-@login_required_sb
-def editar_producto(id):
-    producto = Producto.query.get_or_404(id)
-    producto.nombre = request.form['nombre']
-    producto.descripcion = request.form['descripcion']
-    producto.familia = request.form['familia']
-    producto.talle = request.form['talle']
-    producto.color = request.form['color']
-    producto.proveedor = request.form['proveedor']
-    producto.precio_compra = float(request.form['precio_compra'])
-    producto.precio_venta = float(request.form['precio_venta'])
-    producto.stock = max(0, int(request.form['stock']))
-    db.session.commit()
-    flash(f'Producto {producto.nombre} actualizado correctamente.')
+    supabase.table("productos").delete().eq("id", id).execute()
+    flash("Producto eliminado correctamente.")
     return redirect(url_for('stock_routes.stock'))
 
 
@@ -112,37 +98,46 @@ def cargar_stock():
                     return redirect(url_for('stock_routes.stock'))
 
                 for _, row in df.iterrows():
-                    producto = Producto.query.filter_by(codigo=row['codigo']).first()
-                    if producto:
-                        producto.nombre = row['nombre']
-                        producto.familia = row['familia']
-                        producto.talle = row['talle']
-                        producto.color = row['color']
-                        producto.proveedor = row['proveedor']
-                        producto.precio_compra = float(str(row['precio_compra']).replace('$', '').replace('.', '').replace(',', '.').strip())
-                        producto.precio_venta = float(str(row['precio_venta_contado']).replace('$', '').replace('.', '').replace(',', '.').strip())
-                        producto.stock = max(0, int(row['stock']))
+                    codigo = row['codigo']
+                    existente = supabase.table("productos").select("*").eq("codigo", codigo).maybe_single().execute().data
+                    data = {
+                        "codigo": codigo,
+                        "nombre": row['nombre'],
+                        "descripcion": '',
+                        "familia": row['familia'],
+                        "talle": row['talle'],
+                        "color": row['color'],
+                        "proveedor": row['proveedor'],
+                        "precio_compra": float(str(row['precio_compra']).replace('$', '').replace('.', '').replace(',', '.').strip()),
+                        "precio_venta": float(str(row['precio_venta_contado']).replace('$', '').replace('.', '').replace(',', '.').strip()),
+                        "stock": max(0, int(row['stock']))
+                    }
+                    if existente:
+                        supabase.table("productos").update(data).eq("codigo", codigo).execute()
                     else:
-                        nuevo = Producto(
-                            codigo=row['codigo'],
-                            nombre=row['nombre'],
-                            descripcion='',
-                            familia=row['familia'],
-                            talle=row['talle'],
-                            color=row['color'],
-                            proveedor=row['proveedor'],
-                            precio_compra=float(str(row['precio_compra']).replace('$', '').replace('.', '').replace(',', '.').strip()),
-                            precio_venta=float(str(row['precio_venta_contado']).replace('$', '').replace('.', '').replace(',', '.').strip()),
-                            stock=max(0, int(row['stock']))
-                        )
-                        db.session.add(nuevo)
+                        supabase.table("productos").insert(data).execute()
 
-                db.session.commit()
-                flash('Stock actualizado correctamente.')
+                flash("Stock actualizado correctamente.")
             except Exception as e:
-                flash(f'Error al procesar el archivo: {e}')
+                flash(f"Error al procesar el archivo: {e}")
         else:
             flash('Formato de archivo no permitido.')
         return redirect(url_for('stock_routes.stock'))
 
     return render_template('stock.html')
+
+
+@stock_routes.route('/stock/upload_imagen', methods=['POST'])
+@login_required_sb
+def subir_imagen_producto():
+    archivo = request.files['imagen']
+    nombre = archivo.filename
+    ruta_bucket = f"productos/{nombre}"
+
+    try:
+        supabase.storage.from_("productos").upload(ruta_bucket, archivo)
+        flash("Imagen subida correctamente a Supabase Storage.")
+    except Exception as e:
+        flash(f"Error al subir la imagen: {e}")
+
+    return redirect(url_for('stock_routes.stock'))

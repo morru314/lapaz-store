@@ -27,21 +27,19 @@ def register():
             })
 
             if response.user:
-                # Guardar en la tabla User local
+                # Crear entrada local si querés usar tabla User
                 nuevo = User(
                     username=username,
                     nombre=nombre,
                     email=email,
                     perfil=perfil,
-                    password_hash="-"  # ya no se usa
+                    password_hash="-"  # no se usa
                 )
                 db.session.add(nuevo)
                 db.session.commit()
 
                 flash("Cuenta creada. Verificá tu correo.")
                 return redirect(url_for('auth_routes.login'))
-            else:
-                flash("No se pudo registrar.")
 
         except Exception as e:
             flash("Error: " + str(e))
@@ -66,8 +64,6 @@ def login():
                 session["sb_user"] = result.user.email
                 flash("Sesión iniciada.")
                 return redirect(url_for('dashboard_routes.dashboard'))
-            else:
-                flash("Credenciales inválidas")
 
         except Exception as e:
             flash("Error de autenticación: " + str(e))
@@ -87,6 +83,5 @@ def perfil():
     if not session.get("sb_user"):
         return redirect(url_for("auth_routes.login"))
 
-    # Cargar info desde la tabla User local
     user = User.query.filter_by(email=session["sb_user"]).first()
     return render_template("perfil.html", user=user)

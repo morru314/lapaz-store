@@ -1,11 +1,20 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-from extensions import db
-from models.models import Deuda, Cliente, Pago
+from supabase import create_client
+import os
+import uuid
 from datetime import datetime
+
+# Blueprint
 
 deudas_routes = Blueprint('deudas_routes', __name__, template_folder='../templates')
 
-# Decorador para validar login con Supabase
+# Supabase client
+supabase = create_client(
+    os.getenv("SUPABASE_URL"),
+    os.getenv("SUPABASE_ANON_KEY")
+)
+
+# Decorador Supabase
 from functools import wraps
 
 def login_required_sb(f):
@@ -20,51 +29,59 @@ def login_required_sb(f):
 @deudas_routes.route('/deudas')
 @login_required_sb
 def deudas():
-    clientes = Cliente.query.all()
-    deudas = Deuda.query.all()
+    clientes = supabase.table("clientes").select("*").eq("activo", True).execute().data
+    deudas = supabase.table("deudas").select("*").execute().data
     return render_template('deudas.html', clientes=clientes, deudas=deudas)
 
 
-@deudas_routes.route('/deudas/cliente/<int:cliente_id>')
+@deudas_routes.route('/deudas/cliente/<cliente_id>')
 @login_required_sb
 def deudas_por_cliente(cliente_id):
-    cliente = Cliente.query.get_or_404(cliente_id)
-    deudas = Deuda.query.filter_by(cliente_id=cliente_id).all()
-    pagos = Pago.query.filter_by(cliente_id=cliente_id).order_by(Pago.fecha.desc()).all()
+    cliente = supabase.table("clientes").select("*").eq("id", cliente_id).single().execute().data
+    deudas = supabase.table("deudas").select("*").eq("cliente_id", cliente_id).execute().data
+    pagos = supabase.table("pagos").select("*").eq("cliente_id", cliente_id).order("fecha", desc=True).execute().data
     return render_template('deudas_cliente.html', cliente=cliente, deudas=deudas, pagos=pagos)
 
 
 @deudas_routes.route('/deudas/pagar', methods=['POST'])
 @login_required_sb
 def pagar_deuda():
-    cliente_id = int(request.form['cliente_id'])
+    cliente_id = request.form['cliente_id']
     monto_pago = float(request.form['monto'])
     metodo = request.form['metodo']
     concepto = request.form.get('concepto', '')
 
-    deudas = Deuda.query.filter_by(cliente_id=cliente_id)\
-        .filter(Deuda.saldo_pendiente > 0)\
-        .order_by(Deuda.id.asc()).all()
+    deudas = supabase.table("deudas").select("*")\
+        .eq("cliente_id", cliente_id)\
+        .not_('saldo_pendiente', 'is', None)\
+        .order("id", asc=True).execute().data
 
     saldo_restante = monto_pago
+    updates = []
 
     for deuda in deudas:
         if saldo_restante <= 0:
             break
-        aplicado = min(saldo_restante, deuda.saldo_pendiente)
-        deuda.saldo_pendiente -= aplicado
-        deuda.estado = "saldada" if deuda.saldo_pendiente <= 0 else "parcial"
+        aplicado = min(saldo_restante, deuda["saldo_pendiente"])
+        nuevo_saldo = deuda["saldo_pendiente"] - aplicado
+        nuevo_estado = "saldada" if nuevo_saldo <= 0 else "parcial"
+
+        supabase.table("deudas").update({
+            "saldo_pendiente": nuevo_saldo,
+            "estado": nuevo_estado
+        }).eq("id", deuda["id"]).execute()
+
         saldo_restante -= aplicado
 
-    pago = Pago(
-        cliente_id=cliente_id,
-        monto=monto_pago,
-        metodo=metodo,
-        concepto=concepto,
-        fecha=datetime.utcnow()
-    )
-    db.session.add(pago)
-    db.session.commit()
+    pago = {
+        "id": str(uuid.uuid4()),
+        "cliente_id": cliente_id,
+        "monto": monto_pago,
+        "metodo": metodo,
+        "concepto": concepto,
+        "fecha": datetime.utcnow().isoformat()
+    }
+    supabase.table("pagos").insert(pago).execute()
 
     flash("Pago registrado y aplicado correctamente.")
     return redirect(url_for('deudas_routes.deudas_por_cliente', cliente_id=cliente_id))

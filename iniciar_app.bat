@@ -3,9 +3,11 @@ echo =============================
 echo INICIANDO SISTEMA LA PAZ STORE - PRODUCCIÓN (Supabase)
 echo =============================
 
-REM 1. Activar entorno virtual
-echo 🔄 Activando entorno virtual...
-call venv\Scripts\activate
+REM 1. Activar entorno virtual (solo si no está activo)
+IF NOT DEFINED VIRTUAL_ENV (
+    echo 🔄 Activando entorno virtual...
+    call venv\Scripts\activate
+)
 
 REM 2. Instalar dependencias
 if exist requirements.txt (

@@ -1,10 +1,17 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, session
-from extensions import db
-from models.models import Cliente, Producto, Venta, DetalleVenta, Deuda, Pago
+from supabase import create_client
+import os
+import uuid
 
 ventas_routes = Blueprint('ventas_routes', __name__, template_folder='../templates')
 
-# ✅ Autenticación con token Supabase
+# Supabase client
+supabase = create_client(
+    os.getenv("SUPABASE_URL"),
+    os.getenv("SUPABASE_ANON_KEY")
+)
+
+# Decorador de sesión
 from functools import wraps
 
 def login_required_sb(f):
@@ -19,8 +26,8 @@ def login_required_sb(f):
 @ventas_routes.route('/ventas')
 @login_required_sb
 def ventas():
-    productos = Producto.query.all()
-    clientes = Cliente.query.all()
+    productos = supabase.table("productos").select("*").execute().data
+    clientes = supabase.table("clientes").select("*").eq("activo", True).execute().data
     return render_template('ventas.html', productos=productos, clientes=clientes)
 
 
@@ -32,67 +39,72 @@ def registrar_venta():
     # Cliente
     cliente_id = data.get("cliente_id")
     if not cliente_id:
-        cliente = Cliente(
-            nombre=data["cliente_nombre"],
-            apellido=data["cliente_apellido"],
-            telefono=data.get("cliente_telefono", "")
-        )
-        db.session.add(cliente)
-        db.session.flush()
-        cliente_id = cliente.id
+        cliente_data = {
+            "id": str(uuid.uuid4()),
+            "nombre": data["cliente_nombre"],
+            "apellido": data["cliente_apellido"],
+            "telefono": data.get("cliente_telefono", ""),
+            "activo": True
+        }
+        cliente_insert = supabase.table("clientes").insert(cliente_data).execute()
+        cliente_id = cliente_data["id"]
 
-    # Crear venta
-    venta = Venta(
-        cliente_id=cliente_id,
-        total_original=data["total_original"],
-        total_cobrado=data["total_cobrado"],
-        descuento_total=data.get("descuento_total", 0)
-    )
-    db.session.add(venta)
-    db.session.flush()
+    # Venta
+    venta_data = {
+        "id": str(uuid.uuid4()),
+        "cliente_id": cliente_id,
+        "total_original": data["total_original"],
+        "total_cobrado": data["total_cobrado"],
+        "descuento_total": data.get("descuento_total", 0)
+    }
+    supabase.table("ventas").insert(venta_data).execute()
 
     # Detalles
     for item in data["items"]:
-        producto = Producto.query.get(item["producto_id"])
+        producto = supabase.table("productos").select("*").eq("id", item["producto_id"]).single().execute().data
         if not producto:
             return jsonify({"error": f"Producto con ID {item['producto_id']} no encontrado"}), 404
-        if producto.stock < item["cantidad"]:
-            return jsonify({"error": f"Stock insuficiente para {producto.nombre}"}), 400
+        if producto["stock"] < item["cantidad"]:
+            return jsonify({"error": f"Stock insuficiente para {producto['nombre']}"}), 400
 
-        producto.stock -= item["cantidad"]
+        # Actualizar stock
+        nuevo_stock = producto["stock"] - item["cantidad"]
+        supabase.table("productos").update({"stock": nuevo_stock}).eq("id", producto["id"]).execute()
 
-        detalle = DetalleVenta(
-            venta_id=venta.id,
-            producto_id=producto.id,
-            cantidad=item["cantidad"],
-            precio_unitario=item["precio_unitario"],
-            precio_cobrado=item["precio_cobrado"],
-            descuento_aplicado=item.get("descuento_aplicado", 0)
-        )
-        db.session.add(detalle)
+        # Insertar detalle
+        detalle = {
+            "id": str(uuid.uuid4()),
+            "venta_id": venta_data["id"],
+            "producto_id": producto["id"],
+            "cantidad": item["cantidad"],
+            "precio_unitario": item["precio_unitario"],
+            "precio_cobrado": item["precio_cobrado"],
+            "descuento_aplicado": item.get("descuento_aplicado", 0)
+        }
+        supabase.table("detalle_ventas").insert(detalle).execute()
 
-    # Deuda si corresponde
-    if venta.total_cobrado < venta.total_original:
-        deuda = Deuda(
-            cliente_id=cliente_id,
-            venta_id=venta.id,
-            saldo_pendiente=venta.total_original - venta.total_cobrado,
-            estado="parcial" if venta.total_cobrado > 0 else "pendiente"
-        )
-        db.session.add(deuda)
+    # Deuda
+    if venta_data["total_cobrado"] < venta_data["total_original"]:
+        deuda = {
+            "id": str(uuid.uuid4()),
+            "cliente_id": cliente_id,
+            "venta_id": venta_data["id"],
+            "saldo_pendiente": venta_data["total_original"] - venta_data["total_cobrado"],
+            "estado": "parcial" if venta_data["total_cobrado"] > 0 else "pendiente"
+        }
+        supabase.table("deudas").insert(deuda).execute()
 
-    # Pago si corresponde
-    metodo_pago = data.get("metodo_pago", "Transferencia")
-    if venta.total_cobrado > 0:
-        pago = Pago(
-            cliente_id=cliente_id,
-            monto=venta.total_cobrado,
-            metodo=metodo_pago,
-            concepto=f"Pago de venta #{venta.id}"
-        )
-        db.session.add(pago)
+    # Pago
+    if venta_data["total_cobrado"] > 0:
+        pago = {
+            "id": str(uuid.uuid4()),
+            "cliente_id": cliente_id,
+            "monto": venta_data["total_cobrado"],
+            "metodo": data.get("metodo_pago", "Transferencia"),
+            "concepto": f"Pago de venta #{venta_data['id']}"
+        }
+        supabase.table("pagos").insert(pago).execute()
 
-    db.session.commit()
     return jsonify({"message": "Venta registrada correctamente."})
 
 
@@ -100,49 +112,23 @@ def registrar_venta():
 @login_required_sb
 def buscar_producto():
     q = request.args.get('q', '').strip().lower()
-    palabras = q.split()
-
-    query = Producto.query
-    for palabra in palabras:
-        ilike = f"%{palabra}%"
-        query = query.filter(
-            (Producto.nombre.ilike(ilike)) |
-            (Producto.color.ilike(ilike)) |
-            (Producto.talle.ilike(ilike)) |
-            (Producto.codigo.ilike(ilike)) |
-            (Producto.familia.ilike(ilike))
-        )
-
-    productos = query.limit(10).all()
-
-    return jsonify([
-        {
-            "id": p.id,
-            "nombre": p.nombre,
-            "codigo": p.codigo,
-            "precio_venta": p.precio_venta,
-            "talle": p.talle,
-            "color": p.color,
-            "stock": p.stock,
-            "familia": p.familia
-        } for p in productos
-    ])
+    productos = supabase.table("productos").select("*").execute().data
+    filtrados = []
+    for p in productos:
+        texto = f"{p['nombre']} {p['color']} {p['talle']} {p['codigo']} {p['familia']}".lower()
+        if all(pal in texto for pal in q.split()):
+            filtrados.append(p)
+    return jsonify(filtrados[:10])
 
 
 @ventas_routes.route('/ventas/buscar_cliente')
 @login_required_sb
 def buscar_cliente():
-    q = request.args.get('q', '').lower()
-    clientes = Cliente.query.filter(
-        (Cliente.nombre.ilike(f"%{q}%")) |
-        (Cliente.apellido.ilike(f"%{q}%")) |
-        (Cliente.telefono.ilike(f"%{q}%"))
-    ).all()
-    return jsonify([
-        {
-            "id": c.id,
-            "nombre": c.nombre,
-            "apellido": c.apellido,
-            "telefono": c.telefono
-        } for c in clientes
-    ])
+    q = request.args.get('q', '').strip().lower()
+    clientes = supabase.table("clientes").select("*").eq("activo", True).execute().data
+    filtrados = []
+    for c in clientes:
+        texto = f"{c['nombre']} {c['apellido']} {c['telefono']}".lower()
+        if q in texto:
+            filtrados.append(c)
+    return jsonify(filtrados[:10])
