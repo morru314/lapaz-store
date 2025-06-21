@@ -19,7 +19,14 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Seguridad y archivos
-    SECRET_KEY = os.environ.get("SECRET_KEY") or secrets.token_hex(16)
+    # "SECRET_KEY" debe estar definido en el entorno para producción.
+    # Si FLASK_ENV=development y no se definió, se genera uno temporal.
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    if not SECRET_KEY:
+        if os.environ.get("FLASK_ENV") == "development":
+            SECRET_KEY = secrets.token_hex(16)
+        else:
+            raise RuntimeError("SECRET_KEY environment variable is required")
     UPLOAD_FOLDER = os.path.join(BASEDIR, 'static', 'uploads')
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10 MB
 
