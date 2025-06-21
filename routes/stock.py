@@ -8,7 +8,6 @@ from utils.auth_helpers import login_required_sb
 
 stock_routes = Blueprint('stock_routes', __name__, template_folder='../templates')
 
-
 @stock_routes.route('/stock')
 @login_required_sb
 def stock():
@@ -32,7 +31,7 @@ def stock():
     )
 
 
-@stock_routes.route('/stock/editar/<int:id>', methods=['GET', 'POST'])
+@stock_routes.route('/stock/editar/<int:id>', methods=['GET', 'POST'], endpoint='editar_producto')
 @login_required_sb
 def editar_producto(id):
     if request.method == 'POST':
