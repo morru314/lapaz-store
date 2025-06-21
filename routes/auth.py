@@ -62,5 +62,6 @@ def perfil():
     if not session.get("sb_user"):
         return redirect(url_for("auth_routes.login"))
 
+
     email = session["sb_user"]
     return render_template("perfil.html", email=email)

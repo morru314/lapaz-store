@@ -4,16 +4,9 @@ import pandas as pd
 import os
 from config import Config
 from functools import wraps
+from utils.auth_helpers import login_required_sb
 
 stock_routes = Blueprint('stock_routes', __name__, template_folder='../templates')
-
-def login_required_sb(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if not session.get("sb_token"):
-            return redirect(url_for("auth_routes.login"))
-        return f(*args, **kwargs)
-    return decorated_function
 
 
 @stock_routes.route('/stock')

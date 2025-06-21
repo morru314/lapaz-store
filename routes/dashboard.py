@@ -2,21 +2,13 @@ from flask import Blueprint, render_template, session, redirect, url_for
 from supabase_client import supabase
 from datetime import datetime
 import os
+from utils.auth_helpers import login_required_sb
+
 
 # Blueprint
 
 dashboard_routes = Blueprint('dashboard_routes', __name__, template_folder='../templates')
 
-# Decorador para validar login con Supabase
-from functools import wraps
-
-def login_required_sb(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if not session.get("sb_token"):
-            return redirect(url_for("auth_routes.login"))
-        return f(*args, **kwargs)
-    return decorated_function
 
 
 @dashboard_routes.route('/dashboard')

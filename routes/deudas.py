@@ -3,21 +3,11 @@ from supabase_client import supabase
 import os
 import uuid
 from datetime import datetime
+from utils.auth_helpers import login_required_sb
 
 # Blueprint
 
 deudas_routes = Blueprint('deudas_routes', __name__, template_folder='../templates')
-
-# Decorador Supabase
-from functools import wraps
-
-def login_required_sb(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if not session.get("sb_token"):
-            return redirect(url_for("auth_routes.login"))
-        return f(*args, **kwargs)
-    return decorated_function
 
 
 @deudas_routes.route('/deudas')

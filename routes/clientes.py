@@ -1,17 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, session
 from supabase_client import supabase
 from functools import wraps
+from utils.auth_helpers import login_required_sb
+
 
 clientes_routes = Blueprint('clientes_routes', __name__, template_folder='../templates')
-
-# Decorador login
-def login_required_sb(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if not session.get("sb_token"):
-            return redirect(url_for("auth_routes.login"))
-        return f(*args, **kwargs)
-    return decorated_function
 
 
 @clientes_routes.route('/clientes')
