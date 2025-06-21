@@ -6,21 +6,13 @@ from routes.ventas import ventas_routes
 from routes.deudas import deudas_routes
 from routes.dashboard import dashboard_routes
 from routes.auth import auth_routes
-from supabase_client import supabase
-from flask_login import LoginManager, current_user
-from models import User
-
 import os
 
-# Flask app
 app = Flask(__name__)
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "auth_routes.login"  # Redirige si no está logueado
 app.config.from_object(Config)
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# Registrar rutas
+# Registrar blueprints
 app.register_blueprint(stock_routes)
 app.register_blueprint(clientes_routes)
 app.register_blueprint(ventas_routes)
@@ -38,11 +30,7 @@ def index():
 def format_currency(value):
     return f"{value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
-@login_manager.user_loader
-def load_user(user_id):
-    return Usuario.query.get(int(user_id))
-
-# Correr app
+# Iniciar app
 if __name__ == "__main__":
     if not os.environ.get("RENDER"):
         port = int(os.environ.get("PORT", 5000))
