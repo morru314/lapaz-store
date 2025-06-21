@@ -7,9 +7,9 @@ load_dotenv()
 class Config:
     BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
-    # Base de datos: prioridad a Supabase, fallback a SQLite local
+    # Base de datos: Supabase
     DB_PATH = os.path.join(BASEDIR, 'database', 'ventas.db')
-    SQLALCHEMY_DATABASE_URI = os.environ.get("POSTGRES_SUPABASE_URL") or f"sqlite:///{DB_PATH.replace(os.sep, '/')}"
+    SQLALCHEMY_DATABASE_URI = os.environ["SQLALCHEMY_DATABASE_URI"]
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
