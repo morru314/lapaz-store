@@ -1,14 +1,23 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
-from flask_login import login_required
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, session
 from extensions import db
-from models.models import Cliente
+from models.models import Cliente, Venta, Deuda
 
 clientes_routes = Blueprint('clientes_routes', __name__, template_folder='../templates')
 
-from models.models import Cliente, Venta, Deuda  # ya lo usás
+# Decorador para proteger rutas con sesión Supabase
+from functools import wraps
+
+def login_required_sb(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get("sb_token"):
+            return redirect(url_for("auth_routes.login"))
+        return f(*args, **kwargs)
+    return decorated_function
+
 
 @clientes_routes.route('/clientes')
-@login_required
+@login_required_sb
 def clientes():
     clientes = Cliente.query.filter_by(activo=True).all()
     clientes_data = []
@@ -22,8 +31,9 @@ def clientes():
         })
     return render_template('clientes.html', clientes_data=clientes_data)
 
+
 @clientes_routes.route('/clientes/nuevo', methods=['POST'])
-@login_required
+@login_required_sb
 def nuevo_cliente():
     nombre = request.form['nombre']
     apellido = request.form['apellido']
@@ -41,8 +51,10 @@ def nuevo_cliente():
     db.session.commit()
     flash("Cliente agregado correctamente.")
     return redirect(url_for('clientes_routes.clientes'))
+
+
 @clientes_routes.route('/clientes/editar/<int:id>', methods=['GET', 'POST'])
-@login_required
+@login_required_sb
 def editar_cliente(id):
     cliente = Cliente.query.get_or_404(id)
     if request.method == 'POST':
@@ -54,10 +66,12 @@ def editar_cliente(id):
         db.session.commit()
         flash("Cliente actualizado correctamente.")
         return redirect(url_for('clientes_routes.clientes'))
+
     return render_template('clientes.html', cliente_editar=cliente, editar=True)
 
+
 @clientes_routes.route('/clientes/eliminar/<int:id>', methods=['POST'])
-@login_required
+@login_required_sb
 def eliminar_cliente(id):
     cliente = Cliente.query.get_or_404(id)
 
@@ -70,11 +84,20 @@ def eliminar_cliente(id):
     flash("Cliente marcado como inactivo.")
     return redirect(url_for('clientes_routes.clientes'))
 
+
 @clientes_routes.route('/clientes/buscar')
-@login_required
+@login_required_sb
 def buscar_cliente():
     q = request.args.get('q', '').lower()
     resultados = Cliente.query.filter(
-        (Cliente.nombre.ilike(f"%{q}%")) | (Cliente.apellido.ilike(f"%{q}%")) | (Cliente.telefono.ilike(f"%{q}%"))
+        (Cliente.nombre.ilike(f"%{q}%")) |
+        (Cliente.apellido.ilike(f"%{q}%")) |
+        (Cliente.telefono.ilike(f"%{q}%"))
     ).limit(10).all()
-    return jsonify([{"id": c.id, "nombre": c.nombre, "apellido": c.apellido, "telefono": c.telefono} for c in resultados])
+
+    return jsonify([{
+        "id": c.id,
+        "nombre": c.nombre,
+        "apellido": c.apellido,
+        "telefono": c.telefono
+    } for c in resultados])

@@ -1,88 +1,74 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="max-w-xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg mt-10">
-  <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Editar Producto</h2>
+<div class="container-editar-producto">
+  <h2 class="titulo-editar">Editar Producto</h2>
 
-  <form method="post" class="space-y-5">
+  <form method="post" class="formulario">
     <!-- Código (solo lectura) -->
-    <div>
-      <label class="block text-lg font-medium text-gray-600 dark:text-gray-300 mb-1">Código</label>
-      <input type="text" value="{{ producto.codigo }}" disabled 
-             class="w-full rounded-md p-2 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed border border-gray-300 dark:border-gray-600" />
+    <div class="grupo-form">
+      <label class="etiqueta">Código</label>
+      <input type="text" value="{{ producto.codigo }}" disabled class="input-disabled" />
     </div>
 
     <!-- Nombre -->
-    <div>
-      <label class="block text-lg font-medium text-gray-600 dark:text-gray-300 mb-1">Nombre</label>
-      <input type="text" name="nombre" value="{{ producto.nombre }}" required 
-             class="w-full rounded-md p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+    <div class="grupo-form">
+      <label class="etiqueta">Nombre</label>
+      <input type="text" name="nombre" value="{{ producto.nombre }}" required class="input" />
     </div>
 
     <!-- Descripción -->
-    <div>
-      <label class="block text-lg font-medium text-gray-600 dark:text-gray-300 mb-1">Descripción</label>
-      <input type="text" name="descripcion" value="{{ producto.descripcion }}"
-             class="w-full rounded-md p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+    <div class="grupo-form">
+      <label class="etiqueta">Descripción</label>
+      <input type="text" name="descripcion" value="{{ producto.descripcion }}" class="input" />
     </div>
 
     <!-- Familia y Talle -->
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <label class="block text-lg font-medium text-gray-600 dark:text-gray-300 mb-1">Familia</label>
-        <input type="text" name="familia" value="{{ producto.familia }}" required 
-               class="w-full rounded-md p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 focus:ring-blue-500 transition" />
+    <div class="grid-doble">
+      <div class="grupo-form">
+        <label class="etiqueta">Familia</label>
+        <input type="text" name="familia" value="{{ producto.familia }}" required class="input" />
       </div>
-      <div>
-        <label class="block text-lg font-medium text-gray-600 dark:text-gray-300 mb-1">Talle</label>
-        <input type="text" name="talle" value="{{ producto.talle }}" required 
-               class="w-full rounded-md p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 focus:ring-blue-500 transition" />
+      <div class="grupo-form">
+        <label class="etiqueta">Talle</label>
+        <input type="text" name="talle" value="{{ producto.talle }}" required class="input" />
       </div>
     </div>
 
     <!-- Color y Proveedor -->
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <label class="block text-lg font-medium text-gray-600 dark:text-gray-300 mb-1">Color</label>
-        <input type="text" name="color" value="{{ producto.color }}"
-               class="w-full rounded-md p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 focus:ring-blue-500 transition" />
+    <div class="grid-doble">
+      <div class="grupo-form">
+        <label class="etiqueta">Color</label>
+        <input type="text" name="color" value="{{ producto.color }}" class="input" />
       </div>
-      <div>
-        <label class="block text-lg font-medium text-gray-600 dark:text-gray-300 mb-1">Proveedor</label>
-        <input type="text" name="proveedor" value="{{ producto.proveedor }}"
-               class="w-full rounded-md p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 focus:ring-blue-500 transition" />
+      <div class="grupo-form">
+        <label class="etiqueta">Proveedor</label>
+        <input type="text" name="proveedor" value="{{ producto.proveedor }}" class="input" />
       </div>
     </div>
 
     <!-- Precio Compra y Venta -->
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <label class="block text-lg font-medium text-gray-600 dark:text-gray-300 mb-1">Precio Compra</label>
-        <input type="number" step="0.01" name="precio_compra" value="{{ producto.precio_compra }}"
-               class="w-full rounded-md p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 focus:ring-blue-500 transition" />
+    <div class="grid-doble">
+      <div class="grupo-form">
+        <label class="etiqueta">Precio Compra</label>
+        <input type="number" step="0.01" name="precio_compra" value="{{ producto.precio_compra }}" class="input" />
       </div>
-      <div>
-        <label class="block text-lg font-medium text-gray-600 dark:text-gray-300 mb-1">Precio Venta</label>
-        <input type="number" step="0.01" name="precio_venta" value="{{ producto.precio_venta }}"
-               class="w-full rounded-md p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 focus:ring-blue-500 transition" />
+      <div class="grupo-form">
+        <label class="etiqueta">Precio Venta</label>
+        <input type="number" step="0.01" name="precio_venta" value="{{ producto.precio_venta }}" class="input" />
       </div>
     </div>
 
     <!-- Stock -->
-    <div>
-      <label class="block text-lg font-medium text-gray-600 dark:text-gray-300 mb-1">Stock</label>
-      <input type="number" name="stock" value="{{ producto.stock }}" min="0"
-             class="w-full rounded-md p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 focus:ring-blue-500 transition" />
+    <div class="grupo-form">
+      <label class="etiqueta">Stock</label>
+      <input type="number" name="stock" value="{{ producto.stock }}" min="0" class="input" />
     </div>
 
     <!-- Botones -->
-    <div class="flex justify-between mt-6">
-      <a href="{{ url_for('stock_routes.stock') }}"
-         class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-md transition">
-         ⬅ Volver</a>
-      <button type="submit"
-              class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition">
-              💾 Guardar Cambios</button>
+    <div class="botones">
+      <a href="{{ url_for('stock_routes.stock') }}" class="btn-secondary">⬅ Volver</a>
+      <button type="submit" class="btn-primary">💾 Guardar Cambios</button>
     </div>
   </form>
 </div>

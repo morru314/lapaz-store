@@ -1,0 +1,173 @@
+from zipfile import ZipFile
+from pathlib import Path
+
+# Crear el contenido base del archivo CSS general
+css_content = """
+/* Estilos globales */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #111827;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor principal */
+.container, .venta-container {
+  max-width: 1024px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Títulos */
+h1, h2, h3 {
+  font-weight: bold;
+  color: #fff;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Formularios */
+form {
+  background-color: #1f2937;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  margin-top: 1rem;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid #4b5563;
+  background-color: #374151;
+  color: #fff;
+}
+
+input[readonly] {
+  background-color: #1f2937;
+}
+
+/* Botones */
+button, .btn-secondary, .btn-danger {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button {
+  background-color: #2563eb;
+  color: white;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-secondary {
+  background-color: #6b7280;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #4b5563;
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c;
+}
+
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #374151;
+  text-align: left;
+}
+
+thead {
+  background-color: #1f2937;
+}
+
+/* Buscadores */
+#buscar, #buscar_cliente, #buscar_producto {
+  background-color: #374151;
+  color: white;
+}
+
+/* Sugerencias */
+.sugerencias {
+  background-color: #1f2937;
+  border: 1px solid #4b5563;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Listado de productos/ventas */
+.items-lista {
+  margin-top: 1rem;
+}
+
+.items-lista div {
+  background-color: #1f2937;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Modal */
+#modalEliminar {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+#modalEliminar .bg-gray-800 {
+  background-color: #1f2937 !important;
+}
+
+#modalEliminar .text-red-400 {
+  color: #f87171 !important;
+}
+
+#modalEliminar button {
+  margin-left: 0.5rem;
+}
+"""
+
+# Guardar CSS en archivo temporal
+output_dir = Path("/mnt/data")
+css_file = output_dir / "styles.css"
+with open(css_file, "w") as f:
+    f.write(css_content)
+
+css_file.name

@@ -1,20 +1,28 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import login_required
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from extensions import db
-from models.models import Producto
+from models.models import Producto, DetalleVenta
 import pandas as pd
 import os
 from config import Config
 
 stock_routes = Blueprint('stock_routes', __name__, template_folder='../templates')
 
-from models.models import DetalleVenta
+# ✅ Decorador personalizado con Supabase
+from functools import wraps
+
+def login_required_sb(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get("sb_token"):
+            return redirect(url_for("auth_routes.login"))
+        return f(*args, **kwargs)
+    return decorated_function
+
 
 @stock_routes.route('/stock')
-@login_required
+@login_required_sb
 def stock():
     productos = Producto.query.all()
-
     total_productos = len(productos)
     total_stock = sum(p.stock for p in productos)
     valor_stock_compra = sum(p.stock * p.precio_compra for p in productos)
@@ -33,20 +41,23 @@ def stock():
         facturacion=facturacion
     )
 
+
 @stock_routes.route('/stock/editar/<int:id>', methods=['GET'])
-@login_required
+@login_required_sb
 def mostrar_formulario_edicion(id):
     producto = Producto.query.get_or_404(id)
     return render_template('editar_producto.html', producto=producto)
 
+
 @stock_routes.route('/stock/eliminar/<int:id>', methods=['GET'])
-@login_required
+@login_required_sb
 def confirmar_eliminar_producto(id):
     producto = Producto.query.get_or_404(id)
     return render_template('confirmar_eliminar.html', producto=producto)
 
+
 @stock_routes.route('/stock/eliminar/<int:id>', methods=['POST'])
-@login_required
+@login_required_sb
 def eliminar_producto(id):
     producto = Producto.query.get_or_404(id)
     db.session.delete(producto)
@@ -54,8 +65,9 @@ def eliminar_producto(id):
     flash(f'Producto "{producto.nombre}" eliminado correctamente.')
     return redirect(url_for('stock_routes.stock'))
 
+
 @stock_routes.route('/stock/editar/<int:id>', methods=['POST'])
-@login_required
+@login_required_sb
 def editar_producto(id):
     producto = Producto.query.get_or_404(id)
     producto.nombre = request.form['nombre']
@@ -71,8 +83,9 @@ def editar_producto(id):
     flash(f'Producto {producto.nombre} actualizado correctamente.')
     return redirect(url_for('stock_routes.stock'))
 
+
 @stock_routes.route('/stock/cargar', methods=['GET', 'POST'])
-@login_required
+@login_required_sb
 def cargar_stock():
     if request.method == 'POST':
         archivo = request.files['archivo']
@@ -131,5 +144,5 @@ def cargar_stock():
         else:
             flash('Formato de archivo no permitido.')
         return redirect(url_for('stock_routes.stock'))
-    else:
-        return render_template('stock.html')
+
+    return render_template('stock.html')

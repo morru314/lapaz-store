@@ -2,53 +2,52 @@
 {% block content %}
 
 <!-- FACTURACIÓN -->
-<div class="mb-8">
-  <h2 class="text-white text-xl font-semibold mb-4">💰 Facturación</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div class="bg-green-700 p-4 rounded-xl shadow text-center text-white">
-      <p class="text-sm">📅 MTD (Mes en curso)</p>
-      <h2 class="text-2xl font-bold">${{ facturacion_mtd | format_currency }}</h2>
+<div class="bloque-dashboard">
+  <h2 class="titulo-seccion">💰 Facturación</h2>
+  <div class="grid-doble">
+    <div class="card verde-oscuro">
+      <p class="subtitulo">📅 MTD (Mes en curso)</p>
+      <h2 class="valor">${{ facturacion_mtd | format_currency }}</h2>
     </div>
-    <div class="bg-green-600 p-4 rounded-xl shadow text-center text-white">
-      <p class="text-sm">📈 YTD (Año en curso)</p>
-      <h2 class="text-2xl font-bold">${{ facturacion_ytd | format_currency }}</h2>
+    <div class="card verde">
+      <p class="subtitulo">📈 YTD (Año en curso)</p>
+      <h2 class="valor">${{ facturacion_ytd | format_currency }}</h2>
     </div>
   </div>
 </div>
 
 <!-- STOCK -->
-<div class="mb-8">
-  <h2 class="text-white text-xl font-semibold mb-4">📦 Stock</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div class="bg-blue-800 p-4 rounded-xl shadow text-center text-white">
-      <p class="text-sm">💸 Total Invertido (Compra)</p>
-      <h2 class="text-2xl font-bold">${{ total_invertido | format_currency }}</h2>
+<div class="bloque-dashboard">
+  <h2 class="titulo-seccion">📦 Stock</h2>
+  <div class="grid-doble">
+    <div class="card azul-oscuro">
+      <p class="subtitulo">💸 Total Invertido (Compra)</p>
+      <h2 class="valor">${{ total_invertido | format_currency }}</h2>
     </div>
-    <div class="bg-blue-700 p-4 rounded-xl shadow text-center text-white">
-      <p class="text-sm">💰 Valor Stock Venta</p>
-      <h2 class="text-2xl font-bold">${{ valor_stock_venta | format_currency }}</h2>
+    <div class="card azul">
+      <p class="subtitulo">💰 Valor Stock Venta</p>
+      <h2 class="valor">${{ valor_stock_venta | format_currency }}</h2>
     </div>
   </div>
 </div>
 
 <!-- TOTALES GENERALES -->
-<div class="mb-8">
-  <h2 class="text-white text-xl font-semibold mb-4">📊 Totales Generales</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    <div class="bg-gray-800 p-4 rounded-xl shadow text-center text-white">
-      <p class="text-sm">📄 Total Productos</p>
-      <h2 class="text-2xl font-bold">{{ total_productos }}</h2>
+<div class="bloque-dashboard">
+  <h2 class="titulo-seccion">📊 Totales Generales</h2>
+  <div class="grid-triple">
+    <div class="card gris">
+      <p class="subtitulo">📄 Total Productos</p>
+      <h2 class="valor">{{ total_productos }}</h2>
     </div>
-    <div class="bg-gray-800 p-4 rounded-xl shadow text-center text-white">
-      <p class="text-sm">📦 Total Unidades</p>
-      <h2 class="text-2xl font-bold">{{ total_unidades }}</h2>
+    <div class="card gris">
+      <p class="subtitulo">📦 Total Unidades</p>
+      <h2 class="valor">{{ total_unidades }}</h2>
     </div>
-    <div class="bg-indigo-700 p-4 rounded-xl shadow text-center text-white col-span-full">
-      <p class="text-sm">🏁 Total Facturado Histórico</p>
-      <h2 class="text-2xl font-bold">${{ total_facturado | format_currency }}</h2>
+    <div class="card morado">
+      <p class="subtitulo">🏁 Total Facturado Histórico</p>
+      <h2 class="valor">${{ total_facturado | format_currency }}</h2>
     </div>
   </div>
 </div>
-
 
 {% endblock %}

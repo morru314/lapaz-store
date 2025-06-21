@@ -1,13 +1,24 @@
-from flask import Blueprint, render_template
-from flask_login import login_required
+from flask import Blueprint, render_template, session, redirect, url_for
 from models.models import Producto, Venta, Deuda, DetalleVenta
 from datetime import datetime
 from extensions import db
 
 dashboard_routes = Blueprint('dashboard_routes', __name__, template_folder='../templates')
 
+# Decorador para validar login con Supabase
+from functools import wraps
+
+def login_required_sb(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get("sb_token"):
+            return redirect(url_for("auth_routes.login"))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 @dashboard_routes.route('/dashboard')
-@login_required
+@login_required_sb
 def dashboard():
     hoy = datetime.today()
     primer_dia_mes = datetime(hoy.year, hoy.month, 1)

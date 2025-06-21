@@ -1,29 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Registrar Pago</title>
-</head>
-<body>
-    <h1>Registrar Pago para Venta #{{ venta.id }}</h1>
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-formulario">
+  <div class="card-formulario">
+    <h1 class="titulo-formulario">Registrar Pago para Venta #{{ venta.id }}</h1>
     <p><strong>Cliente:</strong> {{ venta.cliente.nombre }} {{ venta.cliente.apellido }}</p>
     <p><strong>Deuda actual:</strong> {{ deuda.saldo_pendiente | format_currency }}</p>
 
-    <form method="POST">
-        <label>Monto a pagar:</label>
-        <input type="number" name="monto" step="0.01" required><br><br>
+    <form method="POST" class="formulario">
+      <div class="grupo-form">
+        <label class="etiqueta">Monto a pagar:</label>
+        <input type="number" name="monto" step="0.01" required class="input">
+      </div>
 
-        <label>Método de pago:</label>
-        <select name="metodo">
-            <option>Transferencia</option>
-            <option>Efectivo</option>
-            <option>Débito</option>
-            <option>Crédito</option>
-        </select><br><br>
+      <div class="grupo-form">
+        <label class="etiqueta">Método de pago:</label>
+        <select name="metodo" class="input">
+          <option>Transferencia</option>
+          <option>Efectivo</option>
+          <option>Débito</option>
+          <option>Crédito</option>
+        </select>
+      </div>
 
-        <button type="submit">Registrar Pago</button>
+      <button type="submit" class="btn-primary mt-4">Registrar Pago</button>
     </form>
 
-    <br>
-    <a href="{{ url_for('ventas_routes.historial_ventas') }}">Volver al historial</a>
-</body>
-</html>
+    <div class="mt-4">
+      <a href="{{ url_for('ventas_routes.historial_ventas') }}" class="btn-secondary">⬅ Volver al historial</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

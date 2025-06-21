@@ -1,75 +1,67 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="max-w-6xl mx-auto mt-10 p-6">
-  <h1 class="text-3xl font-bold mb-6 text-gray-800 dark:text-white">Clientes</h1>
+<div class="container-clientes">
+  <h1 class="titulo-seccion">Clientes</h1>
 
   <!-- FORMULARIO -->
-  <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg mb-10">
-    <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-white">
+  <div class="formulario-box">
+    <h2 class="formulario-titulo">
       {{ 'Editar Cliente' if editar else 'Nuevo Cliente' }}
     </h2>
     <form method="post" action="{{ url_for('clientes_routes.editar_cliente', id=cliente_editar.id) if editar else url_for('clientes_routes.nuevo_cliente') }}">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input type="text" name="nombre" placeholder="Nombre" required value="{{ cliente_editar.nombre if editar else '' }}"
-               class="w-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white p-2 rounded-md" />
-        <input type="text" name="apellido" placeholder="Apellido" required value="{{ cliente_editar.apellido if editar else '' }}"
-               class="w-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white p-2 rounded-md" />
-        <input type="text" name="telefono" placeholder="Teléfono" value="{{ cliente_editar.telefono if editar else '' }}"
-               class="w-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white p-2 rounded-md" />
-        <input type="email" name="email" placeholder="Email" value="{{ cliente_editar.email if editar else '' }}"
-               class="w-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white p-2 rounded-md" />
-        <input type="text" name="direccion" placeholder="Dirección" value="{{ cliente_editar.direccion if editar else '' }}"
-               class="w-full md:col-span-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white p-2 rounded-md" />
+      <div class="formulario-grid">
+        <input type="text" name="nombre" placeholder="Nombre" required value="{{ cliente_editar.nombre if editar else '' }}" class="input-field" />
+        <input type="text" name="apellido" placeholder="Apellido" required value="{{ cliente_editar.apellido if editar else '' }}" class="input-field" />
+        <input type="text" name="telefono" placeholder="Teléfono" value="{{ cliente_editar.telefono if editar else '' }}" class="input-field" />
+        <input type="email" name="email" placeholder="Email" value="{{ cliente_editar.email if editar else '' }}" class="input-field" />
+        <input type="text" name="direccion" placeholder="Dirección" value="{{ cliente_editar.direccion if editar else '' }}" class="input-field md:col-span-2" />
       </div>
-      <div class="mt-6 flex justify-between">
-        <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition">
+      <div class="formulario-acciones">
+        <button type="submit" class="btn-primario">
           {{ '💾 Guardar Cambios' if editar else '➕ Agregar Cliente' }}
         </button>
         {% if editar %}
-        <a href="{{ url_for('clientes_routes.clientes') }}"
-           class="text-sm text-blue-400 hover:underline">Cancelar</a>
+        <a href="{{ url_for('clientes_routes.clientes') }}" class="link-cancelar">Cancelar</a>
         {% endif %}
       </div>
     </form>
   </div>
 
   <!-- BUSCADOR -->
-  <div class="mb-4">
-    <input type="text" id="buscar" placeholder="Buscar cliente por nombre, apellido o teléfono…"
-           class="w-full p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white"
-           oninput="filtrarClientes()" />
+  <div class="buscador">
+    <input type="text" id="buscar" placeholder="Buscar cliente por nombre, apellido o teléfono…" class="input-field" oninput="filtrarClientes()" />
   </div>
 
   <!-- TABLA -->
-  <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-xl shadow">
-    <table class="min-w-full text-sm text-left">
-      <thead class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white">
+  <div class="tabla-container">
+    <table class="tabla-clientes">
+      <thead>
         <tr>
-          <th class="p-3">Nombre</th>
-          <th class="p-3">Apellido</th>
-          <th class="p-3">Teléfono</th>
-          <th class="p-3">Email</th>
-          <th class="p-3">Dirección</th>
-          <th class="p-3">Compras</th>
-          <th class="p-3">Deuda</th>
-          <th class="p-3">Acciones</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Teléfono</th>
+          <th>Email</th>
+          <th>Dirección</th>
+          <th>Compras</th>
+          <th>Deuda</th>
+          <th>Acciones</th>
         </tr>
       </thead>
-      <tbody id="tabla-clientes" class="text-gray-900 dark:text-white">
+      <tbody id="tabla-clientes">
         {% for data in clientes_data %}
-        <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-          <td class="p-3">{{ data.cliente.nombre }}</td>
-          <td class="p-3">{{ data.cliente.apellido }}</td>
-          <td class="p-3">{{ data.cliente.telefono }}</td>
-          <td class="p-3">{{ data.cliente.email }}</td>
-          <td class="p-3">{{ data.cliente.direccion }}</td>
-          <td class="p-3">${{ '%.2f' | format(data.compras) }}</td>
-          <td class="p-3">${{ '%.2f' | format(data.deuda) }}</td>
-          <td class="p-3 flex gap-2">
-            <a href="{{ url_for('clientes_routes.editar_cliente', id=data.cliente.id) }}" class="text-blue-600 hover:underline">Editar</a>
+        <tr>
+          <td>{{ data.cliente.nombre }}</td>
+          <td>{{ data.cliente.apellido }}</td>
+          <td>{{ data.cliente.telefono }}</td>
+          <td>{{ data.cliente.email }}</td>
+          <td>{{ data.cliente.direccion }}</td>
+          <td>${{ '%.2f' | format(data.compras) }}</td>
+          <td>${{ '%.2f' | format(data.deuda) }}</td>
+          <td class="acciones">
+            <a href="{{ url_for('clientes_routes.editar_cliente', id=data.cliente.id) }}" class="link-editar">Editar</a>
             <form method="post" action="{{ url_for('clientes_routes.eliminar_cliente', id=data.cliente.id) }}">
-              <button type="submit" onclick="return confirm('¿Eliminar cliente?')" class="text-red-500 hover:underline">Eliminar</button>
+              <button type="submit" onclick="return confirm('¿Eliminar cliente?')" class="link-eliminar">Eliminar</button>
             </form>
           </td>
         </tr>
@@ -82,14 +74,12 @@
 <!-- MODAL ERROR -->
 {% with messages = get_flashed_messages() %}
   {% if messages %}
-    <div id="modalError" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl max-w-md w-full mx-4">
+    <div id="modalError" class="modal-error">
+      <div class="modal-contenido">
         <div class="text-center">
-          <h2 class="text-xl font-bold text-red-600 mb-2">⚠ Error</h2>
-          <p class="text-gray-700 dark:text-gray-200 mb-4">{{ messages[0] }}</p>
-          <button onclick="document.getElementById('modalError').remove()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-all">
-            Cerrar
-          </button>
+          <h2 class="modal-titulo">⚠ Error</h2>
+          <p class="modal-mensaje">{{ messages[0] }}</p>
+          <button onclick="document.getElementById('modalError').remove()" class="btn-modal">Cerrar</button>
         </div>
       </div>
     </div>

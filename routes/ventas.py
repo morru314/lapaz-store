@@ -1,19 +1,31 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
-from flask_login import login_required
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, session
 from extensions import db
 from models.models import Cliente, Producto, Venta, DetalleVenta, Deuda, Pago
 
 ventas_routes = Blueprint('ventas_routes', __name__, template_folder='../templates')
 
+# ✅ Autenticación con token Supabase
+from functools import wraps
+
+def login_required_sb(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get("sb_token"):
+            return redirect(url_for("auth_routes.login"))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 @ventas_routes.route('/ventas')
-@login_required
+@login_required_sb
 def ventas():
     productos = Producto.query.all()
     clientes = Cliente.query.all()
     return render_template('ventas.html', productos=productos, clientes=clientes)
 
+
 @ventas_routes.route('/ventas/registrar', methods=['POST'])
-@login_required
+@login_required_sb
 def registrar_venta():
     data = request.json
 
@@ -43,13 +55,9 @@ def registrar_venta():
     for item in data["items"]:
         producto = Producto.query.get(item["producto_id"])
         if not producto:
-            return jsonify({
-                "error": f"Producto con ID {item['producto_id']} no encontrado"
-            }), 404
+            return jsonify({"error": f"Producto con ID {item['producto_id']} no encontrado"}), 404
         if producto.stock < item["cantidad"]:
-            return jsonify({
-                "error": f"Stock insuficiente para {producto.nombre}"
-            }), 400
+            return jsonify({"error": f"Stock insuficiente para {producto.nombre}"}), 400
 
         producto.stock -= item["cantidad"]
 
@@ -63,7 +71,7 @@ def registrar_venta():
         )
         db.session.add(detalle)
 
-    # Registrar deuda si corresponde
+    # Deuda si corresponde
     if venta.total_cobrado < venta.total_original:
         deuda = Deuda(
             cliente_id=cliente_id,
@@ -73,9 +81,8 @@ def registrar_venta():
         )
         db.session.add(deuda)
 
-    # Registrar pago si se cobró algo
+    # Pago si corresponde
     metodo_pago = data.get("metodo_pago", "Transferencia")
-
     if venta.total_cobrado > 0:
         pago = Pago(
             cliente_id=cliente_id,
@@ -87,14 +94,15 @@ def registrar_venta():
 
     db.session.commit()
     return jsonify({"message": "Venta registrada correctamente."})
+
+
 @ventas_routes.route('/ventas/buscar_producto')
-@login_required
+@login_required_sb
 def buscar_producto():
     q = request.args.get('q', '').strip().lower()
     palabras = q.split()
 
     query = Producto.query
-
     for palabra in palabras:
         ilike = f"%{palabra}%"
         query = query.filter(
@@ -102,7 +110,7 @@ def buscar_producto():
             (Producto.color.ilike(ilike)) |
             (Producto.talle.ilike(ilike)) |
             (Producto.codigo.ilike(ilike)) |
-            (Producto.familia.ilike(ilike)) 
+            (Producto.familia.ilike(ilike))
         )
 
     productos = query.limit(10).all()
@@ -122,7 +130,7 @@ def buscar_producto():
 
 
 @ventas_routes.route('/ventas/buscar_cliente')
-@login_required
+@login_required_sb
 def buscar_cliente():
     q = request.args.get('q', '').lower()
     clientes = Cliente.query.filter(
@@ -130,11 +138,11 @@ def buscar_cliente():
         (Cliente.apellido.ilike(f"%{q}%")) |
         (Cliente.telefono.ilike(f"%{q}%"))
     ).all()
-    return jsonify([{
-        "id": c.id,
-        "nombre": c.nombre,
-        "apellido": c.apellido,
-        "telefono": c.telefono
-    } for c in clientes])
-
-
+    return jsonify([
+        {
+            "id": c.id,
+            "nombre": c.nombre,
+            "apellido": c.apellido,
+            "telefono": c.telefono
+        } for c in clientes
+    ])
