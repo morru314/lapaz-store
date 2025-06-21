@@ -40,7 +40,7 @@
         <td>{{ p.stock }}</td>
         <td class="acciones">
           <a href="{{ url_for('stock_routes.mostrar_formulario_edicion', id=p.id) }}" title="Editar" class="icono-editar">✏️</a>
-          <button type="button" title="Eliminar" onclick='abrirModal("{{ url_for("stock_routes.eliminar_producto", id=p.id) }}");' class="icono-eliminar">❌</button>
+          <button type="button" title="Eliminar" onclick="abrirModal('{{ url_for('stock_routes.eliminar_producto', id=p.id) }}')" class="icono-eliminar">❌</button>
         </td>
       </tr>
       {% endfor %}

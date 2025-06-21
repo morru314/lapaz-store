@@ -1,8 +1,4 @@
-from zipfile import ZipFile
-from pathlib import Path
 
-# Crear el contenido base del archivo CSS general
-css_content = """
 /* Estilos globales */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -162,12 +158,3 @@ thead {
 #modalEliminar button {
   margin-left: 0.5rem;
 }
-"""
-
-# Guardar CSS en archivo temporal
-output_dir = Path("/mnt/data")
-css_file = output_dir / "styles.css"
-with open(css_file, "w") as f:
-    f.write(css_content)
-
-css_file.name
