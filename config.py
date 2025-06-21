@@ -9,7 +9,12 @@ class Config:
 
     # Base de datos: Supabase
     DB_PATH = os.path.join(BASEDIR, 'database', 'ventas.db')
-    SQLALCHEMY_DATABASE_URI = os.environ["SQLALCHEMY_DATABASE_URI"]
+    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")
+    if not SQLALCHEMY_DATABASE_URI:
+        SQLALCHEMY_DATABASE_URI = f"sqlite:///{DB_PATH}"
+        print(
+            f"[!] SQLALCHEMY_DATABASE_URI not set. Using SQLite database at {SQLALCHEMY_DATABASE_URI}"
+        )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
