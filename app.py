@@ -7,10 +7,16 @@ from routes.deudas import deudas_routes
 from routes.dashboard import dashboard_routes
 from routes.auth import auth_routes
 from supabase_client import supabase
+from flask_login import LoginManager, current_user
+from models.usuario import Usuario  # Asegurate de tener este modelo
+
 import os
 
 # Flask app
 app = Flask(__name__)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "auth_routes.login"  # Redirige si no está logueado
 app.config.from_object(Config)
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
@@ -31,6 +37,10 @@ def index():
 @app.template_filter('format_currency')
 def format_currency(value):
     return f"{value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Usuario.query.get(int(user_id))
 
 # Correr app
 if __name__ == "__main__":

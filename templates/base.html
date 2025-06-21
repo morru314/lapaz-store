@@ -51,10 +51,10 @@
             <i data-lucide="credit-card" class="w-4 h-4"></i> Deudas
           </a>
           <button onclick="toggleModo()" class="hover:scale-110 transition-transform">🌗</button>
-          {% if current_user.is_authenticated %}
+          {% if session.sb_user %}
           <div class="hidden sm:flex items-center gap-3">
             <a href="{{ url_for('auth_routes.perfil') }}" class="text-sm font-semibold hover:underline">
-              👤 {{ current_user.username }}
+              👤 Admin
             </a>
             <a href="{{ url_for('auth_routes.logout') }}" class="text-red-500 hover:underline text-sm">Salir</a>
           </div>
@@ -79,10 +79,10 @@
         <a href="/deudas" onclick="cerrarMenu()" class="flex items-center gap-2 hover:underline">
           <i data-lucide="credit-card" class="w-5 h-5"></i> Deudas
         </a>
-        {% if current_user.is_authenticated %}
+        {% if session.sb_user %}
         <div class="pt-4 border-t border-gray-600 space-y-1">
           <a href="{{ url_for('auth_routes.perfil') }}" onclick="cerrarMenu()" class="text-sm hover:underline flex items-center gap-1">
-            👤 {{ current_user.username }}
+            👤 Admin
           </a>
           <a href="{{ url_for('auth_routes.logout') }}" onclick="cerrarMenu()" class="text-red-400 hover:underline text-sm">Cerrar sesión</a>
         </div>
