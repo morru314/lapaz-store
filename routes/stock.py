@@ -73,7 +73,16 @@ def cargar_stock():
 
             try:
                 # Leer archivo
-                df = pd.read_csv(ruta) if ruta.endswith('.csv') else pd.read_excel(ruta)
+                import chardet
+                if ruta.endswith('.csv'):
+                 # Detectar encoding para archivos CSV
+                with open(ruta, 'rb') as f:
+                enc = chardet.detect(f.read())['encoding']
+                df = pd.read_csv(ruta, sep=';', encoding=enc)
+                else:
+                df = pd.read_excel(ruta)
+
+                df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
 
                 # Normalizar columnas
                 df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
