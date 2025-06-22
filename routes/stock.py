@@ -111,7 +111,7 @@ def cargar_stock():
 
                 flash("Stock actualizado correctamente.")
             except Exception as e:
-                flash(f"Error al procesar el archivo: {e}")
+                flash(f"⚠️ Error procesando archivo: {str(e)}")
         else:
             flash('Formato de archivo no permitido.')
         return redirect(url_for('stock_routes.stock'))

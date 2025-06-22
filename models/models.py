@@ -2,6 +2,8 @@ from extensions import db
 from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+import uuid
+from sqlalchemy.dialects.postgresql import UUID
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -59,20 +61,20 @@ class DetalleVenta(db.Model):
     venta = db.relationship('Venta', backref=db.backref('detalles', lazy=True))
     producto = db.relationship('Producto')
 
+class Deuda(db.Model):
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    cliente_id = db.Column(UUID(as_uuid=True), db.ForeignKey('cliente.id'), nullable=False)
+    venta_id = db.Column(UUID(as_uuid=True), db.ForeignKey('venta.id'), nullable=False)
+    saldo_pendiente = db.Column(db.Float, nullable=False)
+    estado = db.Column(db.String(20), default="pendiente")
+    cliente = db.relationship('Cliente', backref=db.backref('deudas', lazy=True))
+    venta = db.relationship('Venta', backref=db.backref('deuda', uselist=False))
+
 class Pago(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'), nullable=False)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    cliente_id = db.Column(UUID(as_uuid=True), db.ForeignKey('cliente.id'), nullable=False)
     monto = db.Column(db.Float, nullable=False)
     fecha = db.Column(db.DateTime, default=datetime.utcnow)
     metodo = db.Column(db.String(50))
     concepto = db.Column(db.String(200))
     cliente = db.relationship('Cliente', backref=db.backref('pagos', lazy=True))
-
-class Deuda(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'), nullable=False)
-    venta_id = db.Column(db.Integer, db.ForeignKey('venta.id'), nullable=False)
-    saldo_pendiente = db.Column(db.Float, nullable=False)
-    estado = db.Column(db.String(20), default="pendiente")  # opciones: pendiente, parcial, saldada
-    cliente = db.relationship('Cliente', backref=db.backref('deudas', lazy=True))
-    venta = db.relationship('Venta', backref=db.backref('deuda', uselist=False))

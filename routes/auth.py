@@ -16,12 +16,14 @@ def register():
                 "password": password
             })
 
-            if response.user:
+            if response and response.user:
                 flash("Cuenta creada. Verificá tu correo.")
                 return redirect(url_for('auth_routes.login'))
+            else:
+                flash("Error: No se pudo crear la cuenta.")
 
         except Exception as e:
-            flash("Error: " + str(e))
+            flash(f"Error: {str(e)}")
 
     return render_template('register.html')
 
@@ -43,6 +45,8 @@ def login():
                 session["sb_user"] = result.user.email
                 flash("Sesión iniciada.")
                 return redirect(url_for('dashboard_routes.dashboard'))
+            else:
+                flash("Error de autenticación: credenciales inválidas.")
 
         except Exception as e:
             flash("Error de autenticación: " + str(e))
@@ -61,7 +65,6 @@ def logout():
 def perfil():
     if not session.get("sb_user"):
         return redirect(url_for("auth_routes.login"))
-
 
     email = session["sb_user"]
     return render_template("perfil.html", email=email)

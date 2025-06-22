@@ -54,7 +54,7 @@
           {% if session.sb_user %}
           <div class="hidden sm:flex items-center gap-3">
             <a href="{{ url_for('auth_routes.perfil') }}" class="text-sm font-semibold hover:underline">
-              👤 Admin
+              👤 {{ session.sb_user.split('@')[0].capitalize() }}
             </a>
             <a href="{{ url_for('auth_routes.logout') }}" class="text-red-500 hover:underline text-sm">Salir</a>
           </div>

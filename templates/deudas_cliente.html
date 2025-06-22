@@ -59,7 +59,13 @@
       <tbody>
         {% for pago in pagos %}
         <tr>
-          <td>{{ pago.fecha.strftime('%Y-%m-%d %H:%M') }}</td>
+          <td> {% if pago.fecha.__class__.__name__ == 'datetime' %}
+                {{ pago.fecha.strftime('%Y-%m-%d %H:%M') }}
+              {% else %}
+              {{ pago.fecha[:16].replace('T', ' ') }}
+              {% endif %}
+            </td>
+
           <td>${{ "%.2f"|format(pago.monto) }}</td>
           <td>{{ pago.metodo }}</td>
           <td>{{ pago.concepto }}</td>

@@ -4,6 +4,7 @@ import os
 import uuid
 from datetime import datetime
 from utils.auth_helpers import login_required_sb
+from postgrest import ASC as asc
 
 # Blueprint
 
@@ -18,9 +19,10 @@ def deudas():
     return render_template('deudas.html', clientes=clientes, deudas=deudas)
 
 
-@deudas_routes.route('/deudas/cliente/<cliente_id>')
+@deudas_routes.route('/deudas/cliente/<uuid:cliente_id>')
 @login_required_sb
 def deudas_por_cliente(cliente_id):
+    cliente_id = str(cliente_id)  # si lo necesitás como string
     cliente = supabase.table("clientes").select("*").eq("id", cliente_id).single().execute().data
     deudas = supabase.table("deudas").select("*").eq("cliente_id", cliente_id).execute().data
     pagos = supabase.table("pagos").select("*").eq("cliente_id", cliente_id).order("fecha", desc=True).execute().data

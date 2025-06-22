@@ -39,7 +39,6 @@ def nuevo_cliente():
     email = request.form['email']
     direccion = request.form['direccion']
 
-    # Ver si ya existe
     existing = supabase.table("clientes").select("*").eq("telefono", telefono).maybe_single().execute().data
     if existing:
         flash("Ya existe un cliente con ese número de teléfono.")
@@ -58,9 +57,10 @@ def nuevo_cliente():
     return redirect(url_for('clientes_routes.clientes'))
 
 
-@clientes_routes.route('/clientes/editar/<int:id>', methods=['GET', 'POST'])
+@clientes_routes.route('/clientes/editar/<uuid:id>', methods=['GET', 'POST'])
 @login_required_sb
 def editar_cliente(id):
+    cliente_id = str(id)
     if request.method == 'POST':
         supabase.table("clientes").update({
             "nombre": request.form['nombre'],
@@ -68,26 +68,14 @@ def editar_cliente(id):
             "telefono": request.form['telefono'],
             "email": request.form['email'],
             "direccion": request.form['direccion']
-        }).eq("id", id).execute()
+        }).eq("id", cliente_id).execute()
 
         flash("Cliente actualizado correctamente.")
         return redirect(url_for('clientes_routes.clientes'))
 
-    cliente = supabase.table("clientes").select("*").eq("id", id).maybe_single().execute().data
+    cliente = supabase.table("clientes").select("*").eq("id", cliente_id).maybe_single().execute().data
     return render_template('clientes.html', cliente_editar=cliente, editar=True)
 
-
-@clientes_routes.route('/clientes/eliminar/<int:id>', methods=['POST'])
-@login_required_sb
-def eliminar_cliente(id):
-    cliente = supabase.table("clientes").select("activo").eq("id", id).maybe_single().execute().data
-    if not cliente or not cliente.get("activo"):
-        flash("El cliente ya está inactivo.")
-        return redirect(url_for('clientes_routes.clientes'))
-
-    supabase.table("clientes").update({"activo": False}).eq("id", id).execute()
-    flash("Cliente marcado como inactivo.")
-    return redirect(url_for('clientes_routes.clientes'))
 
 
 @clientes_routes.route('/clientes/buscar')
@@ -103,3 +91,11 @@ def buscar_cliente():
         "apellido": c["apellido"],
         "telefono": c["telefono"]
     } for c in filtrados])
+
+@clientes_routes.route('/clientes/eliminar/<uuid:id>', methods=['POST'])
+@login_required_sb
+def eliminar_cliente(id):
+    supabase.table("clientes").delete().eq("id", str(id)).execute()
+    flash("Cliente eliminado correctamente.")
+    return redirect(url_for('clientes_routes.clientes'))
+

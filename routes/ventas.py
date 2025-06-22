@@ -68,7 +68,7 @@ def registrar_venta():
             "precio_cobrado": item["precio_cobrado"],
             "descuento_aplicado": item.get("descuento_aplicado", 0)
         }
-        supabase.table("detalle_ventas").insert(detalle).execute()
+        supabase.table("detalle_venta").insert(detalle).execute()
 
     # Deuda
     if venta_data["total_cobrado"] < venta_data["total_original"]:
@@ -88,7 +88,8 @@ def registrar_venta():
             "cliente_id": cliente_id,
             "monto": venta_data["total_cobrado"],
             "metodo": data.get("metodo_pago", "Transferencia"),
-            "concepto": f"Pago de venta #{venta_data['id']}"
+            "concepto": f"Pago por {data.get('metodo_pago', 'Transferencia')} - Venta #{venta_data['id']}"
+            "fecha": datetime.utcnow().isoformat()
         }
         supabase.table("pagos").insert(pago).execute()
 
