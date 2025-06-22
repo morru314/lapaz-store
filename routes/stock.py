@@ -73,7 +73,8 @@ def cargar_stock():
 
             try:
                 # Leer archivo
-                df = pd.read_csv(ruta, sep=';') if ruta.endswith('.csv') else pd.read_excel(ruta)
+                df = pd.read_csv(ruta) if ruta.endswith('.csv') else pd.read_excel(ruta)
+
 
                 # Normalizar columnas
                 df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]

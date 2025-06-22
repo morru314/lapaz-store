@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="flash-messages">
+  {% for message in messages %}
+  <div class="alert">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
 <!-- Carga de archivo -->
 <div class="card">
   <h2 class="titulo-seccion">📥 Cargar archivo de stock (.csv o .xlsx)</h2>
