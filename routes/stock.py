@@ -5,6 +5,7 @@ import os
 from config import Config
 from functools import wraps
 from utils.auth_helpers import login_required_sb
+import traceback
 
 stock_routes = Blueprint('stock_routes', __name__, template_folder='../templates')
 
@@ -122,10 +123,10 @@ def cargar_stock():
                 }
 
                 # — Chequear existencia por código —
-                existe = supabase.table("productos")\
-                                 .select("id")\
-                                 .eq("codigo", data["codigo"])\
-                                 .maybe_single()\
+                existe = supabase.table("productos") \
+                                 .select("id") \
+                                 .eq("codigo", data["codigo"]) \
+                                 .maybe_single() \
                                  .execute().data
 
                 if existe:
@@ -136,7 +137,6 @@ def cargar_stock():
                     insertados += 1
 
             except Exception as fila_exc:
-                # Si falla una fila, la guardo en 'errores' y sigo
                 errores.append({
                     "codigo": row.get('codigo', ''),
                     "error": str(fila_exc)
@@ -156,11 +156,14 @@ def cargar_stock():
         return redirect(url_for('stock_routes.stock'))
 
     except Exception as e:
-        # Capturo cualquier otro fallo (p.ej. conexión Supabase, permisos, etc.)
         tb = traceback.format_exc()
-        print(tb)  # o use app.logger.error(tb) si lo configuras
-        flash(f"❌ Error inesperado al procesar stock: {str(e)}")
-        return redirect(url_for('stock_routes.stock'))
+        return (
+            "<h1>ERROR al procesar stock</h1>"
+            "<pre style='white-space: pre-wrap; background:#222; color:#eee; padding:1em;'>"
+            f"{tb}"
+            "</pre>",
+            500
+        )
 
 @stock_routes.route('/stock/upload_imagen', methods=['POST'])
 @login_required_sb
