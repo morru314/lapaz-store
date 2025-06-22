@@ -72,11 +72,10 @@ def cargar_stock():
             archivo.save(ruta)
 
             try:
-                if ruta.endswith('.csv'):
-                    df = pd.read_csv(ruta, sep=';')
-                else:
-                    df = pd.read_excel(ruta)
+                # Leer archivo
+                df = pd.read_csv(ruta, sep=';') if ruta.endswith('.csv') else pd.read_excel(ruta)
 
+                # Normalizar columnas
                 df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
 
                 columnas_obligatorias = {
@@ -86,34 +85,45 @@ def cargar_stock():
                 }
 
                 if not columnas_obligatorias.issubset(df.columns):
-                    flash('El archivo no tiene las columnas requeridas.')
+                    faltantes = columnas_obligatorias - set(df.columns)
+                    flash(f'Columnas faltantes en el archivo: {", ".join(faltantes)}')
                     return redirect(url_for('stock_routes.stock'))
 
+                insertados = 0
+                actualizados = 0
+
                 for _, row in df.iterrows():
-                    codigo = row['codigo']
+                    codigo = str(row['codigo']).strip()
                     existente = supabase.table("productos").select("*").eq("codigo", codigo).maybe_single().execute().data
+
+                    def limpiar_precio(valor):
+                        return float(str(valor).replace('$', '').replace('.', '').replace(',', '.').strip())
+
                     data = {
                         "codigo": codigo,
-                        "nombre": row['nombre'],
+                        "nombre": row['nombre'].strip(),
                         "descripcion": '',
-                        "familia": row['familia'],
-                        "talle": row['talle'],
-                        "color": row['color'],
-                        "proveedor": row['proveedor'],
-                        "precio_compra": float(str(row['precio_compra']).replace('$', '').replace('.', '').replace(',', '.').strip()),
-                        "precio_venta": float(str(row['precio_venta_contado']).replace('$', '').replace('.', '').replace(',', '.').strip()),
+                        "familia": row['familia'].strip(),
+                        "talle": row['talle'].strip(),
+                        "color": row['color'].strip(),
+                        "proveedor": row['proveedor'].strip(),
+                        "precio_compra": limpiar_precio(row['precio_compra']),
+                        "precio_venta": limpiar_precio(row['precio_venta_contado']),
                         "stock": max(0, int(row['stock']))
                     }
+
                     if existente:
                         supabase.table("productos").update(data).eq("codigo", codigo).execute()
+                        actualizados += 1
                     else:
                         supabase.table("productos").insert(data).execute()
+                        insertados += 1
 
-                flash("Stock actualizado correctamente.")
+                flash(f"✔️ Stock actualizado: {insertados} insertados, {actualizados} actualizados.")
             except Exception as e:
-                flash(f"⚠️ Error procesando archivo: {str(e)}")
+                flash(f"❌ Error procesando archivo: {str(e)}")
         else:
-            flash('Formato de archivo no permitido.')
+            flash('⚠️ Formato de archivo no permitido.')
         return redirect(url_for('stock_routes.stock'))
 
     return render_template('stock.html')
