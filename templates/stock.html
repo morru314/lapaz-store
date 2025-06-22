@@ -34,15 +34,15 @@
     <thead>
       <tr>
         <th>Código</th>
+        <th>Stock</th>
         <th>Nombre</th>
-        <th>Descripción</th>
         <th>Familia</th>
         <th>Talle</th>
         <th>Color</th>
         <th>Proveedor</th>
         <th>Compra</th>
         <th>Venta</th>
-        <th>Stock</th>
+        <th>Descripción</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -50,15 +50,15 @@
       {% for p in productos %}
       <tr>
         <td>{{ p.codigo }}</td>
+        <td>{{ p.stock }}</td>
         <td>{{ p.nombre }}</td>
-        <td>{{ p.descripcion }}</td>
         <td>{{ p.familia }}</td>
         <td>{{ p.talle }}</td>
         <td>{{ p.color }}</td>
         <td>{{ p.proveedor }}</td>
         <td>{{ "$%.2f"|format(p.precio_compra) }}</td>
-        <td>{{ "$%.2f"|format(p.precio_venta) }}</td>
-        <td>{{ p.stock }}</td>
+        <td>{{ "$%.2f"|format(p.precio_venta_contado) }}</td>
+        <td>{{ p.descripcion }}</td>
         <td class="acciones">
           <a href="{{ url_for('stock_routes.editar_producto', id=p.id) }}" title="Editar" class="icono-editar">✏️</a>
           <button type="button" title="Eliminar"
