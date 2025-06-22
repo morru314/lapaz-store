@@ -1,301 +1,301 @@
-﻿codigo;familia;nombre;talle;color;proveedor; precio_compra;precio_venta_contado;precio_venta_tarjeta;stock
-PA5V;PALAZO;Palazo Adidas;5;VERDE;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;1
-PA4N;PALAZO;Palazo Adidas;4;NEgro;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;0
-PA5N;PALAZO;Palazo Adidas;5;NEgro;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;0
-PA4A;PALAZO;Palazo Adidas;4;Azul;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;2
-PA5C;PALAZO;Palazo Adidas;4;Chocolate;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;4
-PA4B;PALAZO;Palazo Adidas;4;Beige;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;2
-PA3B;PALAZO;Palazo Adidas;3;Beige;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;2
-PA2V;PALAZO;Palazo Adidas;M;Violeta;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;1
-PA5B;PALAZO;Palazo Adidas;5;Bordo;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;5
-PA2G;PALAZO;Palazo Adidas;2;Gris;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;5
-RAOM4B;REMERA;Adidas Over Mujer;4;Beige;Iri Wear;$ 7.000,00;$ 15.000;$ 16.500;4
-RAOM4N;REMERA;Adidas Over Mujer;4;Negro;Iri Wear;$ 7.000,00;$ 15.000;$ 16.500;1
-CA3C;CALZA;Calza Nike Pro;3;Chocolate;Iri Wear;$ 1,00;$ 30.000;$ 33.000;2
-PPD4U;PANTALON;Palazo Darlon;4;Uva;Iri Wear;$ 19.800;$ 33.000;$ 36.300;0
-PPF4BE;PANTALON;Palazo Friza;4;Beige;Iri Wear;$ 17.050;$ 29.000;$ 31.900;0
-PPF5BO;PANTALON;Palazo Friza;5;Bordo;Iri Wear;$ 17.050;$ 29.000;$ 31.900;0
-PPSF4N;PANTALON;Palazo sin friza;4;Negro;Iri Wear;$ 17.050;$ 29.000;$ 31.900;0
-RA2N;REMERA;Adiddas;2;Negro;Iri Wear;$ 8.580;$ 15.000;$ 16.500;-1
-RT2B;REMERA;Termica;2;Blanca;Iri Wear;$ 9.350;$ 15.000;$ 16.500;0
-BACRLA;BUZO;Buzo Adidas con raya;L;Azul;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
-BACRLN;BUZO;Buzo Adidas con raya;L;Negro;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
-BACRMN;BUZO;Buzo Adidas con raya;M;Negro;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
-BACRXLB;BUZO;Buzo Adidas con raya;XL;Blanco;Iri Wear;$ 16.766;$ 32.000;$ 35.200;-1
-BACRXLR;BUZO;Buzo Adidas con raya;XL;Rojo;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
-BCFA4N;BUZO;Buzo con friza Adidas;L;Negro;Iri Wear;$ 16.500;$ 32.000;$ 35.200;2
-BFALN;BUZO;Buzo con friza Adidas;L;Negro;Iri Wear;$ 19.078;$ 32.000;$ 35.200;0
-BFASB;BUZO;Buzo con friza Adidas;S;Beige;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
-BFAXLN;BUZO;Buzo con friza Adidas;XL;Negro;Iri Wear;$ 19.078;$ 32.000;$ 35.200;2
-BFAXLB;BUZO;Buzo con friza Adidas;XL;Beige;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
-BFAXLC;BUZO;Buzo con friza Adidas;XL;Camel;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
-BFNLB;BUZO;Buzo con friza Nike;L;Beige;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
-CA2N;CALZA;Calza Adidas;2;Negro;Iri Wear;$ 16.766;$ 29.000;$ 31.900;0
-CA3N;CALZA;Calza Adidas;3;Negro;Iri Wear;$ 16.766;$ 29.000;$ 31.900;2
-CA4N;CALZA;Calza Adidas;4;Negro;Iri Wear;$ 16.766;$ 29.000;$ 31.900;2
-CNP2B;CALZA;Calza Nike Pro;2;Beige;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
-CNP4N;CALZA;Calza Nike Pro;4;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
-CNP2V;CALZA;Calza Nike Pro;2;Uva;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
-PL2N;PANTALON;Palazo con linea;2;Negro;Iri Wear;$ 14.453;$ 25.000;$ 27.500;0
-PL3N;PANTALON;Palazo con linea;3;Negro;Iri Wear;$ 14.453;$ 25.000;$ 27.500;0
-PD2N;PANTALON;Palazo Darlon;2;Negro;Iri Wear;$ 21.391;$ 36.000;$ 39.600;0
-PD3N;PANTALON;Palazo Darlon;3;Negro;Iri Wear;$ 21.391;$ 36.000;$ 39.600;0
-PD3V;PANTALON;Palazo Darlon;3;Verde;Iri Wear;$ 21.391;$ 36.000;$ 39.600;0
-PD3U;PANTALON;Palazo Darlon;3;Uva;Iri Wear;$ 21.391;$ 36.000;$ 39.600;0
-PD4U;PANTALON;Palazo Darlon;4;Uva;Iri Wear;$ 21.391;$ 36.000;$ 39.600;0
-PD3A;PANTALON;Palazo Darlon;3;Azul;Iri Wear;$ 19.000;$ 36.000;$ 39.600;0
-PD4A;PANTALON;Palazo Darlon;4;Azul;Iri Wear;$ 19.000;$ 36.000;$ 39.600;0
-PL1A;PALAZO;Palazo Lycra;1;Azul;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
-PL2B;PANTALON;Palazo Lycra;2;Bordo;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PL3B;PANTALON;Palazo Lycra;3;Bordo;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PL3R;PANTALON;Palazo Lycra;3;Rojo;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
-PL4B;PANTALON;Palazo Lycra;4;Bordo;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PL4R;PANTALON;Palazo Lycra;4;Rojo;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PLF2N;PANTALON;Palazo Lycra con  Friza;2;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PLF3C;PANTALON;Palazo Lycra con  Friza;3;Chocolate;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PLF3N;PANTALON;Palazo Lycra con  Friza;3;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PLF4C;PANTALON;Palazo Lycra con  Friza;4;Chocolate;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PLF4N;PANTALON;Palazo Lycra con  Friza;4;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PLF5B;PANTALON;Palazo Lycra con  Friza;5;Beige;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PP2N;PANTALON;Palazo Print;2;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PP3N;PANTALON;Palazo Print;3;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
-PP4N;PANTALON;Palazo Print;4;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
-REA2N;REMERA;Remera Adidas;2;Negro;Iri Wear;$ 8.094;$ 15.000;$ 16.500;0
-REA3N;REMERA;Remera Adidas;3;Negro;Iri Wear;$ 8.094;$ 15.000;$ 16.500;0
-REA4N;REMERA;Remera Adidas;4;Negro;Iri Wear;$ 8.094;$ 15.000;$ 16.500;2
-RN4B;REMERA;Remera Nike Regalo;4;Blanca;Iri Wear;$ 9.921;$ 17.000;$ 18.700;0
-RT3N;REMERA;Termica;2;Negro;Iri Wear;$ 9.350;$ 15.000;$ 16.500;0
-RPCR2N;REMERA;Polar con Cierre rayada;2;Negro;MILU;$ 15.617;$ 29.000;$ 31.900;0
-RPCR2B;REMERA;Polar con Cierre rayada;2;Blanca;MILU;$ 15.617;$ 29.000;$ 31.900;0
-PGC48M;PANTALON;Gabardina Chino;48;Marron;TOBUY;$ 22.309;$ 45.000;$ 49.500;2
-PGC50M;PANTALON;Gabardina Chino;50;Marron;TOBUY;$ 22.309;$ 45.000;$ 49.500;0
-PGC48B;PANTALON;Gabardina Chino;48;Beige;TOBUY;$ 22.309;$ 45.000;$ 49.500;2
-PGC48V;PANTALON;Gabardina Chino;48;Verde;TOBUY;$ 22.309;$ 45.000;$ 49.500;2
-PGC40V;PANTALON;Gabardina Chino;40;Verde;TOBUY;$ 22.309;$ 45.000;$ 49.500;2
-PGC50A;PANTALON;Gabardina Chino;50;Azul;TOBUY;$ 22.309;$ 45.000;$ 49.500;2
-PG46V;PANTALON;Gabardina;46;Verde;TOBUY;$ 20.079;$ 40.000;$ 44.000;2
-PG50M;PANTALON;Gabardina;50;Marron;TOBUY;$ 20.079;$ 40.000;$ 44.000;2
-PG50A;PANTALON;Gabardina;50;Azul;TOBUY;$ 20.079;$ 40.000;$ 44.000;2
-PG48A;PANTALON;Gabardina;48;Azul;TOBUY;$ 20.079;$ 40.000;$ 44.000;2
-PCH36V;PANTALON;Cargo hombre;36;Verde;BOSTON;$ 33.464;$ 59.000;$ 64.900;0
-PCH34GT;PANTALON;Cargo hombre;34;Gris topo;BOSTON;$ 33.464;$ 59.000;$ 64.900;0
-PCH32M;PANTALON;Cargo hombre;32;Marron;BOSTON;$ 33.464;$ 59.000;$ 64.900;0
-PCH38N;PANTALON;Cargo hombre;38;Negro;BOSTON;$ 33.464;$ 59.000;$ 64.900;0
-CFH5N;CAMPERA;Friza Hombre;5;Negro;LEONEL;$ 18.405;$ 37.000;$ 40.700;0
-CFH5GT;CAMPERA;Friza Hombre;5;Gris topo;LEONEL;$ 18.405;$ 37.000;$ 40.700;0
-CFH3C;CAMPERA;Friza Hombre;3;Chocolate;LEONEL;$ 18.405;$ 37.000;$ 40.700;2
-CFH3GT;CAMPERA;Friza Hombre;3;Gris topo;LEONEL;$ 18.405;$ 37.000;$ 40.700;2
-CFH2C;CAMPERA;Friza Hombre;2;Celeste;LEONEL;$ 18.405;$ 37.000;$ 40.700;2
-PJH48V;PANTALON;Jogger Hombre;48;Verde;BORS;$ 21.194;$ 42.000;$ 46.200;2
-PJH48A;PANTALON;Jogger Hombre;48;Azul;BORS;$ 21.194;$ 42.000;$ 46.200;2
-PJH46GO;PANTALON;Jogger Hombre;46;Gris Oscuro;BORS;$ 21.194;$ 42.000;$ 46.200;2
-REXXLB;REMERA;Estampada Hombre;XXL;;BORS;$ 7.808;$ 19.000;$ 20.900;2
-REXLB;REMERA;Estampada Hombre;XL;;BORS;$ 7.808;$ 19.000;$ 20.900;0
-RELB;REMERA;Estampada Hombre;L;;BORS;$ 7.808;$ 19.000;$ 20.900;4
-REMB;REMERA;Estampada Hombre;M;;BORS;$ 7.808;$ 19.000;$ 20.900;4
-CAMMA;CAMPERA;Algodon Mujer;M;Azul;LIBRALATINA;$ 11.155;$ 22.000;$ 24.200;2
-CAMSBN;CAMPERA;Algodon Mujer;S;Blanco y Negro;LIBRALATINA;$ 11.155;$ 22.000;$ 24.200;2
-PJA5N;PANTALON;Joggin Argentina;5;Negro;SOF;$ 16.286;$ 30.000;$ 33.000;2
-PJA3N;PANTALON;Joggin Argentina;3;Negro;SOF;$ 16.286;$ 30.000;$ 33.000;2
-PJR4B;PANTALON;Joggin River;4;Bordo;SOF;$ 16.286;$ 30.000;$ 33.000;2
-CAC3N;CAMPERA;Addidas capucha;3;Negro;SOF;$ 22.979;$ 42.000;$ 46.200;2
-CAC3A;CAMPERA;Addidas capucha;3;Azul;SOF;$ 22.979;$ 42.000;$ 46.200;2
-BANLB;BUZO;Algodon Northface;L;Beige;SOF;$ 20.748;$ 41.000;$ 45.100;0
-BANSB;BUZO;Algodon Nike;1;Beige;SOF;$ 20.748;$ 41.000;$ 45.100;0
-CALR;CAMPERA;Adidas;L;Rojo;SOF;$ 24.094;$ 39.000;$ 42.900;2
-CALN;CAMPERA;Adidas;L;Negro;SOF;$ 24.094;$ 39.000;$ 42.900;2
-CAXLN;CAMPERA;Adidas;XL;Negro;SOF;$ 24.094;$ 39.000;$ 42.900;0
-CAXLA;CAMPERA;Adidas;XL;Azul;SOF;$ 24.094;$ 39.000;$ 42.900;2
-PPM5V;PANTALON;Palazo Mujer;5;Verde;SOF;$ 18.517;$ 30.000;$ 33.000;0
-PJH5G;PANTALON;Joggin Hombre;5;Gris;KEVINJC;$ 14.501;$ 29.000;$ 31.900;2
-PJH1G;PANTALON;Joggin Hombre;1;Gris;KEVINJC;$ 14.501;$ 29.000;$ 31.900;2
-PMUB;PANTALON;Mujer;Unico;Batic;MUTTELOOK;$ 20.079;$ 40.000;$ 44.000;2
-PMUBM;PANTALON;Mujer;Unico;Blanco;MUTTELOOK;$ 21.194;$ 40.000;$ 44.000;2
-CNC10R;CALZA;Nena capibara;10;Rosa;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;2
-CNC14R;CALZA;Nena capibara;14;Rosa;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;2
-CNC8N;CALZA;Nena capibara;8;Negro;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;0
-CNC10A;CALZA;Nena capibara;10;Azul;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;0
-CNC6A;CALZA;Nena capibara;6;Azul;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;0
-CNC12G;CALZA;Nena capibara;12;Gris;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;0
-BMNS10C;BUZO;Maxi Nene Stich;10;Crema;WALYYO;$ 16.732;$ 33.000;$ 36.300;0
-BMNC12C;BUZO;Maxi Nene Capibara;12;Crema;WALYYO;$ 16.732;$ 33.000;$ 36.300;0
-BMNK14V;BUZO;Maxi Nena Kity;14;Violeta;WALYYO;$ 16.732;$ 33.000;$ 36.300;0
-BMNS8R;BUZO;Maxi Nene Stich;8;Rosa;WALYYO;$ 16.732;$ 33.000;$ 36.300;0
-RNM8N;REMERA;Nena Margarita;8;Negro;;$ 7.808;$ 15.000;$ 16.500;2
-RNM14B;REMERA;Nena Margarita;14;Blanco;;$ 7.808;$ 15.000;$ 16.500;2
-RNS14N;REMERA;Nena stich;14;Negro;;$ 7.808;$ 15.000;$ 16.500;2
-RNS10N;REMERA;Nena stich;10;Negro;;$ 7.808;$ 15.000;$ 16.500;2
-RNS6B;REMERA;Nena stich;6;Blanco;;$ 7.808;$ 15.000;$ 16.500;2
-RNC8N;REMERA;Nena capibara;8;Negro;;$ 7.808;$ 15.000;$ 16.500;2
-RNC12B;REMERA;Nena capibara;12;Blanco;;$ 7.808;$ 15.000;$ 16.500;2
-RNC14B;REMERA;Nena capibara;14;Blanco;;$ 7.808;$ 15.000;$ 16.500;2
-RNC16B;REMERA;Nena capibara;16;Blanco;;$ 7.808;$ 15.000;$ 16.500;0
-RNBLB10B;REMERA;Nena La Bubu;10;Blanco;;$ 7.808;$ 15.000;$ 16.500;2
-BHM3N;BUZO;Buzo Hombre Metrik;3;Negro;ELMONO;$ 10.597;$ 25.000;$ 27.500;0
-BHA1NM;BUZO;Buzo Hombre Metrik;2;Azul;ELMONO;$ 10.597;$ 25.000;$ 27.500;2
-PJH2GT;PANTALON;Joggin Hombre;2;Gris topo;ELMONO;$ 17.848;$ 36.000;$ 39.600;2
-PJH3N;PANTALON;Joggin Hombre;3;Negro;ELMONO;$ 17.848;$ 36.000;$ 39.600;0
-MDUV;MEDIAS;Marca Deportiva;Unico;Varios;GALERIA;$ 1.673;$ 3.000;$ 3.300;6
-MMDUV;MEDIAS;Pack x 3 MD Soquetes;Unico;Varios;GALERIA;$ 1.115;$ 4.000;$ 4.400;8
-MSBUV;MEDIAS;Pack x 3 MD Super Balance;Unico;Varios;GALERIA;$ 976;$ 4.000;$ 4.400;8
-RBOHXLB;REMERA;Boston Hombre;XL;Blanca;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
-RBHXLB;REMERA;Balenciaga Hombre;XXL;Blanca;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
-RBHLA;REMERA;Balenciaga Hombre;L;Azul;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
-RMHLV;REMERA;Mustang Hombre;L;Verde;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
-RDHLM;REMERA;Dream Hombre;L;Marron;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
-RRHMM;REMERA;Represent Hombre;M;Marron;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
-BNM8B;BUZO;Nena Mariposa;8;Beige;LEXBANG;$ 15.617;$ 31.000;$ 34.100;0
-BNM12R;BUZO;Nena Margarita;12;Rosa;LEXBANG;$ 15.617;$ 31.000;$ 34.100;2
-BNM14L;BUZO;Nena Margarita;14;Lila;LEXBANG;$ 15.617;$ 31.000;$ 34.100;2
-BNM4R;BUZO;Nena Margarita;4;Rosa;LEXBANG;$ 15.617;$ 31.000;$ 34.100;2
-BNK8C;BUZO;Nena Kity;8;Celeste;SOF;$ 14.501;$ 29.000;$ 31.900;0
-BNK6L;BUZO;Nena Kity;6;Lila;SOF;$ 14.501;$ 29.000;$ 31.900;2
-CPBA10N;CONJUNTO;Pant y Buzo Argentina;10;Negro;SOF;$ 24.540;$ 45.000;$ 49.500;2
-CPBA12N;CONJUNTO;Pant y Buzo Argentina;12;Negro;SOF;$ 24.540;$ 45.000;$ 49.500;0
-CTG4AF;CAMPERA;Termica con gorro;4;Azul Francia;BYCLIZA;$ 21.300;$ 43.000;$ 47.300;2
-CTG3N;CAMPERA;Termica con gorro;3;Negro;BYCLIZA;$ 21.300;$ 43.000;$ 47.300;2
-CTG2V;CAMPERA;Termica con gorro;2;Verde;BYCLIZA;$ 21.300;$ 43.000;$ 47.300;2
-CTG5N;CAMPERA;Termica con gorro;5;Negro;BYCLIZA;$ 21.300;$ 43.000;$ 47.300;0
-PHC3N;PANTALON;Hombre combinado con raya gris;3;Negro;BYCLIZA;$ 21.512;$ 43.000;$ 47.300;2
-PHC4N;PANTALON;Hombre combinado con raya gris;4;Negro;BYCLIZA;$ 21.512;$ 43.000;$ 47.300;2
-PHC5N;PANTALON;Hombre combinado con raya gris;5;Negro;BYCLIZA;$ 21.512;$ 43.000;$ 47.300;4
-PB2N;PANTALON;Babucha;2;Negro;BYCLIZA;$ 27.022;$ 49.000;$ 53.900;2
-PBSN;PANTALON;Babucha;S;Negro;BYCLIZA;$ 27.022;$ 49.000;$ 53.900;2
-CMBMG;CALZA;Mujer con Bolsillo;M;Gris;BYCLIZA;$ 15.366;$ 31.000;$ 34.100;2
-CMBXLC;CALZA;Mujer con Bolsillo;XL;Chocolate;BYCLIZA;$ 15.366;$ 31.000;$ 34.100;2
-CMBLB;CALZA;Mujer con Bolsillo;L;Bordo;BYCLIZA;$ 15.366;$ 31.000;$ 34.100;0
-CNMLN;CALZA;Negra Mujer;L;Negra;BYCLIZA;$ 8.478;$ 20.000;$ 22.000;2
-CNMMN;CALZA;Negra Mujer;M;Negra;BYCLIZA;$ 8.478;$ 20.000;$ 22.000;2
-CNMXLN;CALZA;Negra Mujer;XL;Negra;BYCLIZA;$ 8.478;$ 20.000;$ 22.000;2
-RSPLAF;REMERA;Sudadera Power;L;Azul Francia;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
-RSPLN;REMERA;Sudadera Power;L;Negra;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
-RSPXLN;REMERA;Sudadera Power;XL;Negra;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
-RSPXLF;REMERA;Sudadera Power;XL;Fucsia;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
-RSPXXLN;REMERA;Sudadera Power;XXL;Negra;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
-RSPXXLG;REMERA;Sudadera Power;XXL;Gris;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
-RSPXLR;REMERA;Sudadera Power;XL;Rosa;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
-CBXLN;CALZA;Biker;XL;Negro;BYCLIZA;$ 6.888;$ 18.000;$ 19.800;2
-CBLV;CALZA;Biker;L;Violeta;BYCLIZA;$ 6.888;$ 18.000;$ 19.800;2
-CBLG;CALZA;Biker;L;Gris;BYCLIZA;$ 6.888;$ 18.000;$ 19.800;2
-RSMXXLN;REMERA;Sport Mujer;XXL;Negro;BYCLIZA;$ 6.994;$ 17.000;$ 18.700;0
-RSMMB;REMERA;Sport Mujer;M;Beige;BYCLIZA;$ 6.994;$ 17.000;$ 18.700;2
-RSMMA;REMERA;Sport Mujer;M;Azul;BYCLIZA;$ 6.994;$ 17.000;$ 18.700;2
-RSMLN;REMERA;Sport Mujer;L;Negra;BYCLIZA;$ 6.994;$ 17.000;$ 18.700;2
-RMOXLB;REMERA;Mujer Orificios;XL;Beige;BYCLIZA;$ 9.537;$ 20.000;$ 22.000;2
-RAPMMB;REMERA;Algodon Peinado Mujer;M;Beige;BYCLIZA;$ 6.888;$ 17.000;$ 18.700;2
-RAPMLC;REMERA;Algodon Peinado Mujer;L;Chocolate;BYCLIZA;$ 6.888;$ 17.000;$ 18.700;2
-CMNXXLA;CALZA;Mujer Newflex;XXL;Azul;BYCLIZA;$ 12.610;$ 26.000;$ 28.600;0
-CMNLV;CALZA;Mujer Newflex;L;Verde;BYCLIZA;$ 12.610;$ 26.000;$ 28.600;2
-CMNXLB;CALZA;Mujer Newflex;XL;Bordo;BYCLIZA;$ 12.610;$ 26.000;$ 28.600;2
-CMNMB;CALZA;Mujer Newflex;M;Bordo;BYCLIZA;$ 12.610;$ 26.000;$ 28.600;2
-CMNLC;CALZA;Mujer Newflex;L;Chocolate;BYCLIZA;$ 12.610;$ 26.000;$ 28.600;2
-BTMXLA;BUZO;Termico Mujer;XL;Azul;BYCLIZA;$ 25.433;$ 46.000;$ 50.600;0
-BTMLL;BUZO;Termico Mujer;L;Lila;BYCLIZA;$ 25.433;$ 46.000;$ 50.600;2
-BTMMAF;BUZO;Termico Mujer;M;Azul Francia;BYCLIZA;$ 25.433;$ 46.000;$ 50.600;2
-BPMLA;BUZO;Plush Mujer;L;Azul;LIBRALATINA;$ 16.732;$ 31.000;$ 34.100;2
-BPMLV;BUZO;Plush Mujer;L;Verde;LIBRALATINA;$ 16.732;$ 31.000;$ 34.100;2
-RHHMM;REMERA;HACHE Hombre;M;Marron;H341;$ 6.693;$ 19.000;$ 20.900;2
-RHHSB;REMERA;HACHE Hombre;S;Blanca;H341;$ 6.693;$ 19.000;$ 20.900;2
-RHHXXLB;REMERA;HACHE Hombre;XXL;Blanca;H341;$ 6.693;$ 19.000;$ 20.900;2
-RHHXLG;REMERA;HACHE Hombre;XL;Gris;H341;$ 6.693;$ 19.000;$ 20.900;2
-RMCSB;REMERA;Manga corta Mujer;S;Beige;H341;$ 3.346;$ 9.000;$ 9.900;2
-RMCXLB;REMERA;Manga corta Mujer;XL;Blanca;H341;$ 3.346;$ 9.000;$ 9.900;2
-RMCLU;REMERA;Manga corta Mujer;L;Uva;H341;$ 3.346;$ 9.000;$ 9.900;2
-RMCLN;REMERA;Manga corta Mujer;L;Negra;H341;$ 3.346;$ 9.000;$ 9.900;2
-RMCXLN;REMERA;Manga corta Mujer;XL;Negra;H341;$ 3.346;$ 9.000;$ 9.900;2
-RMLMB;REMERA;Manga Larga Mujer;M;Blanca;H341;$ 4.462;$ 10.000;$ 11.000;2
-RMLXLB;REMERA;Manga Larga Mujer;XL;Blanca;H341;$ 4.462;$ 10.000;$ 11.000;0
-RMLXLU;REMERA;Manga Larga Mujer;XL;Uva;H341;$ 4.462;$ 10.000;$ 11.000;2
-RMLLG;REMERA;Manga Larga Mujer;L;Gris;H341;$ 4.462;$ 10.000;$ 11.000;2
-RMLXLN;REMERA;Manga Larga Mujer;XL;Negra;H341;$ 4.462;$ 10.000;$ 11.000;4
-RMLSN;REMERA;Manga Larga Mujer;S;Negra;H341;$ 4.462;$ 10.000;$ 11.000;2
-SCUB;SWEATER;Calado;Unico;Beige;AMME;$ 16.621;$ 33.000;$ 36.300;2
-CNUB;CARDIGAN;Normal;Unico;Blanco;AMME;$ 16.621;$ 33.000;$ 36.300;2
-CNUC;CARDIGAN;Normal;Unico;Chocolate;AMME;$ 16.621;$ 33.000;$ 36.300;2
-CCUB;CARDIGAN;Calado;Unico;Beige;AMME;$ 13.943;$ 28.000;$ 30.800;2
-CLUN;CARDIGAN;Lineas;Unico;Negro;AMME;$ 18.405;$ 35.000;$ 38.500;0
-SEVUC;SWEATER;Escote en V Rayado;Unico;Chocolate;SAKURAA;$ 17.290;$ 33.000;$ 36.300;2
-SEVUB;SWEATER;Escote en V Rayado;Unico;Beige;SAKURAA;$ 17.290;$ 33.000;$ 36.300;2
-SCBUN;SWEATER;Cuello Bote;Unico;Negro;SAKURAA;$ 17.290;$ 33.000;$ 36.300;2
-RLSUB;REMERA;LittleStone;Unico;Beige;LITTLESTONE;$ 5.577;$ 11.000;$ 12.100;2
-BSPUG;BUZO;Stone Paris;Unico;Gris;LITTLESTONE;$ 11.712;$ 23.000;$ 25.300;2
-BAUB;BUZO;Autentic;Unico;Beige;LITTLESTONE;$ 11.712;$ 23.000;$ 25.300;0
-BCUB;BUZO;Capibara;Unico;Beige;LITTLESTONE;$ 11.712;$ 23.000;$ 25.300;0
-BSCUB;BUZO;Stone Crozaint;Unico;Bordo;LITTLESTONE;$ 11.712;$ 23.000;$ 25.300;2
-BSPUV;BUZO;Stone Paris;Unico;Verde;LITTLESTONE;$ 11.712;$ 23.000;$ 25.300;0
-BPREUV;BUZO;Plush Mujer recorte espalda;Unico;Verde;MELONIA;$ 13.386;$ 27.000;$ 29.700;2
-BPREUC;BUZO;Plush Mujer recorte espalda;Unico;Chocolate;MELONIA;$ 13.386;$ 27.000;$ 29.700;2
-PPPUC;PANTALON;Palazo Plush;Unico;Chocolate;MELONIA;$ 14.501;$ 29.000;$ 31.900;2
-BCMUB;BUZO;Cierre Mujer;Unico;Blanco;MELONIA;$ 14.501;$ 29.000;$ 31.900;0
-BCUR;BUZO;Cierre Mujer;Unico;Rojo;MELONIA;$ 14.501;$ 29.000;$ 31.900;0
-RCMUB;REMERA;Camiseta Morley;Unico;Blanco;MELONIA;$ 6.693;$ 13.000;$ 14.300;2
-RCMUNC;REMERA;Camiseta Morley;Unico;Negro con raya;MELONIA;$ 6.693;$ 13.000;$ 14.300;2
-RCMUV;REMERA;Camiseta Morley;Unico;Violeta;MELONIA;$ 6.693;$ 13.000;$ 14.300;2
-RCMUBE;REMERA;Camiseta Morley;Unico;Beige;MELONIA;$ 6.693;$ 13.000;$ 14.300;2
-RCMUN;REMERA;Camiseta Morley;Unico;Negro;MELONIA;$ 6.693;$ 13.000;$ 14.300;2
-PSUB;PANTALON;Simply;Unico;Bordo;MELONIA;$ 14.501;$ 27.000;$ 29.700;2
-PSUA;PANTALON;Simply;Unico;Azul;MELONIA;$ 14.501;$ 27.000;$ 29.700;2
-BSUA;BUZO;Simply;Unico;Azul;MELONIA;$ 15.059;$ 29.000;$ 31.900;2
-BSUB;BUZO;Simply;Unico;Bordo;MELONIA;$ 15.059;$ 29.000;$ 31.900;2
-RMRUB;REMERA;Modal Raya;Unico;Blanca;MELONIA;$ 7.697;$ 15.000;$ 16.500;2
-RMLUN;REMERA;Modal Lisa;Unico;Negro;MELONIA;$ 7.697;$ 15.000;$ 16.500;2
-PPPD1N;PANTALON;Palazo Pinza Darlon;1;Negro;MAR&JHON;$ 13.386;$ 27.000;$ 29.700;2
-PPPD3N;PANTALON;Palazo Pinza Darlon;3;Negro;MAR&JHON;$ 13.386;$ 27.000;$ 29.700;0
-CD1B;CONJUNTO;Darlon Chupin Buzo y Palazo;1;Beige;MAR&JHON;$ 23.425;$ 47.000;$ 51.700;2
-RTMB;REMERA;Travel 1985;M;Bordo;ZAHIRA;$ 6.693;$ 14.000;$ 15.400;0
-RRIMB;REMERA;Rome Italia;M;Beige;ZAHIRA;$ 6.693;$ 14.000;$ 15.400;2
-RBSB;REMERA;Body Pol Modal;S;Blanco;ZAHIRA;$ 7.251;$ 15.000;$ 16.500;2
-RBMN;REMERA;Body Pol Modal;M;Negro;ZAHIRA;$ 7.251;$ 15.000;$ 16.500;2
-BCURV;BUZO;Cierre;Unico;Rosa Viejo;TiffanybyLina;$ 10.820;$ 24.000;$ 26.400;0
-BMUC;BUZO;Monaco;Unico;Chocolate;TiffanybyLina;$ 10.820;$ 24.000;$ 26.400;0
-BVUB;BUZO;Vision con piel;Unico;Bordo;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;0
-BVUA;BUZO;Vision con piel;Unico;Azul;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;2
-BHUA;BUZO;Hanover con piel;Unico;Azul;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;2
-BHUN;BUZO;Hanover con piel;Unico;Negro;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;0
-PJUC;PANTALON;Jogger Piel Soho;Unico;Chocolate;TiffanybyLina;$ 15.148;$ 30.000;$ 33.000;2
-PJUN;PANTALON;Jogger Piel;Unico;Natural;TiffanybyLina;$ 14.066;$ 28.000;$ 30.800;2
-CSNUN;CONJUNTO;Pantalon Soho Negro;Unico;Negro;TiffanybyLina;$ 15.689;$ 30.000;$ 33.000;0
-BSUN;BUZO;Soho negro;Unico;Negro;TiffanybyLina;$ 15.689;$ 32.000;$ 35.200;0
-BOCUB;BUZO;Over California;Unico;Bordo;TiffanybyLina;$ 20.558;$ 39.000;$ 42.900;2
-BOCUC;BUZO;Over California;Unico;Chocolate;TiffanybyLina;$ 20.558;$ 39.000;$ 42.900;0
-BAUN;BUZO;Achievement;Unico;Natural;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;0
-BBUN;BUZO;Brooklyn con piel;Unico;Negro;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;2
-RMCUN;REMERA;Morley con cierre;Unico;Negro;TiffanybyLina;$ 5.577;$ 12.000;$ 13.200;0
-RMCUC;REMERA;Morley con cierre;Unico;Chocolate;TiffanybyLina;$ 5.577;$ 12.000;$ 13.200;2
-RMCUG;REMERA;Morley con cierre;Unico;Gris;TiffanybyLina;$ 5.577;$ 12.000;$ 13.200;2
-RMCUB;REMERA;Morley con cierre;Unico;Beige;TiffanybyLina;$ 5.577;$ 12.000;$ 13.200;2
-CRFLC;CAMISA;Raya fina;L;Celeste;Inquieta;$ 18.963;$ 38.000;$ 41.800;0
-CRFMC;CAMISA;Raya fina;M;Celeste;Inquieta;$ 18.963;$ 38.000;$ 41.800;2
-CRGLC;CAMISA;Raya Gruesa;L;Celeste;Inquieta;$ 18.963;$ 38.000;$ 41.800;2
-CRGMC;CAMISA;Raya Gruesa;M;Celeste;Inquieta;$ 18.963;$ 38.000;$ 41.800;2
-PM46N;PANTALON;MOM;46;Nevado;Inquieta;$ 23.983;$ 45.000;$ 49.500;2
-PM40N;PANTALON;MOM;40;Nevado;Inquieta;$ 23.983;$ 45.000;$ 49.500;2
-PM36B;PANTALON;MOM;36;Beige;Inquieta;$ 21.752;$ 44.000;$ 48.400;2
-PM44B;PANTALON;MOM;44;Beige;Inquieta;$ 21.752;$ 44.000;$ 48.400;2
-PM46B;PANTALON;MOM;46;Beige;Inquieta;$ 21.752;$ 44.000;$ 48.400;2
-PM42B;PANTALON;MOM;42;Beige;Inquieta;$ 21.752;$ 44.000;$ 48.400;2
-PB38G;PANTALON;Baggy;38;Gris;Inquieta;$ 30.676;$ 55.000;$ 60.500;2
-PB40G;PANTALON;Baggy;40;Gris;Inquieta;$ 30.676;$ 55.000;$ 60.500;0
-PW44GO;PANTALON;WideLeg;44;Gris Oscuro;Inquieta;$ 28.445;$ 55.000;$ 60.500;0
-PW36GO;PANTALON;WideLeg;36;Gris Oscuro;Inquieta;$ 28.445;$ 55.000;$ 60.500;2
-PWC40N;PANTALON;WideLeg con cinto;40;Negro;Inquieta;$ 25.098;$ 49.000;$ 53.900;2
-PWC42A;PANTALON;WideLeg con cinto;42;Azul;Inquieta;$ 27.887;$ 52.000;$ 57.200;0
-PJB38C;PANTALON;Jean Buggy;38;Chocolate;Freedom;$ 22.254;$ 43.000;$ 47.300;0
-PJB40C;PANTALON;Jean Buggy;40;Chocolate;Freedom;$ 22.254;$ 43.000;$ 47.300;0
-PJB44C;PANTALON;Jean Buggy;44;Chocolate;Freedom;$ 22.254;$ 43.000;$ 47.300;2
-PJC46N;PANTALON;Jean Chupin;46;Negro;Freedom;$ 20.134;$ 39.000;$ 42.900;2
-PJC44N;PANTALON;Jean Chupin;44;Negro;Freedom;$ 20.134;$ 39.000;$ 42.900;0
-PJC38N;PANTALON;Jean Chupin;38;Negro;Freedom;$ 20.134;$ 39.000;$ 42.900;2
-PWA44A;PANTALON;Wideleg Arena;44;Arena;Freedom;$ 22.254;$ 45.000;$ 49.500;2
-PWA38A;PANTALON;Wideleg Arena;38;Arena;Freedom;$ 22.254;$ 45.000;$ 49.500;2
-PJC40B;PANTALON;Jogger Cargo;40;Blanco;Freedom;$ 21.194;$ 37.000;$ 40.700;2
-PJC40G;PANTALON;Jogger Cargo;40;Gris;Freedom;$ 18.015;$ 37.000;$ 40.700;2
-PJC42G;PANTALON;Jogger Cargo;42;Gris;Freedom;$ 18.015;$ 37.000;$ 40.700;2
-PJC38G;PANTALON;Jogger Cargo;38;Gris;Freedom;$ 18.015;$ 37.000;$ 40.700;2
-PJC42C;PANTALON;Jogger Cargo;42;Chocolate;Freedom;$ 14.836;$ 37.000;$ 40.700;2
-PJC40C;PANTALON;Jogger Cargo;40;Chocolate;Freedom;$ 14.836;$ 37.000;$ 40.700;2
-PJC36O;PANTALON;Jogger Cargo;36;Oxido;Freedom;$ 14.836;$ 37.000;$ 40.700;2
-PWN40N;PANTALON;Wideleg Negro;40;Negro;Freedom;$ 19.075;$ 38.000;$ 41.800;2
-RJPMB;REMERA;Jersey Placeyou;M;Beige;Placeyou;$ 11.601;$ 23.000;$ 25.300;2
-RJPLN;REMERA;Jersey Placeyou;L;Negra;Placeyou;$ 11.601;$ 23.000;$ 25.300;0
-RPYRM;REMERA;Place You Rayada;M;Negra y Blanca;Placeyou;$ 11.601;$ 23.000;$ 25.300;0
+﻿codigo;nombre;familia;talle;color;proveedor; precio_compra;precio_venta_contado;precio_venta_tarjeta;stock
+PA5V;Palazo Adidas;PALAZO;5;VERDE;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;1
+PA4N;Palazo Adidas;PALAZO;4;NEgro;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;0
+PA5N;Palazo Adidas;PALAZO;5;NEgro;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;0
+PA4A;Palazo Adidas;PALAZO;4;Azul;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;2
+PA5C;Palazo Adidas;PALAZO;4;Chocolate;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;4
+PA4B;Palazo Adidas;PALAZO;4;Beige;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;2
+PA3B;Palazo Adidas;PALAZO;3;Beige;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;2
+PA2V;Palazo Adidas;PALAZO;M;Violeta;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;1
+PA5B;Palazo Adidas;PALAZO;5;Bordo;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;5
+PA2G;Palazo Adidas;PALAZO;2;Gris;Iri Wear;$ 15.500,00;$ 30.000;$ 33.000;5
+RAOM4B;Adidas Over Mujer;REMERA;4;Beige;Iri Wear;$ 7.000,00;$ 15.000;$ 16.500;4
+RAOM4N;Adidas Over Mujer;REMERA;4;Negro;Iri Wear;$ 7.000,00;$ 15.000;$ 16.500;1
+CA3C;Calza Nike Pro;CALZA;3;Chocolate;Iri Wear;$ 1,00;$ 30.000;$ 33.000;2
+PPD4U;Palazo Darlon;PANTALON;4;Uva;Iri Wear;$ 19.800;$ 33.000;$ 36.300;0
+PPF4BE;Palazo Friza;PANTALON;4;Beige;Iri Wear;$ 17.050;$ 29.000;$ 31.900;0
+PPF5BO;Palazo Friza;PANTALON;5;Bordo;Iri Wear;$ 17.050;$ 29.000;$ 31.900;0
+PPSF4N;Palazo sin friza;PANTALON;4;Negro;Iri Wear;$ 17.050;$ 29.000;$ 31.900;0
+RA2N;Adiddas;REMERA;2;Negro;Iri Wear;$ 8.580;$ 15.000;$ 16.500;-1
+RT2B;Termica;REMERA;2;Blanca;Iri Wear;$ 9.350;$ 15.000;$ 16.500;0
+BACRLA;Buzo Adidas con raya;BUZO;L;Azul;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
+BACRLN;Buzo Adidas con raya;BUZO;L;Negro;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
+BACRMN;Buzo Adidas con raya;BUZO;M;Negro;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
+BACRXLB;Buzo Adidas con raya;BUZO;XL;Blanco;Iri Wear;$ 16.766;$ 32.000;$ 35.200;-1
+BACRXLR;Buzo Adidas con raya;BUZO;XL;Rojo;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
+BCFA4N;Buzo con friza Adidas;BUZO;L;Negro;Iri Wear;$ 16.500;$ 32.000;$ 35.200;2
+BFALN;Buzo con friza Adidas;BUZO;L;Negro;Iri Wear;$ 19.078;$ 32.000;$ 35.200;0
+BFASB;Buzo con friza Adidas;BUZO;S;Beige;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
+BFAXLN;Buzo con friza Adidas;BUZO;XL;Negro;Iri Wear;$ 19.078;$ 32.000;$ 35.200;2
+BFAXLB;Buzo con friza Adidas;BUZO;XL;Beige;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
+BFAXLC;Buzo con friza Adidas;BUZO;XL;Camel;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
+BFNLB;Buzo con friza Nike;BUZO;L;Beige;Iri Wear;$ 16.766;$ 32.000;$ 35.200;0
+CA2N;Calza Adidas;CALZA;2;Negro;Iri Wear;$ 16.766;$ 29.000;$ 31.900;0
+CA3N;Calza Adidas;CALZA;3;Negro;Iri Wear;$ 16.766;$ 29.000;$ 31.900;2
+CA4N;Calza Adidas;CALZA;4;Negro;Iri Wear;$ 16.766;$ 29.000;$ 31.900;2
+CNP2B;Calza Nike Pro;CALZA;2;Beige;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
+CNP4N;Calza Nike Pro;CALZA;4;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
+CNP2V;Calza Nike Pro;CALZA;2;Uva;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
+PL2N;Palazo con linea;PANTALON;2;Negro;Iri Wear;$ 14.453;$ 25.000;$ 27.500;0
+PL3N;Palazo con linea;PANTALON;3;Negro;Iri Wear;$ 14.453;$ 25.000;$ 27.500;0
+PD2N;Palazo Darlon;PANTALON;2;Negro;Iri Wear;$ 21.391;$ 36.000;$ 39.600;0
+PD3N;Palazo Darlon;PANTALON;3;Negro;Iri Wear;$ 21.391;$ 36.000;$ 39.600;0
+PD3V;Palazo Darlon;PANTALON;3;Verde;Iri Wear;$ 21.391;$ 36.000;$ 39.600;0
+PD3U;Palazo Darlon;PANTALON;3;Uva;Iri Wear;$ 21.391;$ 36.000;$ 39.600;0
+PD4U;Palazo Darlon;PANTALON;4;Uva;Iri Wear;$ 21.391;$ 36.000;$ 39.600;0
+PD3A;Palazo Darlon;PANTALON;3;Azul;Iri Wear;$ 19.000;$ 36.000;$ 39.600;0
+PD4A;Palazo Darlon;PANTALON;4;Azul;Iri Wear;$ 19.000;$ 36.000;$ 39.600;0
+PL1A;Palazo Lycra;PALAZO;1;Azul;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
+PL2B;Palazo Lycra;PANTALON;2;Bordo;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PL3B;Palazo Lycra;PANTALON;3;Bordo;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PL3R;Palazo Lycra;PANTALON;3;Rojo;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
+PL4B;Palazo Lycra;PANTALON;4;Bordo;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PL4R;Palazo Lycra;PANTALON;4;Rojo;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PLF2N;Palazo Lycra con  Friza;PANTALON;2;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PLF3C;Palazo Lycra con  Friza;PANTALON;3;Chocolate;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PLF3N;Palazo Lycra con  Friza;PANTALON;3;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PLF4C;Palazo Lycra con  Friza;PANTALON;4;Chocolate;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PLF4N;Palazo Lycra con  Friza;PANTALON;4;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PLF5B;Palazo Lycra con  Friza;PANTALON;5;Beige;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PP2N;Palazo Print;PANTALON;2;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PP3N;Palazo Print;PANTALON;3;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;0
+PP4N;Palazo Print;PANTALON;4;Negro;Iri Wear;$ 17.922;$ 30.000;$ 33.000;2
+REA2N;Remera Adidas;REMERA;2;Negro;Iri Wear;$ 8.094;$ 15.000;$ 16.500;0
+REA3N;Remera Adidas;REMERA;3;Negro;Iri Wear;$ 8.094;$ 15.000;$ 16.500;0
+REA4N;Remera Adidas;REMERA;4;Negro;Iri Wear;$ 8.094;$ 15.000;$ 16.500;2
+RN4B;Remera Nike Regalo;REMERA;4;Blanca;Iri Wear;$ 9.921;$ 17.000;$ 18.700;0
+RT3N;Termica;REMERA;2;Negro;Iri Wear;$ 9.350;$ 15.000;$ 16.500;0
+RPCR2N;Polar con Cierre rayada;REMERA;2;Negro;MILU;$ 15.617;$ 29.000;$ 31.900;0
+RPCR2B;Polar con Cierre rayada;REMERA;2;Blanca;MILU;$ 15.617;$ 29.000;$ 31.900;0
+PGC48M;Gabardina Chino;PANTALON;48;Marron;TOBUY;$ 22.309;$ 45.000;$ 49.500;2
+PGC50M;Gabardina Chino;PANTALON;50;Marron;TOBUY;$ 22.309;$ 45.000;$ 49.500;0
+PGC48B;Gabardina Chino;PANTALON;48;Beige;TOBUY;$ 22.309;$ 45.000;$ 49.500;2
+PGC48V;Gabardina Chino;PANTALON;48;Verde;TOBUY;$ 22.309;$ 45.000;$ 49.500;2
+PGC40V;Gabardina Chino;PANTALON;40;Verde;TOBUY;$ 22.309;$ 45.000;$ 49.500;2
+PGC50A;Gabardina Chino;PANTALON;50;Azul;TOBUY;$ 22.309;$ 45.000;$ 49.500;2
+PG46V;Gabardina;PANTALON;46;Verde;TOBUY;$ 20.079;$ 40.000;$ 44.000;2
+PG50M;Gabardina;PANTALON;50;Marron;TOBUY;$ 20.079;$ 40.000;$ 44.000;2
+PG50A;Gabardina;PANTALON;50;Azul;TOBUY;$ 20.079;$ 40.000;$ 44.000;2
+PG48A;Gabardina;PANTALON;48;Azul;TOBUY;$ 20.079;$ 40.000;$ 44.000;2
+PCH36V;Cargo hombre;PANTALON;36;Verde;BOSTON;$ 33.464;$ 59.000;$ 64.900;0
+PCH34GT;Cargo hombre;PANTALON;34;Gris topo;BOSTON;$ 33.464;$ 59.000;$ 64.900;0
+PCH32M;Cargo hombre;PANTALON;32;Marron;BOSTON;$ 33.464;$ 59.000;$ 64.900;0
+PCH38N;Cargo hombre;PANTALON;38;Negro;BOSTON;$ 33.464;$ 59.000;$ 64.900;0
+CFH5N;Friza Hombre;CAMPERA;5;Negro;LEONEL;$ 18.405;$ 37.000;$ 40.700;0
+CFH5GT;Friza Hombre;CAMPERA;5;Gris topo;LEONEL;$ 18.405;$ 37.000;$ 40.700;0
+CFH3C;Friza Hombre;CAMPERA;3;Chocolate;LEONEL;$ 18.405;$ 37.000;$ 40.700;2
+CFH3GT;Friza Hombre;CAMPERA;3;Gris topo;LEONEL;$ 18.405;$ 37.000;$ 40.700;2
+CFH2C;Friza Hombre;CAMPERA;2;Celeste;LEONEL;$ 18.405;$ 37.000;$ 40.700;2
+PJH48V;Jogger Hombre;PANTALON;48;Verde;BORS;$ 21.194;$ 42.000;$ 46.200;2
+PJH48A;Jogger Hombre;PANTALON;48;Azul;BORS;$ 21.194;$ 42.000;$ 46.200;2
+PJH46GO;Jogger Hombre;PANTALON;46;Gris Oscuro;BORS;$ 21.194;$ 42.000;$ 46.200;2
+REXXLB;Estampada Hombre;REMERA;XXL;;BORS;$ 7.808;$ 19.000;$ 20.900;2
+REXLB;Estampada Hombre;REMERA;XL;;BORS;$ 7.808;$ 19.000;$ 20.900;0
+RELB;Estampada Hombre;REMERA;L;;BORS;$ 7.808;$ 19.000;$ 20.900;4
+REMB;Estampada Hombre;REMERA;M;;BORS;$ 7.808;$ 19.000;$ 20.900;4
+CAMMA;Algodon Mujer;CAMPERA;M;Azul;LIBRALATINA;$ 11.155;$ 22.000;$ 24.200;2
+CAMSBN;Algodon Mujer;CAMPERA;S;Blanco y Negro;LIBRALATINA;$ 11.155;$ 22.000;$ 24.200;2
+PJA5N;Joggin Argentina;PANTALON;5;Negro;SOF;$ 16.286;$ 30.000;$ 33.000;2
+PJA3N;Joggin Argentina;PANTALON;3;Negro;SOF;$ 16.286;$ 30.000;$ 33.000;2
+PJR4B;Joggin River;PANTALON;4;Bordo;SOF;$ 16.286;$ 30.000;$ 33.000;2
+CAC3N;Addidas capucha;CAMPERA;3;Negro;SOF;$ 22.979;$ 42.000;$ 46.200;2
+CAC3A;Addidas capucha;CAMPERA;3;Azul;SOF;$ 22.979;$ 42.000;$ 46.200;2
+BANLB;Algodon Northface;BUZO;L;Beige;SOF;$ 20.748;$ 41.000;$ 45.100;0
+BANSB;Algodon Nike;BUZO;1;Beige;SOF;$ 20.748;$ 41.000;$ 45.100;0
+CALR;Adidas;CAMPERA;L;Rojo;SOF;$ 24.094;$ 39.000;$ 42.900;2
+CALN;Adidas;CAMPERA;L;Negro;SOF;$ 24.094;$ 39.000;$ 42.900;2
+CAXLN;Adidas;CAMPERA;XL;Negro;SOF;$ 24.094;$ 39.000;$ 42.900;0
+CAXLA;Adidas;CAMPERA;XL;Azul;SOF;$ 24.094;$ 39.000;$ 42.900;2
+PPM5V;Palazo Mujer;PANTALON;5;Verde;SOF;$ 18.517;$ 30.000;$ 33.000;0
+PJH5G;Joggin Hombre;PANTALON;5;Gris;KEVINJC;$ 14.501;$ 29.000;$ 31.900;2
+PJH1G;Joggin Hombre;PANTALON;1;Gris;KEVINJC;$ 14.501;$ 29.000;$ 31.900;2
+PMUB;Mujer;PANTALON;Unico;Batic;MUTTELOOK;$ 20.079;$ 40.000;$ 44.000;2
+PMUBM;Mujer;PANTALON;Unico;Blanco;MUTTELOOK;$ 21.194;$ 40.000;$ 44.000;2
+CNC10R;Nena capibara;CALZA;10;Rosa;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;2
+CNC14R;Nena capibara;CALZA;14;Rosa;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;2
+CNC8N;Nena capibara;CALZA;8;Negro;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;0
+CNC10A;Nena capibara;CALZA;10;Azul;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;0
+CNC6A;Nena capibara;CALZA;6;Azul;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;0
+CNC12G;Nena capibara;CALZA;12;Gris;CALUFLOR;$ 6.693;$ 14.000;$ 15.400;0
+BMNS10C;Maxi Nene Stich;BUZO;10;Crema;WALYYO;$ 16.732;$ 33.000;$ 36.300;0
+BMNC12C;Maxi Nene Capibara;BUZO;12;Crema;WALYYO;$ 16.732;$ 33.000;$ 36.300;0
+BMNK14V;Maxi Nena Kity;BUZO;14;Violeta;WALYYO;$ 16.732;$ 33.000;$ 36.300;0
+BMNS8R;Maxi Nene Stich;BUZO;8;Rosa;WALYYO;$ 16.732;$ 33.000;$ 36.300;0
+RNM8N;Nena Margarita;REMERA;8;Negro;;$ 7.808;$ 15.000;$ 16.500;2
+RNM14B;Nena Margarita;REMERA;14;Blanco;;$ 7.808;$ 15.000;$ 16.500;2
+RNS14N;Nena stich;REMERA;14;Negro;;$ 7.808;$ 15.000;$ 16.500;2
+RNS10N;Nena stich;REMERA;10;Negro;;$ 7.808;$ 15.000;$ 16.500;2
+RNS6B;Nena stich;REMERA;6;Blanco;;$ 7.808;$ 15.000;$ 16.500;2
+RNC8N;Nena capibara;REMERA;8;Negro;;$ 7.808;$ 15.000;$ 16.500;2
+RNC12B;Nena capibara;REMERA;12;Blanco;;$ 7.808;$ 15.000;$ 16.500;2
+RNC14B;Nena capibara;REMERA;14;Blanco;;$ 7.808;$ 15.000;$ 16.500;2
+RNC16B;Nena capibara;REMERA;16;Blanco;;$ 7.808;$ 15.000;$ 16.500;0
+RNBLB10B;Nena La Bubu;REMERA;10;Blanco;;$ 7.808;$ 15.000;$ 16.500;2
+BHM3N;Buzo Hombre Metrik;BUZO;3;Negro;ELMONO;$ 10.597;$ 25.000;$ 27.500;0
+BHA1NM;Buzo Hombre Metrik;BUZO;2;Azul;ELMONO;$ 10.597;$ 25.000;$ 27.500;2
+PJH2GT;Joggin Hombre;PANTALON;2;Gris topo;ELMONO;$ 17.848;$ 36.000;$ 39.600;2
+PJH3N;Joggin Hombre;PANTALON;3;Negro;ELMONO;$ 17.848;$ 36.000;$ 39.600;0
+MDUV;Marca Deportiva;MEDIAS;Unico;Varios;GALERIA;$ 1.673;$ 3.000;$ 3.300;6
+MMDUV;Pack x 3 MD Soquetes;MEDIAS;Unico;Varios;GALERIA;$ 1.115;$ 4.000;$ 4.400;8
+MSBUV;Pack x 3 MD Super Balance;MEDIAS;Unico;Varios;GALERIA;$ 976;$ 4.000;$ 4.400;8
+RBOHXLB;Boston Hombre;REMERA;XL;Blanca;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
+RBHXLB;Balenciaga Hombre;REMERA;XXL;Blanca;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
+RBHLA;Balenciaga Hombre;REMERA;L;Azul;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
+RMHLV;Mustang Hombre;REMERA;L;Verde;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
+RDHLM;Dream Hombre;REMERA;L;Marron;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
+RRHMM;Represent Hombre;REMERA;M;Marron;GALERIA;$ 7.808;$ 19.000;$ 20.900;2
+BNM8B;Nena Mariposa;BUZO;8;Beige;LEXBANG;$ 15.617;$ 31.000;$ 34.100;0
+BNM12R;Nena Margarita;BUZO;12;Rosa;LEXBANG;$ 15.617;$ 31.000;$ 34.100;2
+BNM14L;Nena Margarita;BUZO;14;Lila;LEXBANG;$ 15.617;$ 31.000;$ 34.100;2
+BNM4R;Nena Margarita;BUZO;4;Rosa;LEXBANG;$ 15.617;$ 31.000;$ 34.100;2
+BNK8C;Nena Kity;BUZO;8;Celeste;SOF;$ 14.501;$ 29.000;$ 31.900;0
+BNK6L;Nena Kity;BUZO;6;Lila;SOF;$ 14.501;$ 29.000;$ 31.900;2
+CPBA10N;Pant y Buzo Argentina;CONJUNTO;10;Negro;SOF;$ 24.540;$ 45.000;$ 49.500;2
+CPBA12N;Pant y Buzo Argentina;CONJUNTO;12;Negro;SOF;$ 24.540;$ 45.000;$ 49.500;0
+CTG4AF;Termica con gorro;CAMPERA;4;Azul Francia;BYCLIZA;$ 21.300;$ 43.000;$ 47.300;2
+CTG3N;Termica con gorro;CAMPERA;3;Negro;BYCLIZA;$ 21.300;$ 43.000;$ 47.300;2
+CTG2V;Termica con gorro;CAMPERA;2;Verde;BYCLIZA;$ 21.300;$ 43.000;$ 47.300;2
+CTG5N;Termica con gorro;CAMPERA;5;Negro;BYCLIZA;$ 21.300;$ 43.000;$ 47.300;0
+PHC3N;Hombre combinado con raya gris;PANTALON;3;Negro;BYCLIZA;$ 21.512;$ 43.000;$ 47.300;2
+PHC4N;Hombre combinado con raya gris;PANTALON;4;Negro;BYCLIZA;$ 21.512;$ 43.000;$ 47.300;2
+PHC5N;Hombre combinado con raya gris;PANTALON;5;Negro;BYCLIZA;$ 21.512;$ 43.000;$ 47.300;4
+PB2N;Babucha;PANTALON;2;Negro;BYCLIZA;$ 27.022;$ 49.000;$ 53.900;2
+PBSN;Babucha;PANTALON;S;Negro;BYCLIZA;$ 27.022;$ 49.000;$ 53.900;2
+CMBMG;Mujer con Bolsillo;CALZA;M;Gris;BYCLIZA;$ 15.366;$ 31.000;$ 34.100;2
+CMBXLC;Mujer con Bolsillo;CALZA;XL;Chocolate;BYCLIZA;$ 15.366;$ 31.000;$ 34.100;2
+CMBLB;Mujer con Bolsillo;CALZA;L;Bordo;BYCLIZA;$ 15.366;$ 31.000;$ 34.100;0
+CNMLN;Negra Mujer;CALZA;L;Negra;BYCLIZA;$ 8.478;$ 20.000;$ 22.000;2
+CNMMN;Negra Mujer;CALZA;M;Negra;BYCLIZA;$ 8.478;$ 20.000;$ 22.000;2
+CNMXLN;Negra Mujer;CALZA;XL;Negra;BYCLIZA;$ 8.478;$ 20.000;$ 22.000;2
+RSPLAF;Sudadera Power;REMERA;L;Azul Francia;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
+RSPLN;Sudadera Power;REMERA;L;Negra;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
+RSPXLN;Sudadera Power;REMERA;XL;Negra;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
+RSPXLF;Sudadera Power;REMERA;XL;Fucsia;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
+RSPXXLN;Sudadera Power;REMERA;XXL;Negra;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
+RSPXXLG;Sudadera Power;REMERA;XXL;Gris;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
+RSPXLR;Sudadera Power;REMERA;XL;Rosa;BYCLIZA;$ 6.146;$ 16.000;$ 17.600;2
+CBXLN;Biker;CALZA;XL;Negro;BYCLIZA;$ 6.888;$ 18.000;$ 19.800;2
+CBLV;Biker;CALZA;L;Violeta;BYCLIZA;$ 6.888;$ 18.000;$ 19.800;2
+CBLG;Biker;CALZA;L;Gris;BYCLIZA;$ 6.888;$ 18.000;$ 19.800;2
+RSMXXLN;Sport Mujer;REMERA;XXL;Negro;BYCLIZA;$ 6.994;$ 17.000;$ 18.700;0
+RSMMB;Sport Mujer;REMERA;M;Beige;BYCLIZA;$ 6.994;$ 17.000;$ 18.700;2
+RSMMA;Sport Mujer;REMERA;M;Azul;BYCLIZA;$ 6.994;$ 17.000;$ 18.700;2
+RSMLN;Sport Mujer;REMERA;L;Negra;BYCLIZA;$ 6.994;$ 17.000;$ 18.700;2
+RMOXLB;Mujer Orificios;REMERA;XL;Beige;BYCLIZA;$ 9.537;$ 20.000;$ 22.000;2
+RAPMMB;Algodon Peinado Mujer;REMERA;M;Beige;BYCLIZA;$ 6.888;$ 17.000;$ 18.700;2
+RAPMLC;Algodon Peinado Mujer;REMERA;L;Chocolate;BYCLIZA;$ 6.888;$ 17.000;$ 18.700;2
+CMNXXLA;Mujer Newflex;CALZA;XXL;Azul;BYCLIZA;$ 12.610;$ 26.000;$ 28.600;0
+CMNLV;Mujer Newflex;CALZA;L;Verde;BYCLIZA;$ 12.610;$ 26.000;$ 28.600;2
+CMNXLB;Mujer Newflex;CALZA;XL;Bordo;BYCLIZA;$ 12.610;$ 26.000;$ 28.600;2
+CMNMB;Mujer Newflex;CALZA;M;Bordo;BYCLIZA;$ 12.610;$ 26.000;$ 28.600;2
+CMNLC;Mujer Newflex;CALZA;L;Chocolate;BYCLIZA;$ 12.610;$ 26.000;$ 28.600;2
+BTMXLA;Termico Mujer;BUZO;XL;Azul;BYCLIZA;$ 25.433;$ 46.000;$ 50.600;0
+BTMLL;Termico Mujer;BUZO;L;Lila;BYCLIZA;$ 25.433;$ 46.000;$ 50.600;2
+BTMMAF;Termico Mujer;BUZO;M;Azul Francia;BYCLIZA;$ 25.433;$ 46.000;$ 50.600;2
+BPMLA;Plush Mujer;BUZO;L;Azul;LIBRALATINA;$ 16.732;$ 31.000;$ 34.100;2
+BPMLV;Plush Mujer;BUZO;L;Verde;LIBRALATINA;$ 16.732;$ 31.000;$ 34.100;2
+RHHMM;HACHE Hombre;REMERA;M;Marron;H341;$ 6.693;$ 19.000;$ 20.900;2
+RHHSB;HACHE Hombre;REMERA;S;Blanca;H341;$ 6.693;$ 19.000;$ 20.900;2
+RHHXXLB;HACHE Hombre;REMERA;XXL;Blanca;H341;$ 6.693;$ 19.000;$ 20.900;2
+RHHXLG;HACHE Hombre;REMERA;XL;Gris;H341;$ 6.693;$ 19.000;$ 20.900;2
+RMCSB;Manga corta Mujer;REMERA;S;Beige;H341;$ 3.346;$ 9.000;$ 9.900;2
+RMCXLB;Manga corta Mujer;REMERA;XL;Blanca;H341;$ 3.346;$ 9.000;$ 9.900;2
+RMCLU;Manga corta Mujer;REMERA;L;Uva;H341;$ 3.346;$ 9.000;$ 9.900;2
+RMCLN;Manga corta Mujer;REMERA;L;Negra;H341;$ 3.346;$ 9.000;$ 9.900;2
+RMCXLN;Manga corta Mujer;REMERA;XL;Negra;H341;$ 3.346;$ 9.000;$ 9.900;2
+RMLMB;Manga Larga Mujer;REMERA;M;Blanca;H341;$ 4.462;$ 10.000;$ 11.000;2
+RMLXLB;Manga Larga Mujer;REMERA;XL;Blanca;H341;$ 4.462;$ 10.000;$ 11.000;0
+RMLXLU;Manga Larga Mujer;REMERA;XL;Uva;H341;$ 4.462;$ 10.000;$ 11.000;2
+RMLLG;Manga Larga Mujer;REMERA;L;Gris;H341;$ 4.462;$ 10.000;$ 11.000;2
+RMLXLN;Manga Larga Mujer;REMERA;XL;Negra;H341;$ 4.462;$ 10.000;$ 11.000;4
+RMLSN;Manga Larga Mujer;REMERA;S;Negra;H341;$ 4.462;$ 10.000;$ 11.000;2
+SCUB;Calado;SWEATER;Unico;Beige;AMME;$ 16.621;$ 33.000;$ 36.300;2
+CNUB;Normal;CARDIGAN;Unico;Blanco;AMME;$ 16.621;$ 33.000;$ 36.300;2
+CNUC;Normal;CARDIGAN;Unico;Chocolate;AMME;$ 16.621;$ 33.000;$ 36.300;2
+CCUB;Calado;CARDIGAN;Unico;Beige;AMME;$ 13.943;$ 28.000;$ 30.800;2
+CLUN;Lineas;CARDIGAN;Unico;Negro;AMME;$ 18.405;$ 35.000;$ 38.500;0
+SEVUC;Escote en V Rayado;SWEATER;Unico;Chocolate;SAKURAA;$ 17.290;$ 33.000;$ 36.300;2
+SEVUB;Escote en V Rayado;SWEATER;Unico;Beige;SAKURAA;$ 17.290;$ 33.000;$ 36.300;2
+SCBUN;Cuello Bote;SWEATER;Unico;Negro;SAKURAA;$ 17.290;$ 33.000;$ 36.300;2
+RLSUB;LittleStone;REMERA;Unico;Beige;LITTLESTONE;$ 5.577;$ 11.000;$ 12.100;2
+BSPUG;Stone Paris;BUZO;Unico;Gris;LITTLESTONE;$ 11.712;$ 23.000;$ 25.300;2
+BAUB;Autentic;BUZO;Unico;Beige;LITTLESTONE;$ 11.712;$ 23.000;$ 25.300;0
+BCUB;Capibara;BUZO;Unico;Beige;LITTLESTONE;$ 11.712;$ 23.000;$ 25.300;0
+BSCUB;Stone Crozaint;BUZO;Unico;Bordo;LITTLESTONE;$ 11.712;$ 23.000;$ 25.300;2
+BSPUV;Stone Paris;BUZO;Unico;Verde;LITTLESTONE;$ 11.712;$ 23.000;$ 25.300;0
+BPREUV;Plush Mujer recorte espalda;BUZO;Unico;Verde;MELONIA;$ 13.386;$ 27.000;$ 29.700;2
+BPREUC;Plush Mujer recorte espalda;BUZO;Unico;Chocolate;MELONIA;$ 13.386;$ 27.000;$ 29.700;2
+PPPUC;Palazo Plush;PANTALON;Unico;Chocolate;MELONIA;$ 14.501;$ 29.000;$ 31.900;2
+BCMUB;Cierre Mujer;BUZO;Unico;Blanco;MELONIA;$ 14.501;$ 29.000;$ 31.900;0
+BCUR;Cierre Mujer;BUZO;Unico;Rojo;MELONIA;$ 14.501;$ 29.000;$ 31.900;0
+RCMUB;Camiseta Morley;REMERA;Unico;Blanco;MELONIA;$ 6.693;$ 13.000;$ 14.300;2
+RCMUNC;Camiseta Morley;REMERA;Unico;Negro con raya;MELONIA;$ 6.693;$ 13.000;$ 14.300;2
+RCMUV;Camiseta Morley;REMERA;Unico;Violeta;MELONIA;$ 6.693;$ 13.000;$ 14.300;2
+RCMUBE;Camiseta Morley;REMERA;Unico;Beige;MELONIA;$ 6.693;$ 13.000;$ 14.300;2
+RCMUN;Camiseta Morley;REMERA;Unico;Negro;MELONIA;$ 6.693;$ 13.000;$ 14.300;2
+PSUB;Simply;PANTALON;Unico;Bordo;MELONIA;$ 14.501;$ 27.000;$ 29.700;2
+PSUA;Simply;PANTALON;Unico;Azul;MELONIA;$ 14.501;$ 27.000;$ 29.700;2
+BSUA;Simply;BUZO;Unico;Azul;MELONIA;$ 15.059;$ 29.000;$ 31.900;2
+BSUB;Simply;BUZO;Unico;Bordo;MELONIA;$ 15.059;$ 29.000;$ 31.900;2
+RMRUB;Modal Raya;REMERA;Unico;Blanca;MELONIA;$ 7.697;$ 15.000;$ 16.500;2
+RMLUN;Modal Lisa;REMERA;Unico;Negro;MELONIA;$ 7.697;$ 15.000;$ 16.500;2
+PPPD1N;Palazo Pinza Darlon;PANTALON;1;Negro;MAR&JHON;$ 13.386;$ 27.000;$ 29.700;2
+PPPD3N;Palazo Pinza Darlon;PANTALON;3;Negro;MAR&JHON;$ 13.386;$ 27.000;$ 29.700;0
+CD1B;Darlon Chupin Buzo y Palazo;CONJUNTO;1;Beige;MAR&JHON;$ 23.425;$ 47.000;$ 51.700;2
+RTMB;Travel 1985;REMERA;M;Bordo;ZAHIRA;$ 6.693;$ 14.000;$ 15.400;0
+RRIMB;Rome Italia;REMERA;M;Beige;ZAHIRA;$ 6.693;$ 14.000;$ 15.400;2
+RBSB;Body Pol Modal;REMERA;S;Blanco;ZAHIRA;$ 7.251;$ 15.000;$ 16.500;2
+RBMN;Body Pol Modal;REMERA;M;Negro;ZAHIRA;$ 7.251;$ 15.000;$ 16.500;2
+BCURV;Cierre;BUZO;Unico;Rosa Viejo;TiffanybyLina;$ 10.820;$ 24.000;$ 26.400;0
+BMUC;Monaco;BUZO;Unico;Chocolate;TiffanybyLina;$ 10.820;$ 24.000;$ 26.400;0
+BVUB;Vision con piel;BUZO;Unico;Bordo;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;0
+BVUA;Vision con piel;BUZO;Unico;Azul;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;2
+BHUA;Hanover con piel;BUZO;Unico;Azul;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;2
+BHUN;Hanover con piel;BUZO;Unico;Negro;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;0
+PJUC;Jogger Piel Soho;PANTALON;Unico;Chocolate;TiffanybyLina;$ 15.148;$ 30.000;$ 33.000;2
+PJUN;Jogger Piel;PANTALON;Unico;Natural;TiffanybyLina;$ 14.066;$ 28.000;$ 30.800;2
+CSNUN;Pantalon Soho Negro;CONJUNTO;Unico;Negro;TiffanybyLina;$ 15.689;$ 30.000;$ 33.000;0
+BSUN;Soho negro;BUZO;Unico;Negro;TiffanybyLina;$ 15.689;$ 32.000;$ 35.200;0
+BOCUB;Over California;BUZO;Unico;Bordo;TiffanybyLina;$ 20.558;$ 39.000;$ 42.900;2
+BOCUC;Over California;BUZO;Unico;Chocolate;TiffanybyLina;$ 20.558;$ 39.000;$ 42.900;0
+BAUN;Achievement;BUZO;Unico;Natural;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;0
+BBUN;Brooklyn con piel;BUZO;Unico;Negro;TiffanybyLina;$ 16.230;$ 32.000;$ 35.200;2
+RMCUN;Morley con cierre;REMERA;Unico;Negro;TiffanybyLina;$ 5.577;$ 12.000;$ 13.200;0
+RMCUC;Morley con cierre;REMERA;Unico;Chocolate;TiffanybyLina;$ 5.577;$ 12.000;$ 13.200;2
+RMCUG;Morley con cierre;REMERA;Unico;Gris;TiffanybyLina;$ 5.577;$ 12.000;$ 13.200;2
+RMCUB;Morley con cierre;REMERA;Unico;Beige;TiffanybyLina;$ 5.577;$ 12.000;$ 13.200;2
+CRFLC;Raya fina;CAMISA;L;Celeste;Inquieta;$ 18.963;$ 38.000;$ 41.800;0
+CRFMC;Raya fina;CAMISA;M;Celeste;Inquieta;$ 18.963;$ 38.000;$ 41.800;2
+CRGLC;Raya Gruesa;CAMISA;L;Celeste;Inquieta;$ 18.963;$ 38.000;$ 41.800;2
+CRGMC;Raya Gruesa;CAMISA;M;Celeste;Inquieta;$ 18.963;$ 38.000;$ 41.800;2
+PM46N;MOM;PANTALON;46;Nevado;Inquieta;$ 23.983;$ 45.000;$ 49.500;2
+PM40N;MOM;PANTALON;40;Nevado;Inquieta;$ 23.983;$ 45.000;$ 49.500;2
+PM36B;MOM;PANTALON;36;Beige;Inquieta;$ 21.752;$ 44.000;$ 48.400;2
+PM44B;MOM;PANTALON;44;Beige;Inquieta;$ 21.752;$ 44.000;$ 48.400;2
+PM46B;MOM;PANTALON;46;Beige;Inquieta;$ 21.752;$ 44.000;$ 48.400;2
+PM42B;MOM;PANTALON;42;Beige;Inquieta;$ 21.752;$ 44.000;$ 48.400;2
+PB38G;Baggy;PANTALON;38;Gris;Inquieta;$ 30.676;$ 55.000;$ 60.500;2
+PB40G;Baggy;PANTALON;40;Gris;Inquieta;$ 30.676;$ 55.000;$ 60.500;0
+PW44GO;WideLeg;PANTALON;44;Gris Oscuro;Inquieta;$ 28.445;$ 55.000;$ 60.500;0
+PW36GO;WideLeg;PANTALON;36;Gris Oscuro;Inquieta;$ 28.445;$ 55.000;$ 60.500;2
+PWC40N;WideLeg con cinto;PANTALON;40;Negro;Inquieta;$ 25.098;$ 49.000;$ 53.900;2
+PWC42A;WideLeg con cinto;PANTALON;42;Azul;Inquieta;$ 27.887;$ 52.000;$ 57.200;0
+PJB38C;Jean Buggy;PANTALON;38;Chocolate;Freedom;$ 22.254;$ 43.000;$ 47.300;0
+PJB40C;Jean Buggy;PANTALON;40;Chocolate;Freedom;$ 22.254;$ 43.000;$ 47.300;0
+PJB44C;Jean Buggy;PANTALON;44;Chocolate;Freedom;$ 22.254;$ 43.000;$ 47.300;2
+PJC46N;Jean Chupin;PANTALON;46;Negro;Freedom;$ 20.134;$ 39.000;$ 42.900;2
+PJC44N;Jean Chupin;PANTALON;44;Negro;Freedom;$ 20.134;$ 39.000;$ 42.900;0
+PJC38N;Jean Chupin;PANTALON;38;Negro;Freedom;$ 20.134;$ 39.000;$ 42.900;2
+PWA44A;Wideleg Arena;PANTALON;44;Arena;Freedom;$ 22.254;$ 45.000;$ 49.500;2
+PWA38A;Wideleg Arena;PANTALON;38;Arena;Freedom;$ 22.254;$ 45.000;$ 49.500;2
+PJC40B;Jogger Cargo;PANTALON;40;Blanco;Freedom;$ 21.194;$ 37.000;$ 40.700;2
+PJC40G;Jogger Cargo;PANTALON;40;Gris;Freedom;$ 18.015;$ 37.000;$ 40.700;2
+PJC42G;Jogger Cargo;PANTALON;42;Gris;Freedom;$ 18.015;$ 37.000;$ 40.700;2
+PJC38G;Jogger Cargo;PANTALON;38;Gris;Freedom;$ 18.015;$ 37.000;$ 40.700;2
+PJC42C;Jogger Cargo;PANTALON;42;Chocolate;Freedom;$ 14.836;$ 37.000;$ 40.700;2
+PJC40C;Jogger Cargo;PANTALON;40;Chocolate;Freedom;$ 14.836;$ 37.000;$ 40.700;2
+PJC36O;Jogger Cargo;PANTALON;36;Oxido;Freedom;$ 14.836;$ 37.000;$ 40.700;2
+PWN40N;Wideleg Negro;PANTALON;40;Negro;Freedom;$ 19.075;$ 38.000;$ 41.800;2
+RJPMB;Jersey Placeyou;REMERA;M;Beige;Placeyou;$ 11.601;$ 23.000;$ 25.300;2
+RJPLN;Jersey Placeyou;REMERA;L;Negra;Placeyou;$ 11.601;$ 23.000;$ 25.300;0
+RPYRM;Place You Rayada;REMERA;M;Negra y Blanca;Placeyou;$ 11.601;$ 23.000;$ 25.300;0

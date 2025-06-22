@@ -75,7 +75,6 @@ def cargar_stock():
                 # Leer archivo
                 df = pd.read_csv(ruta) if ruta.endswith('.csv') else pd.read_excel(ruta)
 
-
                 # Normalizar columnas
                 df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
 
@@ -109,7 +108,8 @@ def cargar_stock():
                         "color": row['color'].strip(),
                         "proveedor": row['proveedor'].strip(),
                         "precio_compra": limpiar_precio(row['precio_compra']),
-                        "precio_venta": limpiar_precio(row['precio_venta_contado']),
+                        "precio_venta_contado": limpiar_precio(row['precio_venta_contado']),
+                        "precio_venta_tarjeta": limpiar_precio(row['precio_venta_tarjeta']),
                         "stock": max(0, int(row['stock']))
                     }
 
