@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <title>La Paz Store</title>
@@ -20,6 +21,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </head>
+
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
 
   <!-- NAVIGATION -->
@@ -54,7 +56,7 @@
           {% if session.sb_user %}
           <div class="hidden sm:flex items-center gap-3">
             <a href="{{ url_for('auth_routes.perfil') }}" class="text-sm font-semibold hover:underline">
-              👤 {{ session.sb_user.split('@')[0].capitalize() }}
+              👤 {{ session.sb_user.username.capitalize() }}
             </a>
             <a href="{{ url_for('auth_routes.logout') }}" class="text-red-500 hover:underline text-sm">Salir</a>
           </div>
@@ -81,10 +83,12 @@
         </a>
         {% if session.sb_user %}
         <div class="pt-4 border-t border-gray-600 space-y-1">
-          <a href="{{ url_for('auth_routes.perfil') }}" onclick="cerrarMenu()" class="text-sm hover:underline flex items-center gap-1">
+          <a href="{{ url_for('auth_routes.perfil') }}" onclick="cerrarMenu()"
+            class="text-sm hover:underline flex items-center gap-1">
             👤 Admin
           </a>
-          <a href="{{ url_for('auth_routes.logout') }}" onclick="cerrarMenu()" class="text-red-400 hover:underline text-sm">Cerrar sesión</a>
+          <a href="{{ url_for('auth_routes.logout') }}" onclick="cerrarMenu()"
+            class="text-red-400 hover:underline text-sm">Cerrar sesión</a>
         </div>
         {% endif %}
         <button onclick="toggleModo(); cerrarMenu();" class="hover:scale-110 transition-transform">
@@ -97,24 +101,24 @@
   <!-- CONTENT -->
   <main class="pt-24 px-4 max-w-6xl mx-auto">
     {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <script>
-          Swal.fire({
-            icon: '{{ messages[0][0] }}',
-            title: '{{ messages[0][0]|capitalize }}',
-            html: `{% for category, msg in messages %}{{ msg }}<br>{% endfor %}`,
-            confirmButtonColor: '#3B82F6',
-            background: '#1f2937',
-            color: '#f9fafb',
-            customClass: {
-              popup: 'text-sm max-w-md p-4 rounded-lg shadow-xl',
-              title: 'text-lg font-semibold',
-              confirmButton: 'text-sm px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700'
-            },
-            buttonsStyling: false
-          });
-        </script>
-      {% endif %}
+    {% if messages %}
+    <script>
+      Swal.fire({
+        icon: '{{ messages[0][0] }}',
+        title: '{{ messages[0][0]|capitalize }}',
+        html: `{% for category, msg in messages %}{{ msg }}<br>{% endfor %}`,
+        confirmButtonColor: '#3B82F6',
+        background: '#1f2937',
+        color: '#f9fafb',
+        customClass: {
+          popup: 'text-sm max-w-md p-4 rounded-lg shadow-xl',
+          title: 'text-lg font-semibold',
+          confirmButton: 'text-sm px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700'
+        },
+        buttonsStyling: false
+      });
+    </script>
+    {% endif %}
     {% endwith %}
     {% block content %}{% endblock %}
   </main>
@@ -169,4 +173,5 @@
   </script>
 
 </body>
+
 </html>
