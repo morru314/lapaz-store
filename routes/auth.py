@@ -42,7 +42,14 @@ def login():
 
             if result.session:
                 session["sb_token"] = result.session.access_token
-                session["sb_user"] = result.user.email
+                user_metadata = result.user.user_metadata or {}
+                session["sb_user"] = {
+                "id": result.user.id,
+                "email": result.user.email,
+                "username": user_metadata.get("username", ""),
+                "full_name": user_metadata.get("full_name", "")
+}
+
                 flash("Sesión iniciada.")
                 return redirect(url_for('dashboard_routes.dashboard'))
             else:
@@ -66,5 +73,6 @@ def perfil():
     if not session.get("sb_user"):
         return redirect(url_for("auth_routes.login"))
 
-    email = session["sb_user"]
-    return render_template("perfil.html", email=email)
+    user = session.get("sb_user")
+    return render_template("perfil.html", user=user)
+
