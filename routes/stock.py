@@ -65,79 +65,97 @@ def eliminar_producto(id):
 @stock_routes.route('/stock/cargar', methods=['GET', 'POST'])
 @login_required_sb
 def cargar_stock():
-    if request.method == 'POST':
-        archivo = request.files['archivo']
-        if archivo and archivo.filename.endswith(('.csv', '.xlsx')):
-            ruta = os.path.join(Config.UPLOAD_FOLDER, archivo.filename)
-            archivo.save(ruta)
+    if request.method != 'POST':
+        return render_template('stock.html')
 
-            try:
-                # Leer archivo
-                import chardet
-                if ruta.endswith('.csv'):
-                 # Detectar encoding para archivos CSV
-                with open(ruta, 'rb') as f:
-                enc = chardet.detect(f.read())['encoding']
-                df = pd.read_csv(ruta, sep=';', encoding=enc)
-                else:
-                df = pd.read_excel(ruta)
-
-                df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
-
-                # Normalizar columnas
-                df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
-
-                columnas_obligatorias = {
-                    'codigo', 'nombre', 'familia', 'talle', 'color',
-                    'proveedor', 'precio_compra', 'precio_venta_contado',
-                    'precio_venta_tarjeta', 'stock'
-                }
-
-                if not columnas_obligatorias.issubset(df.columns):
-                    faltantes = columnas_obligatorias - set(df.columns)
-                    flash(f'Columnas faltantes en el archivo: {", ".join(faltantes)}')
-                    return redirect(url_for('stock_routes.stock'))
-
-                insertados = 0
-                actualizados = 0
-
-                for _, row in df.iterrows():
-                    codigo = str(row['codigo']).strip()
-                    existente = supabase.table("productos").select("*").eq("codigo", codigo).maybe_single().execute().data
-
-                    def limpiar_precio(valor):
-                        return float(str(valor).replace('$', '').replace('.', '').replace(',', '.').strip())
-
-                    data = {
-                        "codigo": codigo,
-                        "nombre": row['nombre'].strip(),
-                        "descripcion": '',
-                        "familia": row['familia'].strip(),
-                        "talle": row['talle'].strip(),
-                        "color": row['color'].strip(),
-                        "proveedor": row['proveedor'].strip(),
-                        "precio_compra": limpiar_precio(row['precio_compra']),
-                        "precio_venta_contado": limpiar_precio(row['precio_venta_contado']),
-                        "precio_venta_tarjeta": limpiar_precio(row['precio_venta_tarjeta']),
-                        "stock": max(0, int(row['stock']))
-                    }
-
-                    if existente:
-                        supabase.table("productos").update(data).eq("codigo", codigo).execute()
-                        actualizados += 1
-                    else:
-                        supabase.table("productos").insert(data).execute()
-                        insertados += 1
-
-                flash(f"✔️ Stock actualizado: {insertados} insertados, {actualizados} actualizados.")
-            except Exception as e:
-                flash(f"❌ Error procesando archivo: {str(e)}")
-        else:
-            flash('⚠️ Formato de archivo no permitido.')
+    archivo = request.files.get('archivo')
+    if not archivo or not archivo.filename.lower().endswith(('.csv', '.xlsx')):
+        flash('⚠️ Formato de archivo no permitido.')
         return redirect(url_for('stock_routes.stock'))
 
-    return render_template('stock.html')
+    ruta = os.path.join(Config.UPLOAD_FOLDER, archivo.filename)
+    archivo.save(ruta)
 
+    # ── 1) Leer CSV o Excel con encoding y separador correcto ──
+    try:
+        import chardet
+        if ruta.lower().endswith('.csv'):
+            # Detectar encoding
+            with open(ruta, 'rb') as f:
+                enc = chardet.detect(f.read())['encoding']
+            df = pd.read_csv(ruta, sep=';', encoding=enc)
+        else:
+            df = pd.read_excel(ruta)
+    except Exception as e:
+        flash(f'❌ No pude leer el archivo: {e}')
+        return redirect(url_for('stock_routes.stock'))
+
+    # ── 2) Normalizar nombres de columnas ──
+    df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
+
+    # ── 3) Verificar columnas obligatorias ──
+    columnas_obligatorias = {
+        'codigo', 'nombre', 'familia', 'talle', 'color',
+        'proveedor', 'precio_compra',
+        'precio_venta_contado', 'precio_venta_tarjeta', 'stock'
+    }
+    faltantes = columnas_obligatorias - set(df.columns)
+    if faltantes:
+        flash(f'Columnas faltantes en el archivo: {", ".join(sorted(faltantes))}')
+        return redirect(url_for('stock_routes.stock'))
+
+    # ── 4) Procesar filas ──
+    insertados = 0
+    actualizados = 0
+    errores = []
+
+    def limpiar_precio(v):
+        return float(str(v).replace('$', '').replace('.', '').replace(',', '.').strip())
+
+    for _, row in df.iterrows():
+        try:
+            data = {
+                "codigo": str(row['codigo']).strip(),
+                "nombre": str(row['nombre']).strip(),
+                "descripcion": '',
+                "familia": str(row['familia']).strip(),
+                "talle": str(row['talle']).strip(),
+                "color": str(row['color']).strip(),
+                "proveedor": str(row['proveedor']).strip(),
+                "precio_compra": limpiar_precio(row['precio_compra']),
+                "precio_venta_contado": limpiar_precio(row['precio_venta_contado']),
+                "precio_venta_tarjeta": limpiar_precio(row['precio_venta_tarjeta']),
+                "stock": max(0, int(row['stock']))
+            }
+
+            existe = supabase.table("productos") \
+                             .select("id") \
+                             .eq("codigo", data["codigo"]) \
+                             .maybe_single() \
+                             .execute().data
+
+            if existe:
+                supabase.table("productos").update(data).eq("codigo", data["codigo"]).execute()
+                actualizados += 1
+            else:
+                supabase.table("productos").insert(data).execute()
+                insertados += 1
+
+        except Exception as e:
+            errores.append({"codigo": row.get('codigo', ''), "error": str(e)})
+
+    # ── 5) Registrar errores en Supabase ──
+    if errores:
+        for err in errores:
+            supabase.table("errores_stock").insert({
+                "codigo": err["codigo"],
+                "detalle_error": err["error"]
+            }).execute()
+        flash(f"⚠️ Terminó con errores: {insertados} insertados, {actualizados} actualizados, {len(errores)} fallidos.")
+    else:
+        flash(f"✔️ Stock actualizado: {insertados} insertados, {actualizados} actualizados.")
+
+    return redirect(url_for('stock_routes.stock'))
 
 @stock_routes.route('/stock/upload_imagen', methods=['POST'])
 @login_required_sb
