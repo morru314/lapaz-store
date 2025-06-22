@@ -76,24 +76,21 @@ def cargar_stock():
     ruta = os.path.join(Config.UPLOAD_FOLDER, archivo.filename)
     archivo.save(ruta)
 
-    # ── 1) Leer CSV o Excel con encoding y separador correcto ──
+    # ── Leer CSV o Excel ──
     try:
-        import chardet
         if ruta.lower().endswith('.csv'):
-            # Detectar encoding
-            with open(ruta, 'rb') as f:
-                enc = chardet.detect(f.read())['encoding']
-            df = pd.read_csv(ruta, sep=';', encoding=enc)
+            # Asumimos UTF-8 y separador punto y coma
+            df = pd.read_csv(ruta, sep=';')
         else:
             df = pd.read_excel(ruta)
     except Exception as e:
         flash(f'❌ No pude leer el archivo: {e}')
         return redirect(url_for('stock_routes.stock'))
 
-    # ── 2) Normalizar nombres de columnas ──
+    # ── Normalizar encabezados ──
     df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
 
-    # ── 3) Verificar columnas obligatorias ──
+    # ── Verificar columnas obligatorias ──
     columnas_obligatorias = {
         'codigo', 'nombre', 'familia', 'talle', 'color',
         'proveedor', 'precio_compra',
@@ -104,9 +101,8 @@ def cargar_stock():
         flash(f'Columnas faltantes en el archivo: {", ".join(sorted(faltantes))}')
         return redirect(url_for('stock_routes.stock'))
 
-    # ── 4) Procesar filas ──
-    insertados = 0
-    actualizados = 0
+    # ── Procesar filas ──
+    insertados = actualizados = 0
     errores = []
 
     def limpiar_precio(v):
@@ -144,7 +140,7 @@ def cargar_stock():
         except Exception as e:
             errores.append({"codigo": row.get('codigo', ''), "error": str(e)})
 
-    # ── 5) Registrar errores en Supabase ──
+    # ── Log de errores ──
     if errores:
         for err in errores:
             supabase.table("errores_stock").insert({
@@ -156,6 +152,7 @@ def cargar_stock():
         flash(f"✔️ Stock actualizado: {insertados} insertados, {actualizados} actualizados.")
 
     return redirect(url_for('stock_routes.stock'))
+
 
 @stock_routes.route('/stock/upload_imagen', methods=['POST'])
 @login_required_sb
