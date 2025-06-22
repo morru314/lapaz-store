@@ -1,4 +1,3 @@
-
 /* Estilos globales */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -9,14 +8,17 @@ body {
 }
 
 /* Contenedor principal */
-.container, .venta-container {
+.container,
+.venta-container {
   max-width: 1024px;
   margin: 2rem auto;
   padding: 1rem;
 }
 
 /* Títulos */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: bold;
   color: #fff;
 }
@@ -42,11 +44,13 @@ form {
   background-color: #1f2937;
   padding: 1.5rem;
   border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   margin-top: 1rem;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   width: 100%;
   padding: 0.5rem;
   margin-top: 0.5rem;
@@ -62,7 +66,9 @@ input[readonly] {
 }
 
 /* Botones */
-button, .btn-secondary, .btn-danger {
+button,
+.btn-secondary,
+.btn-danger {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   border: none;
@@ -104,7 +110,8 @@ table {
   margin-top: 1rem;
 }
 
-th, td {
+th,
+td {
   padding: 0.75rem;
   border-bottom: 1px solid #374151;
   text-align: left;
@@ -115,7 +122,9 @@ thead {
 }
 
 /* Buscadores */
-#buscar, #buscar_cliente, #buscar_producto {
+#buscar,
+#buscar_cliente,
+#buscar_producto {
   background-color: #374151;
   color: white;
 }
@@ -139,7 +148,7 @@ thead {
   padding: 1rem;
   border-radius: 0.75rem;
   margin-bottom: 1rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Modal */
@@ -157,4 +166,8 @@ thead {
 
 #modalEliminar button {
   margin-left: 0.5rem;
+}
+
+.hidden {
+  display: none;
 }

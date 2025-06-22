@@ -4,7 +4,8 @@
 <!-- Carga de archivo -->
 <div class="card">
   <h2 class="titulo-seccion">📥 Cargar archivo de stock (.csv o .xlsx)</h2>
-  <form action="{{ url_for('stock_routes.cargar_stock') }}" method="post" enctype="multipart/form-data" class="formulario">
+  <form action="{{ url_for('stock_routes.cargar_stock') }}" method="post" enctype="multipart/form-data"
+    class="formulario">
     <input type="file" name="archivo" accept=".csv,.xlsx" class="input" required>
     <button type="submit" class="btn-primary">Subir y Actualizar Stock</button>
   </form>
@@ -12,7 +13,8 @@
 
 <!-- Buscador -->
 <div class="buscador mt-6">
-  <input type="text" id="buscar" placeholder="Buscar por cualquier campo..." class="input w-full" oninput="filtrarTabla()">
+  <input type="text" id="buscar" placeholder="Buscar por cualquier campo..." class="input w-full"
+    oninput="filtrarTabla()">
   <button onclick="document.getElementById('buscar').value=''; filtrarTabla();" class="btn-danger">❌</button>
 </div>
 
@@ -21,8 +23,17 @@
   <table class="tabla">
     <thead>
       <tr>
-        <th>Código</th><th>Nombre</th><th>Descripción</th><th>Familia</th><th>Talle</th>
-        <th>Color</th><th>Proveedor</th><th>Compra</th><th>Venta</th><th>Stock</th><th>Acciones</th>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Familia</th>
+        <th>Talle</th>
+        <th>Color</th>
+        <th>Proveedor</th>
+        <th>Compra</th>
+        <th>Venta</th>
+        <th>Stock</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody id="tabla-productos">
@@ -40,7 +51,9 @@
         <td>{{ p.stock }}</td>
         <td class="acciones">
           <a href="{{ url_for('stock_routes.editar_producto', id=p.id) }}" title="Editar" class="icono-editar">✏️</a>
-          <button type="button" title="Eliminar" onclick="abrirModal('{{ url_for('stock_routes.eliminar_producto', id=p.id) }}')" class="icono-eliminar">❌</button>
+          <button type="button" title="Eliminar"
+            onclick="abrirModal('{{ url_for('stock_routes.eliminar_producto', id=p.id) }}')"
+            class="icono-eliminar">❌</button>
         </td>
       </tr>
       {% endfor %}
@@ -49,7 +62,7 @@
 </div>
 
 <!-- Modal eliminar -->
-<div id="modalEliminar" class="modal">
+<div id="modalEliminar" class="modal hidden">
   <div class="modal-contenido">
     <h2 class="modal-titulo">¿Eliminar producto?</h2>
     <p class="mb-4">Esta acción no se puede deshacer.</p>
@@ -64,23 +77,23 @@
 
 <!-- Scripts -->
 <script>
-function filtrarTabla() {
-  const filtro = document.getElementById('buscar').value.toLowerCase();
-  const filas = document.querySelectorAll('#tabla-productos tr');
-  filas.forEach(fila => {
-    let textoTotal = fila.innerText.toLowerCase();
-    fila.style.display = textoTotal.includes(filtro) ? '' : 'none';
-  });
-}
+  function filtrarTabla() {
+    const filtro = document.getElementById('buscar').value.toLowerCase();
+    const filas = document.querySelectorAll('#tabla-productos tr');
+    filas.forEach(fila => {
+      let textoTotal = fila.innerText.toLowerCase();
+      fila.style.display = textoTotal.includes(filtro) ? '' : 'none';
+    });
+  }
 
-function abrirModal(url) {
-  const modal = document.getElementById('modalEliminar');
-  modal.classList.remove('hidden');
-  document.getElementById('formEliminar').action = url;
-}
-function cerrarModal() {
-  document.getElementById('modalEliminar').classList.add('hidden');
-}
+  function abrirModal(url) {
+    const modal = document.getElementById('modalEliminar');
+    modal.classList.remove('hidden');
+    document.getElementById('formEliminar').action = url;
+  }
+  function cerrarModal() {
+    document.getElementById('modalEliminar').classList.add('hidden');
+  }
 </script>
 
 {% endblock %}
