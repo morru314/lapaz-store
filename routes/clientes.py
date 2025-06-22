@@ -39,7 +39,13 @@ def nuevo_cliente():
     email = request.form['email']
     direccion = request.form['direccion']
 
-    existing = supabase.table("clientes").select("*").eq("telefono", telefono).maybe_single().execute().data
+    try:
+        res = supabase.table("clientes").select("*").eq("telefono", telefono).maybe_single().execute()
+        existing = res.data
+    except Exception as e:
+        print("⚠️ Error al buscar cliente por teléfono:", e)
+        existing = None
+
     if existing:
         flash("Ya existe un cliente con ese número de teléfono.")
         return redirect(url_for('clientes_routes.clientes'))
@@ -55,7 +61,6 @@ def nuevo_cliente():
 
     flash("Cliente agregado correctamente.")
     return redirect(url_for('clientes_routes.clientes'))
-
 
 @clientes_routes.route('/clientes/editar/<uuid:id>', methods=['GET', 'POST'])
 @login_required_sb
