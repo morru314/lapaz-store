@@ -88,7 +88,7 @@ def registrar_venta():
             "cliente_id": cliente_id,
             "monto": venta_data["total_cobrado"],
             "metodo": data.get("metodo_pago", "Transferencia"),
-            "concepto": f"Pago por {data.get('metodo_pago', 'Transferencia')} - Venta #{venta_data['id']}"
+            "concepto": f"Pago por {data.get('metodo_pago', 'Transferencia')} - Venta #{venta_data['id']}",
             "fecha": datetime.utcnow().isoformat()
         }
         supabase.table("pagos").insert(pago).execute()
