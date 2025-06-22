@@ -4,7 +4,6 @@ import os
 import uuid
 from datetime import datetime
 from utils.auth_helpers import login_required_sb
-from postgrest import ASC as asc
 
 # Blueprint
 
@@ -40,7 +39,7 @@ def pagar_deuda():
     deudas = supabase.table("deudas").select("*")\
         .eq("cliente_id", cliente_id)\
         .not_('saldo_pendiente', 'is', None)\
-        .order("id", asc=True).execute().data
+        .order("id", desc=False).execute().data
 
     saldo_restante = monto_pago
     updates = []
