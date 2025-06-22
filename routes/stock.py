@@ -62,97 +62,105 @@ def eliminar_producto(id):
     return redirect(url_for('stock_routes.stock'))
 
 
+import traceback
+
 @stock_routes.route('/stock/cargar', methods=['GET', 'POST'])
 @login_required_sb
 def cargar_stock():
-    if request.method != 'POST':
-        return render_template('stock.html')
-
-    archivo = request.files.get('archivo')
-    if not archivo or not archivo.filename.lower().endswith(('.csv', '.xlsx')):
-        flash('⚠️ Formato de archivo no permitido.')
-        return redirect(url_for('stock_routes.stock'))
-
-    ruta = os.path.join(Config.UPLOAD_FOLDER, archivo.filename)
-    archivo.save(ruta)
-
-    # ── Leer CSV o Excel ──
     try:
-        if ruta.lower().endswith('.csv'):
-            # Asumimos UTF-8 y separador punto y coma
-            df = pd.read_csv(ruta, sep=';')
+        # — Si viene GET, mostramos la página —
+        if request.method != 'POST':
+            return render_template('stock.html')
+
+        # — Validación inicial del archivo —
+        archivo = request.files.get('archivo')
+        if not archivo or not archivo.filename.lower().endswith(('.csv', '.xlsx')):
+            flash('⚠️ Formato de archivo no permitido.')
+            return redirect(url_for('stock_routes.stock'))
+
+        # — Guardar el archivo en servidor —
+        ruta = os.path.join(Config.UPLOAD_FOLDER, archivo.filename)
+        archivo.save(ruta)
+
+        # — Leer CSV con separador ";" —
+        df = pd.read_csv(ruta, sep=';')
+        df.columns = [c.strip().lower().replace(' ', '_') for c in df.columns]
+
+        # — Verificar columnas obligatorias —
+        columnas_obligatorias = {
+            'codigo', 'nombre', 'familia', 'talle', 'color',
+            'proveedor', 'precio_compra',
+            'precio_venta_contado', 'precio_venta_tarjeta', 'stock'
+        }
+        faltantes = columnas_obligatorias - set(df.columns)
+        if faltantes:
+            flash(f'Columnas faltantes en el archivo: {", ".join(sorted(faltantes))}')
+            return redirect(url_for('stock_routes.stock'))
+
+        # — Preparar contadores y lista de errores —
+        insertados = actualizados = 0
+        errores = []
+
+        def limpiar_precio(v):
+            return float(str(v).replace('$', '').replace('.', '').replace(',', '.').strip())
+
+        # — Procesar cada fila —
+        for _, row in df.iterrows():
+            try:
+                data = {
+                    "codigo": str(row['codigo']).strip(),
+                    "nombre": str(row['nombre']).strip(),
+                    "descripcion": '',
+                    "familia": str(row['familia']).strip(),
+                    "talle": str(row['talle']).strip(),
+                    "color": str(row['color']).strip(),
+                    "proveedor": str(row['proveedor']).strip(),
+                    "precio_compra": limpiar_precio(row['precio_compra']),
+                    "precio_venta_contado": limpiar_precio(row['precio_venta_contado']),
+                    "precio_venta_tarjeta": limpiar_precio(row['precio_venta_tarjeta']),
+                    "stock": max(0, int(row['stock']))
+                }
+
+                # — Chequear existencia por código —
+                existe = supabase.table("productos")\
+                                 .select("id")\
+                                 .eq("codigo", data["codigo"])\
+                                 .maybe_single()\
+                                 .execute().data
+
+                if existe:
+                    supabase.table("productos").update(data).eq("codigo", data["codigo"]).execute()
+                    actualizados += 1
+                else:
+                    supabase.table("productos").insert(data).execute()
+                    insertados += 1
+
+            except Exception as fila_exc:
+                # Si falla una fila, la guardo en 'errores' y sigo
+                errores.append({
+                    "codigo": row.get('codigo', ''),
+                    "error": str(fila_exc)
+                })
+
+        # — Registrar errores en Supabase (si hay) —
+        if errores:
+            for err in errores:
+                supabase.table("errores_stock").insert({
+                    "codigo": err["codigo"],
+                    "detalle_error": err["error"]
+                }).execute()
+            flash(f"⚠️ Terminó con errores: {insertados} insertados, {actualizados} actualizados, {len(errores)} fallidos.")
         else:
-            df = pd.read_excel(ruta)
+            flash(f"✔️ Stock actualizado: {insertados} insertados, {actualizados} actualizados.")
+
+        return redirect(url_for('stock_routes.stock'))
+
     except Exception as e:
-        flash(f'❌ No pude leer el archivo: {e}')
+        # Capturo cualquier otro fallo (p.ej. conexión Supabase, permisos, etc.)
+        tb = traceback.format_exc()
+        print(tb)  # o use app.logger.error(tb) si lo configuras
+        flash(f"❌ Error inesperado al procesar stock: {str(e)}")
         return redirect(url_for('stock_routes.stock'))
-
-    # ── Normalizar encabezados ──
-    df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
-
-    # ── Verificar columnas obligatorias ──
-    columnas_obligatorias = {
-        'codigo', 'nombre', 'familia', 'talle', 'color',
-        'proveedor', 'precio_compra',
-        'precio_venta_contado', 'precio_venta_tarjeta', 'stock'
-    }
-    faltantes = columnas_obligatorias - set(df.columns)
-    if faltantes:
-        flash(f'Columnas faltantes en el archivo: {", ".join(sorted(faltantes))}')
-        return redirect(url_for('stock_routes.stock'))
-
-    # ── Procesar filas ──
-    insertados = actualizados = 0
-    errores = []
-
-    def limpiar_precio(v):
-        return float(str(v).replace('$', '').replace('.', '').replace(',', '.').strip())
-
-    for _, row in df.iterrows():
-        try:
-            data = {
-                "codigo": str(row['codigo']).strip(),
-                "nombre": str(row['nombre']).strip(),
-                "descripcion": '',
-                "familia": str(row['familia']).strip(),
-                "talle": str(row['talle']).strip(),
-                "color": str(row['color']).strip(),
-                "proveedor": str(row['proveedor']).strip(),
-                "precio_compra": limpiar_precio(row['precio_compra']),
-                "precio_venta_contado": limpiar_precio(row['precio_venta_contado']),
-                "precio_venta_tarjeta": limpiar_precio(row['precio_venta_tarjeta']),
-                "stock": max(0, int(row['stock']))
-            }
-
-            existe = supabase.table("productos") \
-                             .select("id") \
-                             .eq("codigo", data["codigo"]) \
-                             .maybe_single() \
-                             .execute().data
-
-            if existe:
-                supabase.table("productos").update(data).eq("codigo", data["codigo"]).execute()
-                actualizados += 1
-            else:
-                supabase.table("productos").insert(data).execute()
-                insertados += 1
-
-        except Exception as e:
-            errores.append({"codigo": row.get('codigo', ''), "error": str(e)})
-
-    # ── Log de errores ──
-    if errores:
-        for err in errores:
-            supabase.table("errores_stock").insert({
-                "codigo": err["codigo"],
-                "detalle_error": err["error"]
-            }).execute()
-        flash(f"⚠️ Terminó con errores: {insertados} insertados, {actualizados} actualizados, {len(errores)} fallidos.")
-    else:
-        flash(f"✔️ Stock actualizado: {insertados} insertados, {actualizados} actualizados.")
-
-    return redirect(url_for('stock_routes.stock'))
-
 
 @stock_routes.route('/stock/upload_imagen', methods=['POST'])
 @login_required_sb
