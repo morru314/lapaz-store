@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from supabase_client import supabase
 import os
 import uuid
+from datetime import datetime
 from utils.auth_helpers import login_required_sb
 
 ventas_routes = Blueprint('ventas_routes', __name__, template_folder='../templates')

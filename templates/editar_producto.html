@@ -47,15 +47,22 @@
       </div>
     </div>
 
-    <!-- Precio Compra y Venta -->
-    <div class="grid-doble">
+
+    <!-- Precio Compra, Contado y Tarjeta -->
+    <div class="grid-triple">
       <div class="grupo-form">
         <label class="etiqueta">Precio Compra</label>
         <input type="number" step="0.01" name="precio_compra" value="{{ producto.precio_compra }}" class="input" />
       </div>
       <div class="grupo-form">
-        <label class="etiqueta">Precio Venta</label>
-        <input type="number" step="0.01" name="precio_venta" value="{{ producto.precio_venta }}" class="input" />
+        <label class="etiqueta">Precio Contado</label>
+        <input type="number" step="0.01" name="precio_venta_contado" value="{{ producto.precio_venta_contado }}"
+          class="input" />
+      </div>
+      <div class="grupo-form">
+        <label class="etiqueta">Precio Tarjeta</label>
+        <input type="number" step="0.01" name="precio_venta_tarjeta" value="{{ producto.precio_venta_tarjeta }}"
+          class="input" />
       </div>
     </div>
 

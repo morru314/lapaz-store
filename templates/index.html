@@ -1,53 +1,130 @@
 {% extends "base.html" %}
 {% block content %}
 
+<h1
+  class="text-4xl font-extrabold text-center bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent mb-10">
+  📊 Dashboard General
+</h1>
+
 <!-- FACTURACIÓN -->
-<div class="bloque-dashboard">
-  <h2 class="titulo-seccion">💰 Facturación</h2>
-  <div class="grid-doble">
-    <div class="card verde-oscuro">
-      <p class="subtitulo">📅 MTD (Mes en curso)</p>
-      <h2 class="valor">${{ facturacion_mtd | format_currency }}</h2>
+<div class="mb-10">
+  <h2 class="text-2xl font-semibold text-cyan-300 mb-4">💰 Facturación</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="glass p-6 rounded-xl shadow">
+      <p class="text-sm text-slate-400 mb-1">📅 Mes en curso (MTD)</p>
+      <h2 class="text-2xl font-bold text-green-400">${{ facturacion_mtd | round(2) }}</h2>
     </div>
-    <div class="card verde">
-      <p class="subtitulo">📈 YTD (Año en curso)</p>
-      <h2 class="valor">${{ facturacion_ytd | format_currency }}</h2>
+    <div class="glass p-6 rounded-xl shadow">
+      <p class="text-sm text-slate-400 mb-1">📈 Año en curso (YTD)</p>
+      <h2 class="text-2xl font-bold text-green-300">${{ facturacion_ytd | round(2) }}</h2>
+    </div>
+    <div class="glass p-6 rounded-xl shadow">
+      <p class="text-sm text-slate-400 mb-1">🎟️ Ticket Promedio</p>
+      <h2 class="text-2xl font-bold text-cyan-400">
+        {% if ventas_anio|length > 0 %}
+        ${{ (total_facturado / ventas_anio|length) | round(2) }}
+        {% else %}
+        $0.00
+        {% endif %}
+      </h2>
     </div>
   </div>
 </div>
 
 <!-- STOCK -->
-<div class="bloque-dashboard">
-  <h2 class="titulo-seccion">📦 Stock</h2>
-  <div class="grid-doble">
-    <div class="card azul-oscuro">
-      <p class="subtitulo">💸 Total Invertido (Compra)</p>
-      <h2 class="valor">${{ total_invertido | format_currency }}</h2>
+<div class="mb-10">
+  <h2 class="text-2xl font-semibold text-cyan-300 mb-4">📦 Stock</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="glass p-6 rounded-xl shadow">
+      <p class="text-sm text-slate-400 mb-1">💸 Total Invertido (Compra)</p>
+      <h2 class="text-2xl font-bold text-yellow-400">${{ total_invertido | round(2) }}</h2>
     </div>
-    <div class="card azul">
-      <p class="subtitulo">💰 Valor Stock Venta</p>
-      <h2 class="valor">${{ valor_stock_venta | format_currency }}</h2>
+    <div class="glass p-6 rounded-xl shadow">
+      <p class="text-sm text-slate-400 mb-1">💰 Valor Stock Venta</p>
+      <h2 class="text-2xl font-bold text-yellow-300">${{ valor_stock_venta | round(2) }}</h2>
     </div>
   </div>
 </div>
 
-<!-- TOTALES GENERALES -->
-<div class="bloque-dashboard">
-  <h2 class="titulo-seccion">📊 Totales Generales</h2>
-  <div class="grid-triple">
-    <div class="card gris">
-      <p class="subtitulo">📄 Total Productos</p>
-      <h2 class="valor">{{ total_productos }}</h2>
+<!-- TOTALES -->
+<div class="mb-10">
+  <h2 class="text-2xl font-semibold text-cyan-300 mb-4">📦 Totales Generales</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="glass p-6 rounded-xl shadow">
+      <p class="text-sm text-slate-400 mb-1">📄 Total Productos</p>
+      <h2 class="text-2xl font-bold text-white">{{ total_productos }}</h2>
     </div>
-    <div class="card gris">
-      <p class="subtitulo">📦 Total Unidades</p>
-      <h2 class="valor">{{ total_unidades }}</h2>
+    <div class="glass p-6 rounded-xl shadow">
+      <p class="text-sm text-slate-400 mb-1">📦 Total Unidades</p>
+      <h2 class="text-2xl font-bold text-white">{{ total_unidades }}</h2>
     </div>
-    <div class="card morado">
-      <p class="subtitulo">🏁 Total Facturado Histórico</p>
-      <h2 class="valor">${{ total_facturado | format_currency }}</h2>
+    <div class="glass p-6 rounded-xl shadow">
+      <p class="text-sm text-slate-400 mb-1">🏁 Facturación Histórica</p>
+      <h2 class="text-2xl font-bold text-purple-400">${{ total_facturado | round(2) }}</h2>
     </div>
   </div>
 </div>
+
+<!-- GRÁFICO -->
+<div class="mb-10">
+  <h2 class="text-2xl font-semibold text-cyan-300 mb-4">📊 Facturación Mensual</h2>
+  <div class="glass p-6 rounded-xl shadow">
+    <canvas id="graficoFacturacion" height="100"></canvas>
+  </div>
+</div>
+
+<!-- TOP 3 CLIENTES -->
+<div class="mb-10">
+  <h2 class="text-2xl font-semibold text-cyan-300 mb-4">🏆 Mejores Clientes</h2>
+  <div class="glass p-6 rounded-xl shadow">
+    <ul class="space-y-2">
+      {% for cliente in top_clientes %}
+      <li class="flex justify-between border-b border-slate-700 pb-2">
+        <span>{{ cliente.nombre }}</span>
+        <span class="text-green-400 font-semibold">${{ cliente.total | round(2) }}</span>
+      </li>
+      {% else %}
+      <li class="text-slate-400">No hay datos de clientes aún.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const labels = ["Ene", "Feb", "Mar", "Abr", "May", "Jun"];
+  const datos = [10500, 14200, 12300, 15800, 17300, 16500];
+
+  const ctx = document.getElementById('graficoFacturacion');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Facturación mensual',
+        data: datos,
+        fill: true,
+        borderColor: 'rgb(34,211,238)',
+        backgroundColor: 'rgba(34,211,238,0.2)',
+        tension: 0.4,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: { color: 'white' }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#ccc' } },
+        y: { ticks: { color: '#ccc' } }
+      }
+    }
+  });
+</script>
 
 {% endblock %}

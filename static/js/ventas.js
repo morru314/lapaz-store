@@ -57,7 +57,7 @@ async function buscarProducto() {
     sugerencias.innerHTML = '';
     productos.forEach(p => {
       const div = document.createElement('div');
-      div.textContent = `${p.nombre} ${p.talle || ''} ${p.color || ''} - $${p.precio_venta}`;
+      div.textContent = `${p.nombre} ${p.talle || ''} ${p.color || ''} - $${p.precio_venta_contado}`;
       div.classList.add('cursor-pointer', 'py-1');
       div.addEventListener('click', () => agregarProducto(p));
       sugerencias.appendChild(div);
@@ -79,7 +79,7 @@ function agregarProducto(p) {
     itemsVenta.push({
       producto_id: p.id,
       nombre: p.nombre,
-      precio_unitario: p.precio_venta,
+      precio_unitario: p.precio_venta_contado,
       cantidad: cantidad,
       descuento_aplicado: 0
     });

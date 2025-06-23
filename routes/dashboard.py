@@ -23,7 +23,7 @@ def dashboard():
     total_productos = len(productos)
     total_unidades = sum(p['stock'] for p in productos)
     total_invertido = sum(p['stock'] * p['precio_compra'] for p in productos)
-    valor_stock_venta = sum(p['stock'] * p['precio_venta'] for p in productos)
+    valor_stock_venta = sum(p['stock'] * p['precio_venta_contado'] for p in productos)
     stock_bajo = [p for p in productos if p['stock'] <= 3]
 
     # Ventas

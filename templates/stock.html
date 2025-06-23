@@ -1,69 +1,75 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<div class="flash-messages">
-  {% for message in messages %}
-  <div class="alert">{{ message }}</div>
-  {% endfor %}
-</div>
-{% endif %}
-{% endwith %}
+<h1
+  class="text-4xl font-extrabold bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent text-center mb-10">
+  🧾 Gestión de Stock
+</h1>
 
 <!-- Carga de archivo -->
-<div class="card">
-  <h2 class="titulo-seccion">📥 Cargar archivo de stock (.csv o .xlsx)</h2>
+<div class="glass p-6 rounded-xl shadow max-w-4xl mx-auto mb-10">
+  <h2 class="text-xl font-semibold mb-4 text-cyan-300">📥 Cargar archivo de stock (.csv o .xlsx)</h2>
   <form action="{{ url_for('stock_routes.cargar_stock') }}" method="post" enctype="multipart/form-data"
-    class="formulario">
-    <input type="file" name="archivo" accept=".csv,.xlsx" class="input" required>
-    <button type="submit" class="btn-primary">Subir y Actualizar Stock</button>
+    class="flex flex-col md:flex-row gap-4">
+    <input type="file" name="archivo" accept=".csv,.xlsx"
+      class="file:bg-cyan-600 file:hover:bg-cyan-700 file:text-white file:rounded file:px-4 file:py-2 bg-gray-800 text-white rounded w-full cursor-pointer"
+      required>
+    <button type="submit"
+      class="px-5 py-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded text-white font-semibold hover:opacity-90 w-full md:w-auto">
+      🚀 Subir y Actualizar Stock
+    </button>
   </form>
 </div>
 
 <!-- Buscador -->
-<div class="buscador mt-6">
-  <input type="text" id="buscar" placeholder="Buscar por cualquier campo..." class="input w-full"
+<div class="max-w-4xl mx-auto mb-6 flex gap-2">
+  <input type="text" id="buscar" placeholder="🔍 Buscar por cualquier campo..."
+    class="w-full px-4 py-2 rounded bg-gray-800 text-white placeholder-slate-400 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500"
     oninput="filtrarTabla()">
-  <button onclick="document.getElementById('buscar').value=''; filtrarTabla();" class="btn-danger">❌</button>
+  <button onclick="document.getElementById('buscar').value=''; filtrarTabla();"
+    class="px-4 py-2 bg-red-600 rounded text-white font-semibold hover:bg-red-700">
+    ❌
+  </button>
 </div>
 
 <!-- Tabla de productos -->
-<div class="tabla-wrapper mt-6">
-  <table class="tabla">
-    <thead>
-      <tr>
-        <th>Código</th>
-        <th>Stock</th>
-        <th>Nombre</th>
-        <th>Familia</th>
-        <th>Talle</th>
-        <th>Color</th>
-        <th>Proveedor</th>
-        <th>Compra</th>
-        <th>Venta</th>
-        <th>Descripción</th>
-        <th>Acciones</th>
+<div class="overflow-x-auto max-w-6xl mx-auto glass p-4 rounded-xl">
+  <table class="table-auto w-full text-sm">
+    <thead class="text-slate-400 border-b border-slate-700">
+      <tr class="uppercase text-xs">
+        <th class="py-2 px-2 text-left">Código</th>
+        <th class="py-2 px-2 text-left">Stock</th>
+        <th class="py-2 px-2 text-left">Nombre</th>
+        <th class="py-2 px-2 text-left">Familia</th>
+        <th class="py-2 px-2 text-left">Talle</th>
+        <th class="py-2 px-2 text-left">Color</th>
+        <th class="py-2 px-2 text-left">Proveedor</th>
+        <th class="py-2 px-2 text-left">Compra</th>
+        <th class="py-2 px-2 text-left">Venta</th>
+        <th class="py-2 px-2 text-left">Descripción</th>
+        <th class="py-2 px-2 text-left">Acciones</th>
       </tr>
     </thead>
     <tbody id="tabla-productos">
       {% for p in productos %}
-      <tr>
-        <td>{{ p.codigo }}</td>
-        <td>{{ p.stock }}</td>
-        <td>{{ p.nombre }}</td>
-        <td>{{ p.familia }}</td>
-        <td>{{ p.talle }}</td>
-        <td>{{ p.color }}</td>
-        <td>{{ p.proveedor }}</td>
-        <td>{{ "$%.2f"|format(p.precio_compra) }}</td>
-        <td>{{ "$%.2f"|format(p.precio_venta_contado) }}</td>
-        <td>{{ p.descripcion }}</td>
-        <td class="acciones">
-          <a href="{{ url_for('stock_routes.editar_producto', id=p.id) }}" title="Editar" class="icono-editar">✏️</a>
-          <button type="button" title="Eliminar"
-            onclick="abrirModal('{{ url_for('stock_routes.eliminar_producto', id=p.id) }}')"
-            class="icono-eliminar">❌</button>
+      <tr class="border-b border-slate-800 hover:bg-slate-800/50">
+        <td class="py-2 px-2">{{ p.codigo }}</td>
+        <td class="py-2 px-2">{{ p.stock }}</td>
+        <td class="py-2 px-2">{{ p.nombre }}</td>
+        <td class="py-2 px-2">{{ p.familia }}</td>
+        <td class="py-2 px-2">{{ p.talle }}</td>
+        <td class="py-2 px-2">{{ p.color }}</td>
+        <td class="py-2 px-2">{{ p.proveedor }}</td>
+        <td class="py-2 px-2 text-green-400">{{ "$%.2f"|format(p.precio_compra) }}</td>
+        <td class="py-2 px-2 text-yellow-400">{{ "$%.2f"|format(p.precio_venta_contado) }}</td>
+        <td class="py-2 px-2">{{ p.descripcion }}</td>
+        <td class="py-2 px-2">
+          <div class="flex items-center gap-3">
+            <a href="{{ url_for('stock_routes.editar_producto', id=p.id) }}"
+              class="text-cyan-400 hover:text-cyan-300 transition" title="Editar">✏️</a>
+            <button onclick="abrirModal('{{ url_for('stock_routes.eliminar_producto', id=p.id) }}')"
+              class="text-red-400 hover:text-red-300 transition" title="Eliminar">❌</button>
+          </div>
         </td>
       </tr>
       {% endfor %}
@@ -71,15 +77,17 @@
   </table>
 </div>
 
-<!-- Modal eliminar -->
-<div id="modalEliminar" class="modal hidden">
-  <div class="modal-contenido">
-    <h2 class="modal-titulo">¿Eliminar producto?</h2>
-    <p class="mb-4">Esta acción no se puede deshacer.</p>
+<!-- Modal Eliminar -->
+<div id="modalEliminar" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+  <div class="glass p-6 rounded-xl shadow-xl max-w-md w-full mx-4">
+    <h2 class="text-xl font-semibold mb-4 text-red-400">¿Eliminar producto?</h2>
+    <p class="mb-4 text-slate-300">Esta acción es irreversible. ¿Deseas continuar?</p>
     <div class="flex justify-end gap-3">
-      <button onclick="cerrarModal()" class="btn-secondary">Cancelar</button>
+      <button onclick="cerrarModal()"
+        class="px-5 py-2 bg-gray-700 hover:bg-gray-600 rounded text-white font-semibold">Cancelar</button>
       <form id="formEliminar" method="post">
-        <button type="submit" class="btn-danger">Eliminar</button>
+        <button type="submit"
+          class="px-5 py-2 bg-red-600 hover:bg-red-700 rounded text-white font-semibold">Eliminar</button>
       </form>
     </div>
   </div>
@@ -87,23 +95,41 @@
 
 <!-- Scripts -->
 <script>
+  let debounceTimer;
+
+  document.getElementById('buscar').addEventListener('input', function () {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(filtrarTabla, 200); // Espera 200ms después de escribir
+  });
+
   function filtrarTabla() {
-    const filtro = document.getElementById('buscar').value.toLowerCase();
+    const filtro = document.getElementById('buscar').value.toLowerCase().trim();
+    const terminos = filtro.split(/\s+/); // divide por espacios
     const filas = document.querySelectorAll('#tabla-productos tr');
+
     filas.forEach(fila => {
-      let textoTotal = fila.innerText.toLowerCase();
-      fila.style.display = textoTotal.includes(filtro) ? '' : 'none';
+      const textoFila = Array.from(fila.querySelectorAll('td'))
+        .map(td => td.textContent.toLowerCase())
+        .join(' ');
+
+      // debe incluir todos los términos
+      const coincide = terminos.every(termino => textoFila.includes(termino));
+      fila.style.display = coincide ? '' : 'none';
     });
   }
+
 
   function abrirModal(url) {
     const modal = document.getElementById('modalEliminar');
     modal.classList.remove('hidden');
     document.getElementById('formEliminar').action = url;
   }
+
   function cerrarModal() {
     document.getElementById('modalEliminar').classList.add('hidden');
   }
 </script>
+
+
 
 {% endblock %}

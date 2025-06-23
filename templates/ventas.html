@@ -1,57 +1,136 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="venta-container">
-  <h1 class="venta-titulo">Registrar Venta</h1>
+<h1
+  class="text-4xl font-extrabold text-center bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent mb-10">
+  🧾 Registrar Venta
+</h1>
 
-  <form id="venta-form" class="venta-form" onsubmit="registrarVenta(event)">
+<form id="venta-form" onsubmit="registrarVenta(event)" class="max-w-5xl mx-auto space-y-10">
 
-    <!-- Paso 1: Cliente -->
-    <section class="venta-seccion">
-      <h2 class="venta-subtitulo">1. Cliente</h2>
-      <input type="text" id="buscar_cliente" placeholder="Buscar cliente por nombre o teléfono…" oninput="buscarCliente()" />
-      <div id="sugerencias_cliente" class="sugerencias hidden"></div>
+  <!-- Paso 1: Cliente -->
+  <section class="glass p-6 rounded-xl shadow space-y-4">
+    <h2 class="text-xl font-semibold text-cyan-300">1️⃣ Cliente</h2>
+    <input type="text" id="buscar_cliente"
+      class="w-full px-4 py-2 bg-gray-800 text-white rounded placeholder-slate-400 border border-slate-600"
+      placeholder="🔍 Buscar cliente por nombre o teléfono…" oninput="buscarCliente()" />
+    <div id="sugerencias_cliente" class="hidden bg-slate-800 rounded p-3 text-sm text-white shadow"></div>
 
-      <div class="cliente-datos">
-        <input type="text" id="cliente_nombre" placeholder="Nombre" required>
-        <input type="text" id="cliente_apellido" placeholder="Apellido" required>
-        <input type="text" id="cliente_telefono" placeholder="Teléfono">
-      </div>
-    </section>
-
-    <!-- Paso 2: Productos -->
-    <section class="venta-seccion">
-      <h2 class="venta-subtitulo">2. Productos</h2>
-      <div class="producto-busqueda">
-        <input type="text" id="buscar_producto" placeholder="Buscar producto…" oninput="buscarProducto()">
-      </div>
-      <div id="sugerencias_producto" class="sugerencias hidden"></div>
-      <div id="lista-items" class="items-lista"></div>
-    </section>
-
-    <!-- Paso 3: Pago -->
-    <section class="venta-seccion">
-      <h2 class="venta-subtitulo">3. Pago</h2>
-      <div class="pago-datos">
-        <input type="number" id="total_original" placeholder="Total original" readonly>
-        <input type="number" id="descuento_total" placeholder="Descuento total" value="0" oninput="recalcular()">
-        <input type="number" id="total_cobrado" placeholder="Monto cobrado" required>
-      </div>
-      <select id="metodo_pago">
-        <option value="Transferencia">Transferencia</option>
-        <option value="Tarjeta de Débito">Tarjeta de Débito</option>
-        <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
-        <option value="Efectivo">Efectivo</option>
-      </select>
-    </section>
-
-    <div class="boton-final">
-      <button type="submit">📂 Registrar Venta</button>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <input type="text" id="cliente_nombre" placeholder="Nombre" required
+        class="px-4 py-2 bg-gray-800 text-white rounded border border-slate-600 placeholder-slate-400" />
+      <input type="text" id="cliente_apellido" placeholder="Apellido" required
+        class="px-4 py-2 bg-gray-800 text-white rounded border border-slate-600 placeholder-slate-400" />
+      <input type="text" id="cliente_telefono" placeholder="Teléfono"
+        class="px-4 py-2 bg-gray-800 text-white rounded border border-slate-600 placeholder-slate-400" />
     </div>
+  </section>
 
-  </form>
-</div>
+  <!-- Paso 2: Productos -->
+  <section class="glass p-6 rounded-xl shadow space-y-4">
+    <h2 class="text-xl font-semibold text-cyan-300">2️⃣ Productos</h2>
+    <input type="text" id="buscar_producto"
+      class="w-full px-4 py-2 bg-gray-800 text-white rounded border border-slate-600 placeholder-slate-400"
+      placeholder="🔍 Buscar producto…" oninput="buscarProducto()" />
+    <div id="sugerencias_producto"
+      class="hidden bg-slate-800 rounded p-3 text-sm text-white shadow max-h-60 overflow-y-auto"></div>
+    <div id="lista-items" class="space-y-2"></div>
+  </section>
+
+  <!-- Paso 3: Pago -->
+  <section class="glass p-6 rounded-xl shadow space-y-4">
+    <h2 class="text-xl font-semibold text-cyan-300">3️⃣ Pago</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <input type="number" id="total_original" placeholder="Total original" readonly
+        class="px-4 py-2 bg-gray-800 text-white rounded border border-slate-600 placeholder-slate-400" />
+      <input type="number" id="descuento_total" placeholder="Descuento total" value="0" oninput="recalcular()"
+        class="px-4 py-2 bg-gray-800 text-white rounded border border-slate-600 placeholder-slate-400" />
+      <input type="number" id="total_cobrado" placeholder="Monto cobrado" required
+        class="px-4 py-2 bg-gray-800 text-white rounded border border-slate-600 placeholder-slate-400" />
+    </div>
+    <select id="metodo_pago"
+      class="w-full mt-4 px-4 py-2 rounded bg-gray-800 text-white border border-slate-600 focus:outline-none">
+      <option value="Transferencia">Transferencia</option>
+      <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+      <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+      <option value="Efectivo">Efectivo</option>
+    </select>
+  </section>
+
+  <div class="text-center">
+    <button type="submit"
+      class="px-6 py-3 bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-semibold rounded hover:opacity-90 shadow">
+      📂 Registrar Venta
+    </button>
+  </div>
+</form>
+
+<!-- Scripts -->
+<script>
+  let productosSeleccionados = [];
+
+  async function agregarProducto(producto) {
+    const { value: cantidad } = await Swal.fire({
+      title: `📦 Cantidad para:`,
+      html: `<strong class="text-pink-400">${producto.nombre}</strong>`,
+      input: 'number',
+      inputValue: 1,
+      inputAttributes: {
+        min: 1,
+        step: 1
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Agregar',
+      cancelButtonText: 'Cancelar',
+      background: '#1f2937',
+      color: '#f9fafb',
+      confirmButtonColor: '#6366f1'
+    });
+
+    if (cantidad && cantidad > 0) {
+      productosSeleccionados.push({ ...producto, cantidad: parseInt(cantidad) });
+      renderizarProductos();
+      recalcular();
+    }
+  }
+
+  function renderizarProductos() {
+    const contenedor = document.getElementById('lista-items');
+    contenedor.innerHTML = '';
+
+    productosSeleccionados.forEach((item, index) => {
+      const total = item.precio * item.cantidad;
+      const div = document.createElement('div');
+      div.className = 'glass p-4 rounded-xl flex justify-between items-center hover:bg-slate-800/60 transition';
+
+      div.innerHTML = `
+        <div>
+          <p class="text-lg font-semibold text-white">${item.nombre}</p>
+          <p class="text-sm text-slate-400">Cantidad: <strong>${item.cantidad}</strong> x $${item.precio}</p>
+          <p class="text-sm text-yellow-300">Subtotal: $${total.toLocaleString()}</p>
+        </div>
+        <button onclick="quitarProducto(${index})"
+          class="text-red-400 hover:text-red-300 font-bold text-lg">🗑️</button>
+      `;
+
+      contenedor.appendChild(div);
+    });
+
+    document.getElementById('total_original').value = productosSeleccionados.reduce((s, p) => s + p.precio * p.cantidad, 0);
+  }
+
+  function quitarProducto(index) {
+    productosSeleccionados.splice(index, 1);
+    renderizarProductos();
+    recalcular();
+  }
+
+  function recalcular() {
+    const totalOriginal = parseFloat(document.getElementById('total_original').value) || 0;
+    const descuento = parseFloat(document.getElementById('descuento_total').value) || 0;
+    document.getElementById('total_cobrado').value = (totalOriginal - descuento).toFixed(2);
+  }
+</script>
 
 <script src="{{ url_for('static', filename='js/ventas.js') }}"></script>
-
 {% endblock %}

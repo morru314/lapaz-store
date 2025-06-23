@@ -1,100 +1,144 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container-clientes">
-  <h1 class="titulo-seccion">Clientes</h1>
+<h1
+  class="text-4xl font-extrabold bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent text-center mb-10">
+  Clientes
+</h1>
 
-  <!-- FORMULARIO -->
-  <div class="formulario-box">
-    <h2 class="formulario-titulo">
-      {{ 'Editar Cliente' if editar else 'Nuevo Cliente' }}
-    </h2>
-    <form method="post" action="{{ url_for('clientes_routes.editar_cliente', id=cliente_editar.id) if editar else url_for('clientes_routes.nuevo_cliente') }}">
-      <div class="formulario-grid">
-        <input type="text" name="nombre" placeholder="Nombre" required value="{{ cliente_editar.nombre if editar else '' }}" class="input-field" />
-        <input type="text" name="apellido" placeholder="Apellido" required value="{{ cliente_editar.apellido if editar else '' }}" class="input-field" />
-        <input type="text" name="telefono" placeholder="Teléfono" value="{{ cliente_editar.telefono if editar else '' }}" class="input-field" />
-        <input type="email" name="email" placeholder="Email" value="{{ cliente_editar.email if editar else '' }}" class="input-field" />
-        <input type="text" name="direccion" placeholder="Dirección" value="{{ cliente_editar.direccion if editar else '' }}" class="input-field md:col-span-2" />
-      </div>
-      <div class="formulario-acciones">
-        <button type="submit" class="btn-primario">
-          {{ '💾 Guardar Cambios' if editar else '➕ Agregar Cliente' }}
-        </button>
-        {% if editar %}
-        <a href="{{ url_for('clientes_routes.clientes') }}" class="link-cancelar">Cancelar</a>
-        {% endif %}
-      </div>
-    </form>
-  </div>
+<!-- BOTÓN PARA MOSTRAR FORMULARIO -->
+{% if not editar %}
+<div class="flex justify-center mb-6">
+  <button onclick="mostrarFormulario()"
+    class="px-5 py-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded text-white font-semibold hover:opacity-90">
+    ➕ Agregar Cliente
+  </button>
+</div>
+{% endif %}
 
-  <!-- BUSCADOR -->
-  <div class="buscador">
-    <input type="text" id="buscar" placeholder="Buscar cliente por nombre, apellido o teléfono…" class="input-field" oninput="filtrarClientes()" />
-  </div>
-
-  <!-- TABLA -->
-  <div class="tabla-container">
-    <table class="tabla-clientes">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Teléfono</th>
-          <th>Email</th>
-          <th>Dirección</th>
-          <th>Compras</th>
-          <th>Deuda</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tabla-clientes">
-        {% for data in clientes_data %}
-        <tr>
-          <td>{{ data.cliente.nombre }}</td>
-          <td>{{ data.cliente.apellido }}</td>
-          <td>{{ data.cliente.telefono }}</td>
-          <td>{{ data.cliente.email }}</td>
-          <td>{{ data.cliente.direccion }}</td>
-          <td>${{ '%.2f' | format(data.compras) }}</td>
-          <td>${{ '%.2f' | format(data.deuda) }}</td>
-          <td class="acciones">
-            <a href="{{ url_for('clientes_routes.editar_cliente', id=data.cliente.id) }}" class="link-editar">Editar</a>
-            <form method="post" action="{{ url_for('clientes_routes.eliminar_cliente', id=data.cliente.id) }}">
-              <button type="submit" onclick="return confirm('¿Eliminar cliente?')" class="link-eliminar">Eliminar</button>
-            </form>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+<!-- FORMULARIO -->
+<div id="formularioCliente"
+  class="glass p-6 rounded-xl mb-10 shadow max-w-4xl mx-auto {% if not editar %}hidden{% endif %}">
+  <h2 class="text-xl font-semibold mb-4 text-cyan-300">
+    {{ 'Editar Cliente' if editar else 'Nuevo Cliente' }}
+  </h2>
+  <form method="post"
+    action="{{ url_for('clientes_routes.editar_cliente', id=cliente_editar.id) if editar else url_for('clientes_routes.nuevo_cliente') }}"
+    class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <input id="campoNombre" type="text" name="nombre" placeholder="Nombre" required
+      value="{{ cliente_editar.nombre if editar else '' }}"
+      class="input input-bordered bg-gray-800 text-white placeholder-slate-400" />
+    <input type="text" name="apellido" placeholder="Apellido" required
+      value="{{ cliente_editar.apellido if editar else '' }}"
+      class="input input-bordered bg-gray-800 text-white placeholder-slate-400" />
+    <input type="text" name="telefono" placeholder="Teléfono" value="{{ cliente_editar.telefono if editar else '' }}"
+      class="input input-bordered bg-gray-800 text-white placeholder-slate-400" />
+    <input type="email" name="email" placeholder="Email" value="{{ cliente_editar.email if editar else '' }}"
+      class="input input-bordered bg-gray-800 text-white placeholder-slate-400" />
+    <input type="text" name="direccion" placeholder="Dirección" value="{{ cliente_editar.direccion if editar else '' }}"
+      class="md:col-span-2 input input-bordered bg-gray-800 text-white placeholder-slate-400" />
+    <div class="md:col-span-2 flex items-center gap-4 mt-4">
+      <button type="submit"
+        class="px-5 py-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded text-white font-semibold hover:opacity-90">
+        💾 Guardar
+      </button>
+      <button type="button" onclick="cancelarFormulario()"
+        class="px-5 py-2 bg-gray-700 rounded text-white font-semibold hover:bg-gray-600">
+        Cancelar
+      </button>
+    </div>
+  </form>
 </div>
 
-<!-- MODAL ERROR -->
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <div id="modalError" class="modal-error">
-      <div class="modal-contenido">
-        <div class="text-center">
-          <h2 class="modal-titulo">⚠ Error</h2>
-          <p class="modal-mensaje">{{ messages[0] }}</p>
-          <button onclick="document.getElementById('modalError').remove()" class="btn-modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  {% endif %}
-{% endwith %}
+<!-- BUSCADOR -->
+<div class="max-w-4xl mx-auto mb-6">
+  <input type="text" id="buscar" placeholder="Buscar cliente por nombre, apellido o teléfono…"
+    class="w-full input input-bordered bg-gray-800 text-white placeholder-slate-400" oninput="filtrarClientes()" />
+</div>
+
+<!-- TABLA -->
+<div class="overflow-x-auto max-w-6xl mx-auto glass p-4 rounded-xl">
+  <table class="table-auto w-full text-sm">
+    <thead class="text-slate-400 border-b border-slate-700">
+      <tr>
+        <th class="py-2 px-2 text-left">Nombre</th>
+        <th class="py-2 px-2 text-left">Apellido</th>
+        <th class="py-2 px-2 text-left">Teléfono</th>
+        <th class="py-2 px-2 text-left">Email</th>
+        <th class="py-2 px-2 text-left">Dirección</th>
+        <th class="py-2 px-2 text-left">Compras</th>
+        <th class="py-2 px-2 text-left">Deuda</th>
+        <th class="py-2 px-2 text-left">Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-clientes">
+      {% for data in clientes_data %}
+      <tr class="border-b border-slate-800 hover:bg-slate-800/50">
+        <td class="py-2 px-2">{{ data.cliente.nombre }}</td>
+        <td class="py-2 px-2">{{ data.cliente.apellido }}</td>
+        <td class="py-2 px-2">{{ data.cliente.telefono }}</td>
+        <td class="py-2 px-2">{{ data.cliente.email }}</td>
+        <td class="py-2 px-2">{{ data.cliente.direccion }}</td>
+        <td class="py-2 px-2">${{ '%.2f' | format(data.compras) }}</td>
+        <td class="py-2 px-2">
+          <span class="{{ 'text-green-400' if data.deuda == 0 else 'text-red-400' }}">
+            ${{ '%.2f' | format(data.deuda) }}
+          </span>
+        </td>
+        <td class="py-2 px-2">
+          <div class="flex items-center gap-4">
+            <a href="{{ url_for('clientes_routes.editar_cliente', id=data.cliente.id) }}"
+              class="text-cyan-400 hover:underline">Editar</a>
+            <button type="button" onclick="confirmarEliminar({{ data.cliente.id }})"
+              class="text-red-400 hover:underline">Eliminar</button>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 <script>
-function filtrarClientes() {
-  const filtro = document.getElementById('buscar').value.toLowerCase();
-  const filas = document.querySelectorAll('#tabla-clientes tr');
-  filas.forEach(fila => {
-    const texto = fila.innerText.toLowerCase();
-    fila.style.display = texto.includes(filtro) ? '' : 'none';
+  function filtrarClientes() {
+    const filtro = document.getElementById('buscar').value.toLowerCase();
+    const filas = document.querySelectorAll('#tabla-clientes tr');
+    filas.forEach(fila => {
+      const texto = fila.innerText.toLowerCase();
+      fila.style.display = texto.includes(filtro) ? '' : 'none';
+    });
+  }
+
+  function mostrarFormulario() {
+    const form = document.getElementById('formularioCliente');
+    form.classList.remove('hidden');
+    form.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      document.getElementById('campoNombre')?.focus();
+    }, 300);
+  }
+
+  function cancelarFormulario() {
+    const form = document.getElementById('formularioCliente');
+    form.classList.add('hidden');
+  }
+
+  function confirmarEliminar(clienteId) {
+    if (confirm('¿Eliminar cliente?')) {
+      // Crear y enviar formulario dinámicamente
+      const form = document.createElement('form');
+      form.method = 'post';
+      form.action = `/clientes/eliminar/${clienteId}`; // Ajusta esta URL según tu routing
+      document.body.appendChild(form);
+      form.submit();
+    }
+  }
+
+  {% if editar %}
+  window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('campoNombre')?.focus();
   });
-}
+  {% endif %}
 </script>
 
 {% endblock %}
